@@ -1,10 +1,21 @@
-# Quasar App
+# Keeper
 
-> A Quasar project
+Simple note app build with Quasar and its Electron wrapper.
+
+## Run Dev Server
+
+```bash
+# serve with hot reload at localhost:8080 in one tab
+$ quasar dev
+
+# open electron window in another tab
+$ cd electron/
+$ quasar dev
+```
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
