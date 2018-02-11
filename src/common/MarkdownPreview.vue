@@ -4,7 +4,18 @@
 
 <script>
 import MarkdownIt from 'markdown-it'
-var md = new MarkdownIt()
+
+// Config documentation: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
+var md = new MarkdownIt({
+  html: true,
+  xhtmlOut: true,
+  breaks: false,
+  langPrefix: 'language-',
+  linkify: true,
+  typographer: false,
+  quotes: '“”‘’',
+  highlight: function (/* str, lang */) { return '' }
+})
 
 export default {
   props: ['content'],
@@ -18,6 +29,17 @@ export default {
   watch: {
     content (data) {
       this.renderMarkdown(data)
+    },
+
+    parsedContent () {
+      this.$nextTick(() => {
+        for (let linkIndex in document.links) {
+          if (String(linkIndex) !== 'length') {
+            document.links[linkIndex].target = '_blank'
+            document.links[linkIndex].rel = 'noopener noreferrer'
+          }
+        }
+      })
     }
   },
 
