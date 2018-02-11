@@ -82,12 +82,17 @@
       <div class="pane-group">
         <div class="pane padded-more">
           <div v-for="(tab, index) in tabs">
-            <edit-input :content="tabs[index].content" @update="setTabContent(index, $event)" v-show="activeTab === Number(index)"></edit-input>
+            <edit-input :content="tab.content"
+                        @update="setTabContent(index, $event)"
+                        v-show="activeTab === Number(index)"
+            ></edit-input>
           </div>
         </div>
         <div class="pane padded-more">
           <div v-for="(tab, index) in tabs">
-            <div v-html="tabs[index].html" v-show="activeTab === Number(index)"></div>
+            <markdown-preview :content="tab.content"
+                              v-show="activeTab === Number(index)"
+            ></markdown-preview>
           </div>
         </div>
       </div>
@@ -110,8 +115,7 @@ import {
 import EditInput from '../common/EditInput'
 import About from '../common/About'
 import Test from '../common/Test'
-import MarkdownIt from 'markdown-it'
-var md = new MarkdownIt()
+import MarkdownPreview from '../common/MarkdownPreview'
 
 export default {
   components: {
@@ -124,7 +128,8 @@ export default {
     QItem,
     QModal,
     QBtn,
-    Dialog
+    Dialog,
+    MarkdownPreview
   },
 
   data () {
@@ -135,8 +140,7 @@ export default {
 
       newTab: {
         name: 'New Tab',
-        content: '',
-        html: ''
+        content: ''
       }
     }
   },
@@ -187,12 +191,6 @@ export default {
 
     setTabContent (tabIndex, content) {
       this.tabs[tabIndex].content = content
-      this.renderMarkdown(tabIndex)
-    },
-
-    renderMarkdown (tabIndex) {
-      let tab = this.tabs[Number(tabIndex)]
-      tab.html = md.render(String(tab.content))
     }
   },
 
