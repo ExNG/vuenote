@@ -35,4 +35,9 @@ export default {
 </script>
 
 <style>
+  code {
+    background-color: rgba(220,220,220,.5);
+    border-radius: 2px;
+    box-decoration-break: clone;
+  }
 </style>

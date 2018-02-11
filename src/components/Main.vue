@@ -55,7 +55,7 @@
                   @click="panes = 'left'"
                   :class="{ 'active': panes === 'left' }"
           >
-            <span class="icon icon-left-dir"></span>
+            <span class="icon icon-pencil"></span>
           </button>
           <button class="btn btn-default"
                   @click="panes = 'all'"
@@ -67,7 +67,7 @@
                   @click="panes = 'right'"
                   :class="{ 'active': panes === 'right' }"
           >
-            <span class="icon icon-right-dir"></span>
+            <span class="icon icon-eye"></span>
           </button>
         </div>
 
@@ -171,7 +171,7 @@ export default {
 
     addTab (name = null, content = null) {
       let data = JSON.parse(JSON.stringify(this.newTab))
-      data.name = name ? String(name) : String(Math.random())
+      data.name = name ? String(name) : String('Unamed Tab')
       data.content = content ? String(content) : String(Math.random())
       this.setActiveTab(Number(this.tabs.push(data)) - 1)
     },
