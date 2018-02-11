@@ -17,8 +17,19 @@ export default {
 
   watch: {
     content (data) {
-      this.parsedContent = md.render(String(this.content))
+      this.renderMarkdown(data)
     }
+  },
+
+  methods: {
+    renderMarkdown (data = null) {
+      data = data ? String(data) : String(this.content)
+      this.parsedContent = md.render(String(data))
+    }
+  },
+
+  created () {
+    this.renderMarkdown()
   }
 }
 </script>
