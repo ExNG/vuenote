@@ -57,6 +57,24 @@
           Render
         </button>
 
+        <div class="btn-group">
+          <button class="btn btn-default"
+                  @click="panes = 'left'"
+          >
+            <span class="icon icon-left-dir"></span>
+          </button>
+          <button class="btn btn-default"
+                  @click="panes = 'all'"
+          >
+            <span class="icon icon-window"></span>
+          </button>
+          <button class="btn btn-default"
+                  @click="panes = 'right'"
+          >
+            <span class="icon icon-right-dir"></span>
+          </button>
+        </div>
+
         <button class="btn btn-default btn-dropdown pull-right">
           <span class="icon icon-menu icon-text"></span>
           <!-- Menu -->
@@ -80,7 +98,9 @@
 
     <div class="window-content">
       <div class="pane-group">
-        <div class="pane padded-more">
+        <div class="pane padded-more"
+             v-show="panes === 'all' || panes === 'left'"
+        >
           <div v-for="(tab, index) in tabs">
             <edit-input :content="tab.content"
                         @update="setTabContent(index, $event)"
@@ -88,7 +108,9 @@
             ></edit-input>
           </div>
         </div>
-        <div class="pane padded-more">
+        <div class="pane padded-more"
+             v-show="panes === 'all' || panes === 'right'"
+        >
           <div v-for="(tab, index) in tabs">
             <markdown-preview :content="tab.content"
                               v-show="activeTab === Number(index)"
@@ -135,6 +157,7 @@ export default {
   data () {
     return {
       activeTab: 0,
+      panes: 'all',
 
       tabs: [],
 
