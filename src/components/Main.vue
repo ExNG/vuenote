@@ -43,33 +43,29 @@
 
         <button class="btn btn-default"
                 @click="save()"
+                disabled
         >
           <span class="icon icon-floppy icon-text"></span>
           <!-- WONT SAVE, FOR TESTING -->
           Save
         </button>
 
-        <button class="btn btn-default"
-                @click="renderMarkdown(activeTab)"
-                v-if="activeTab !== null && tabs[activeTab]"
-        >
-          <span class="icon icon-print icon-text"></span>
-          Render
-        </button>
-
         <div class="btn-group">
           <button class="btn btn-default"
                   @click="panes = 'left'"
+                  :class="{ 'active': panes === 'left' }"
           >
             <span class="icon icon-left-dir"></span>
           </button>
           <button class="btn btn-default"
                   @click="panes = 'all'"
+                  :class="{ 'active': panes === 'all' }"
           >
             <span class="icon icon-window"></span>
           </button>
           <button class="btn btn-default"
                   @click="panes = 'right'"
+                  :class="{ 'active': panes === 'right' }"
           >
             <span class="icon icon-right-dir"></span>
           </button>
@@ -173,9 +169,10 @@ export default {
       this.activeTab = Number(tabIndex)
     },
 
-    addTab () {
+    addTab (name = null, content = null) {
       let data = JSON.parse(JSON.stringify(this.newTab))
-      data.content = String(Math.random())
+      data.name = name ? String(name) : String(Math.random())
+      data.content = content ? String(content) : String(Math.random())
       this.setActiveTab(Number(this.tabs.push(data)) - 1)
     },
 
@@ -218,13 +215,65 @@ export default {
   },
 
   created () {
-    // let data = JSON.parse(JSON.stringify(this.newTab))
-    // data.content = Math.random()
-    // this.tabs.push(data)
-    //
-    // let otherData = this.newTab
-    // otherData.content = Math.random()
-    // this.tabs.push(otherData)
+    // later check if there are existing saves
+    let loadNotes = false
+
+    if (loadNotes) {
+      this.tabs = []
+    }
+    else {
+      let content = [
+        '# Welcome',
+        '',
+        '---',
+        '',
+        'Keeper supports full Markdown syntax,',
+        '',
+        '## Typography',
+        '',
+        'Name | Usage | Alternative usage',
+        '--- | --- | ----',
+        '*Italic* | `*Text*` | `_Text_`',
+        '**Strong** | `**Text**` | `__Text__`',
+        '~~Strikethrough~~ | `~~Text~~` |',
+        '> Blockquote | `> Text` |',
+        '',
+        '## Lists',
+        '',
+        'Name | Usage',
+        '--- | ---',
+        'Simple List | `- Text` or `* Text` or `+ Text`',
+        'Simple List Child | `   - Text`',
+        'Numbered List | `1. Text`',
+        '',
+        '## Links',
+        '',
+        'Links can be automatically detected, but you should use the markdown way if you want to be sure.',
+        '',
+        '`[Text](http://www.link-to.url)`',
+        '',
+        '## Images',
+        '',
+        '`![Alt Text](http://link.to/image)`',
+        '',
+        '## Tables',
+        '',
+        'Normal | Centered | Right aligned',
+        '--- | :---: | ---:',
+        'Text | Text | Text',
+        '',
+        '---',
+        '',
+        'This is just a short introdution to Markdown, take a look at [this Github article](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for more in depth information',
+        ''
+      ]
+
+      content = content.join('\n')
+
+      this.addTab('Welcome',
+        content
+      )
+    }
   }
 }
 </script>
