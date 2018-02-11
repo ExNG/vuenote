@@ -41,9 +41,20 @@
           <span class="icon icon-plus-circled"></span>
         </button>
 
-        <button class="btn btn-default">
-          <span class="icon icon-home"></span>
-          Filters
+        <button class="btn btn-default"
+                @click="save()"
+        >
+          <span class="icon icon-floppy icon-text"></span>
+          <!-- WONT SAVE, FOR TESTING -->
+          Save
+        </button>
+
+        <button class="btn btn-default"
+                @click="renderMarkdown(activeTab)"
+                v-if="activeTab !== null && tabs[activeTab]"
+        >
+          <span class="icon icon-print icon-text"></span>
+          Render
         </button>
 
         <button class="btn btn-default btn-dropdown pull-right">
@@ -67,11 +78,22 @@
       </div>
     </header>
 
-    <div v-for="(tab, index) in tabs">
-      <div v-show="activeTab === Number(index)">
-        <edit-input :content="tabs[index].content" @update="tabs[index].content = $event"></edit-input>
+    <div class="window-content">
+      <div class="pane-group">
+        <div class="pane padded-more">
+          <div v-for="(tab, index) in tabs">
+            <edit-input :content="tabs[index].content" @update="setTabContent(index, $event)" v-show="activeTab === Number(index)"></edit-input>
+          </div>
+        </div>
+        <div class="pane padded-more">
+          <div v-for="(tab, index) in tabs">
+            <div v-html="tabs[index].html" v-show="activeTab === Number(index)"></div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <test></test>
   </div>
 </template>
 
@@ -87,11 +109,15 @@ import {
 } from 'quasar'
 import EditInput from '../common/EditInput'
 import About from '../common/About'
+import Test from '../common/Test'
+import MarkdownIt from 'markdown-it'
+var md = new MarkdownIt()
 
 export default {
   components: {
     EditInput,
     About,
+    Test,
     QPopover,
     QContextMenu,
     QList,
@@ -109,7 +135,8 @@ export default {
 
       newTab: {
         name: 'New Tab',
-        content: ''
+        content: '',
+        html: ''
       }
     }
   },
@@ -121,7 +148,7 @@ export default {
 
     addTab () {
       let data = JSON.parse(JSON.stringify(this.newTab))
-      data.content = Math.random()
+      data.content = String(Math.random())
       this.setActiveTab(Number(this.tabs.push(data)) - 1)
     },
 
@@ -152,6 +179,20 @@ export default {
           }
         ]
       })
+    },
+
+    save () {
+      console.log('saved', JSON.stringify(this.tabs))
+    },
+
+    setTabContent (tabIndex, content) {
+      this.tabs[tabIndex].content = content
+      this.renderMarkdown(tabIndex)
+    },
+
+    renderMarkdown (tabIndex) {
+      let tab = this.tabs[Number(tabIndex)]
+      tab.html = md.render(String(tab.content))
     }
   },
 
