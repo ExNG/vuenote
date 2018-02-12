@@ -52,20 +52,14 @@
 
         <div class="btn-group">
           <button class="btn btn-default"
-                  @click="panes = 'left'"
-                  :class="{ 'active': panes === 'left' }"
+                  @click="panes.left = !panes.left"
+                  :class="{ 'active': panes.left }"
           >
             <span class="icon icon-pencil"></span>
           </button>
           <button class="btn btn-default"
-                  @click="panes = 'all'"
-                  :class="{ 'active': panes === 'all' }"
-          >
-            <span class="icon icon-window"></span>
-          </button>
-          <button class="btn btn-default"
-                  @click="panes = 'right'"
-                  :class="{ 'active': panes === 'right' }"
+                  @click="panes.right = !panes.right"
+                  :class="{ 'active': panes.right }"
           >
             <span class="icon icon-eye"></span>
           </button>
@@ -80,9 +74,10 @@
                 About
                 <q-modal ref="aboutModal">
                   <div class="padded-more">
-                    <h4>About</h4>
                     <about></about>
-                    <q-btn color="primary" @click="$refs.aboutModal.close()">Close</q-btn>
+                    <div style="text-align: right;">
+                      <q-btn color="primary" @click="$refs.aboutModal.close()">Close</q-btn>
+                    </div>
                   </div>
                 </q-modal>
               </q-item>
@@ -95,7 +90,7 @@
     <div class="window-content">
       <div class="pane-group">
         <div class="pane padded-more"
-             v-show="panes === 'all' || panes === 'left'"
+             v-show="panes.left"
         >
           <div v-for="(tab, index) in tabs">
             <edit-input :content="tab.content"
@@ -106,7 +101,7 @@
           </div>
         </div>
         <div class="pane padded-more"
-             v-show="panes === 'all' || panes === 'right'"
+             v-show="panes.right"
         >
           <div v-for="(tab, index) in tabs">
             <markdown-preview :content="tab.content"
@@ -154,7 +149,10 @@ export default {
   data () {
     return {
       activeTab: 0,
-      panes: 'all',
+      panes: {
+        left: true,
+        right: true
+      },
 
       tabs: [],
 
@@ -178,6 +176,7 @@ export default {
     },
 
     removeTab (index) {
+      this.activeTab = Number(index - 1)
       this.tabs.splice(Number(index), 1)
     },
 
