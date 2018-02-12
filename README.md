@@ -1,4 +1,4 @@
-# Keeper
+# Vuenite
 
 Simple note app build with Quasar and its Electron wrapper.
 

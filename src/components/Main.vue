@@ -228,7 +228,7 @@ export default {
         '',
         '---',
         '',
-        'Keeper supports full Markdown syntax,',
+        'Vuenite supports full Markdown syntax,',
         '',
         '## Typography',
         '',
