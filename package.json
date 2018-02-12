@@ -1,10 +1,11 @@
 {
-  "name": "quasar-app",
-  "productName": "Quasar App",
+  "name": "vuenite",
+  "productName": "Vuenite",
   "version": "0.0.1",
   "private": true,
-  "description": "A Quasar App",
-  "author": "Your Name <your@email.com>",
+  "license": "MIT",
+  "description": "Lightweight note app",
+  "author": "Johann Behr <johannbehr@exng.de>",
   "scripts": {
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
