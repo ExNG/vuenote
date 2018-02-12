@@ -101,6 +101,7 @@
             <edit-input :content="tab.content"
                         @update="setTabContent(index, $event)"
                         v-show="activeTab === Number(index)"
+                        style="margin-left: -3px; padding-left: 3px; min-height: calc(100vh - 75px);"
             ></edit-input>
           </div>
         </div>
