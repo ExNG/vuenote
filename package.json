@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "animate.css": "^3.6.1",
     "babel-runtime": "^6.25.0",
     "markdown-it": "^8.4.0",
     "photonkit": "^0.1.2",
