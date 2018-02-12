@@ -20,7 +20,7 @@
     <hr>
 
     <div style="width: 100%; text-align: center; max-width: 500px;">
-      <div v-show="activeTab === 'about'">
+      <div class="animated fadeIn" v-show="activeTab === 'about'">
         <h4>Vuenite <small>(Alpha)</small></h4>
         <p>Vuenite is a lightweight note app, it aims at simplifying the way of taking notes.</p>
 
@@ -44,7 +44,7 @@
           </tr>
         </table>
       </div>
-      <div v-show="activeTab === 'dependencies'">
+      <div class="animated fadeIn" v-show="activeTab === 'dependencies'">
         <p>Vuenite only works because of these libraries</p>
 
         <br>

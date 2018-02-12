@@ -5,7 +5,7 @@
 
       <div class="toolbar-actions">
         <div class="btn-group">
-          <button class="btn btn-default"
+          <button class="btn btn-default animated fadeIn"
                   v-for="(tab, index) in tabs"
                   @click="setActiveTab(Number(index))"
                   :class="{ 'active': activeTab === index }"
@@ -89,7 +89,8 @@
 
     <div class="window-content">
       <div class="pane-group">
-        <div class="pane padded-more"
+        <div class="pane padded-more animated"
+             :class="{ 'fadeInLeft': panes.left }"
              v-show="panes.left"
         >
           <div v-for="(tab, index) in tabs">
@@ -100,7 +101,8 @@
             ></edit-input>
           </div>
         </div>
-        <div class="pane padded-more"
+        <div class="pane padded-more animated"
+             :class="{ 'fadeInRight': panes.right }"
              v-show="panes.right"
         >
           <div v-for="(tab, index) in tabs">
