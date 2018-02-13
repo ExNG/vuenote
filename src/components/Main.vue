@@ -81,6 +81,9 @@
                   </div>
                 </q-modal>
               </q-item>
+              <q-item @click="exportDoc(), $refs.popover.close()">
+                Export
+              </q-item>
             </q-list>
           </q-popover>
         </button>
@@ -96,7 +99,7 @@
           <div v-for="(tab, index) in tabs">
             <edit-input :content="tab.content"
                         @update="setTabContent(index, $event)"
-                        v-show="activeTab === Number(index)"
+                        v-if="activeTab === Number(index)"
                         style="margin-left: -3px; padding-left: 3px; min-height: calc(100vh - 75px);"
             ></edit-input>
           </div>
@@ -107,7 +110,7 @@
         >
           <div v-for="(tab, index) in tabs">
             <markdown-preview :content="tab.content"
-                              v-show="activeTab === Number(index)"
+                              v-if="activeTab === Number(index)"
             ></markdown-preview>
           </div>
         </div>
@@ -132,6 +135,7 @@ import EditInput from '../common/EditInput'
 import About from '../common/About'
 import Test from '../common/Test'
 import MarkdownPreview from '../common/MarkdownPreview'
+import FileSaver from 'file-saver'
 
 export default {
   components: {
@@ -201,6 +205,47 @@ export default {
             label: 'Apply',
             handler (data) {
               here.tabs[index].name = data.title
+            }
+          }
+        ]
+      })
+    },
+
+    exportDoc () {
+      let outside = this
+      Dialog.create({
+        title: 'Export',
+        message: 'Select file format',
+        form: {
+          option: {
+            type: 'radio',
+            model: 'txt',
+            inline: true,
+            items: [
+              {label: 'Text', value: 'txt'}
+            ]
+          }
+        },
+        buttons: [
+          'Cancel',
+          {
+            label: 'Ok',
+            handler (data) {
+              console.log('Returned ' + JSON.stringify(data))
+              // data.option is 'opt1'
+              switch (data.option) {
+                case 'txt':
+                  FileSaver.saveAs(
+                    new Blob(
+                      [outside.tabs[outside.activeTab].content],
+                      {
+                        type: 'text/plain;charset=utf-8'
+                      }
+                    ),
+                    outside.tabs[outside.activeTab].name + '.txt'
+                  )
+                  break
+              }
             }
           }
         ]
