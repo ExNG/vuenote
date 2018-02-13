@@ -91,7 +91,7 @@
     </header>
 
     <div class="window-content">
-      <div class="pane-group">
+      <div class="pane-group" style="overflow: hidden;">
         <div class="pane padded-more animated"
              :class="{ 'fadeInLeft': panes.left }"
              v-show="panes.left"
@@ -99,7 +99,7 @@
           <div v-for="(tab, index) in tabs">
             <edit-input :content="tab.content"
                         @update="setTabContent(index, $event)"
-                        v-if="activeTab === Number(index)"
+                        v-show="activeTab === Number(index)"
                         style="margin-left: -3px; padding-left: 3px; min-height: calc(100vh - 75px);"
             ></edit-input>
           </div>
@@ -110,8 +110,16 @@
         >
           <div v-for="(tab, index) in tabs">
             <markdown-preview :content="tab.content"
-                              v-if="activeTab === Number(index)"
+                              v-show="activeTab === Number(index)"
             ></markdown-preview>
+          </div>
+        </div>
+        <div class="pane padded-more animated"
+             :class="{ 'fadeIn': !panes.left && !panes.right }"
+             v-if="!panes.left && !panes.right"
+        >
+          <div class="fixed-center" style="text-align: center;">
+            <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
           </div>
         </div>
       </div>
