@@ -134,8 +134,20 @@ import {
 import EditInput from '../common/EditInput'
 import About from '../common/About'
 import Test from '../common/Test'
+import MarkdownIt from 'markdown-it'
 import MarkdownPreview from '../common/MarkdownPreview'
 import FileSaver from 'file-saver'
+
+var md = new MarkdownIt({
+  html: true,
+  xhtmlOut: true,
+  breaks: false,
+  langPrefix: 'language-',
+  linkify: true,
+  typographer: false,
+  quotes: '“”‘’',
+  highlight: function (/* str, lang */) { return '' }
+})
 
 export default {
   components: {
@@ -212,6 +224,8 @@ export default {
     },
 
     exportDoc () {
+      // TODO: Move this export method and markdown generator into own file
+
       let outside = this
       Dialog.create({
         title: 'Export',
@@ -222,7 +236,8 @@ export default {
             model: 'txt',
             inline: true,
             items: [
-              {label: 'Text', value: 'txt'}
+              {label: 'Text', value: 'txt'},
+              {label: 'Html', value: 'html'}
             ]
           }
         },
@@ -231,8 +246,6 @@ export default {
           {
             label: 'Ok',
             handler (data) {
-              console.log('Returned ' + JSON.stringify(data))
-              // data.option is 'opt1'
               switch (data.option) {
                 case 'txt':
                   FileSaver.saveAs(
@@ -243,6 +256,18 @@ export default {
                       }
                     ),
                     outside.tabs[outside.activeTab].name + '.txt'
+                  )
+                  break
+                case 'html':
+                  let html = '<html><head><title>' + outside.tabs[outside.activeTab].name + '</title></head><body>' + md.render(String(outside.tabs[outside.activeTab].content)) + '</body></html>'
+                  FileSaver.saveAs(
+                    new Blob(
+                      [html],
+                      {
+                        type: 'text/plain;charset=utf-8'
+                      }
+                    ),
+                    outside.tabs[outside.activeTab].name + '.html'
                   )
                   break
               }
