@@ -56,6 +56,8 @@
             <tr><td>Electron</td></tr>
             <tr><td>Photonkit</td></tr>
             <tr><td>MarkdownIt</td></tr>
+            <tr><td>FileSaverJS</td></tr>
+            <tr><td>Html2Canvas</td></tr>
           </table>
         </div>
       </div>
