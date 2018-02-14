@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "lts/*"
+before_script:
+  - npm install -g quasar-cli
+install:
+  - npm install
+  - cd electron && npm install
+script:
+  - quasar build
+  - cd electron && quasar build
