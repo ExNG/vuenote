@@ -7,5 +7,6 @@ install:
   - npm install
   - cd electron && npm install
 script:
+  - cd ..
   - quasar build
   - cd electron && quasar build
