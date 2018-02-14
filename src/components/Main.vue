@@ -143,21 +143,8 @@ import {
 import EditInput from '../common/EditInput'
 import About from '../common/About'
 import Test from '../common/Test'
-import MarkdownIt from 'markdown-it'
+import Export from '../services/Export'
 import MarkdownPreview from '../common/MarkdownPreview'
-import FileSaver from 'file-saver'
-import Html2Canvas from 'html2canvas'
-
-var md = new MarkdownIt({
-  html: true,
-  xhtmlOut: true,
-  breaks: false,
-  langPrefix: 'language-',
-  linkify: true,
-  typographer: false,
-  quotes: '“”‘’',
-  highlight: function (/* str, lang */) { return '' }
-})
 
 export default {
   components: {
@@ -234,76 +221,7 @@ export default {
     },
 
     exportDoc () {
-      // TODO: Move this export method and markdown generator into own file
-
-      let outside = this
-      Dialog.create({
-        title: 'Export',
-        message: 'Select file format',
-        form: {
-          option: {
-            type: 'radio',
-            model: 'txt',
-            inline: true,
-            items: [
-              {label: 'Text', value: 'txt'},
-              {label: 'Html', value: 'html'},
-              {label: 'Picture', value: 'picture'}
-            ]
-          }
-        },
-        buttons: [
-          'Cancel',
-          {
-            label: 'Ok',
-            handler (data) {
-              switch (data.option) {
-                case 'txt':
-                  FileSaver.saveAs(
-                    new Blob(
-                      [outside.tabs[outside.activeTab].content],
-                      {
-                        type: 'text/plain;charset=utf-8'
-                      }
-                    ),
-                    outside.tabs[outside.activeTab].name + '.txt'
-                  )
-                  break
-                case 'html':
-                  let html = '<html><head><title>' +
-                    outside.tabs[outside.activeTab].name +
-                    '</title></head><body>' +
-                    md.render(String(outside.tabs[outside.activeTab].content)) +
-                    '</body></html>'
-
-                  FileSaver.saveAs(
-                    new Blob(
-                      [html],
-                      {
-                        type: 'text/plain;charset=utf-8'
-                      }
-                    ),
-                    outside.tabs[outside.activeTab].name + '.html'
-                  )
-                  break
-                case 'picture':
-                  // TODO: Fix white image bug
-                  Html2Canvas(document.querySelector('#preview-' + outside.activeTab))
-                    .then(canvas => {
-                      document.body.appendChild(canvas)
-                      canvas.toBlob(canvas => {
-                        FileSaver.saveAs(
-                          canvas,
-                          outside.tabs[outside.activeTab].name + '.jpg'
-                        )
-                      }, 'image/jpeg', 1)
-                    })
-                  break
-              }
-            }
-          }
-        ]
-      })
+      Export.dialog(this.tabs[this.activeTab].content, this.tabs[this.activeTab].name, this.activeTab)
     },
 
     save () {

@@ -3,19 +3,7 @@
 </template>
 
 <script>
-import MarkdownIt from 'markdown-it'
-
-// Config documentation: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
-var md = new MarkdownIt({
-  html: true,
-  xhtmlOut: true,
-  breaks: false,
-  langPrefix: 'language-',
-  linkify: true,
-  typographer: false,
-  quotes: '“”‘’',
-  highlight: function (/* str, lang */) { return '' }
-})
+import Markdown from '../services/Markdown'
 
 export default {
   props: ['content'],
@@ -46,7 +34,7 @@ export default {
   methods: {
     renderMarkdown (data = null) {
       data = data ? String(data) : String(this.content)
-      this.parsedContent = md.render(String(data))
+      this.parsedContent = Markdown.generateHtml(data)
     }
   },
 
