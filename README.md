@@ -1,6 +1,12 @@
 # Vuenite
 
+[![Travis](https://img.shields.io/travis/ExNG/vuenite.svg)](https://travis-ci.org/ExNG/vuenite) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenite/total.svg)](http://github.com/ExNG/vuenite)
+
 Simple note app build with Quasar and its Electron wrapper.
+
+![Vuenite Screenshot](docs/images/vuenite_screenshot.png)
+
+--------------------------------------------------------------------------------
 
 ## Run Dev Server
 
