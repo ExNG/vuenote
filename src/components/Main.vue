@@ -110,6 +110,7 @@
         >
           <div v-for="(tab, index) in tabs">
             <markdown-preview :content="tab.content"
+                              :id="'preview-' + index"
                               v-show="activeTab === Number(index)"
             ></markdown-preview>
           </div>
@@ -145,6 +146,7 @@ import Test from '../common/Test'
 import MarkdownIt from 'markdown-it'
 import MarkdownPreview from '../common/MarkdownPreview'
 import FileSaver from 'file-saver'
+import Html2Canvas from 'html2canvas'
 
 var md = new MarkdownIt({
   html: true,
@@ -245,7 +247,8 @@ export default {
             inline: true,
             items: [
               {label: 'Text', value: 'txt'},
-              {label: 'Html', value: 'html'}
+              {label: 'Html', value: 'html'},
+              {label: 'Picture', value: 'picture'}
             ]
           }
         },
@@ -267,7 +270,12 @@ export default {
                   )
                   break
                 case 'html':
-                  let html = '<html><head><title>' + outside.tabs[outside.activeTab].name + '</title></head><body>' + md.render(String(outside.tabs[outside.activeTab].content)) + '</body></html>'
+                  let html = '<html><head><title>' +
+                    outside.tabs[outside.activeTab].name +
+                    '</title></head><body>' +
+                    md.render(String(outside.tabs[outside.activeTab].content)) +
+                    '</body></html>'
+
                   FileSaver.saveAs(
                     new Blob(
                       [html],
@@ -277,6 +285,19 @@ export default {
                     ),
                     outside.tabs[outside.activeTab].name + '.html'
                   )
+                  break
+                case 'picture':
+                  // TODO: Fix white image bug
+                  Html2Canvas(document.querySelector('#preview-' + outside.activeTab))
+                    .then(canvas => {
+                      document.body.appendChild(canvas)
+                      canvas.toBlob(canvas => {
+                        FileSaver.saveAs(
+                          canvas,
+                          outside.tabs[outside.activeTab].name + '.jpg'
+                        )
+                      }, 'image/jpeg', 1)
+                    })
                   break
               }
             }
@@ -328,7 +349,8 @@ export default {
         '',
         '## Links',
         '',
-        'Links can be automatically detected, but you should use the markdown way if you want to be sure.',
+        'Links can be automatically detected, but you should use the ' +
+          'markdown way if you want to be sure.',
         '',
         '`[Text](http://www.link-to.url)`',
         '',
@@ -344,7 +366,9 @@ export default {
         '',
         '---',
         '',
-        'This is just a short introdution to Markdown, take a look at [this Github article](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for more in depth information',
+        'This is just a short introdution to Markdown, take a look at ' +
+          '[this Github article](https://github.com/adam-p/markdown-here/wiki' +
+          '/Markdown-Cheatsheet) for more in depth information',
         ''
       ]
 
