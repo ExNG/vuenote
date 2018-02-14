@@ -16,6 +16,7 @@
     "animate.css": "^3.6.1",
     "babel-runtime": "^6.25.0",
     "file-saver": "^1.3.3",
+    "html2canvas": "^1.0.0-alpha.9",
     "markdown-it": "^8.4.0",
     "photonkit": "^0.1.2",
     "quasar-extras": "0.x",
