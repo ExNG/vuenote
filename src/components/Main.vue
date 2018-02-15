@@ -43,10 +43,8 @@
 
         <button class="btn btn-default"
                 @click="save()"
-                disabled
         >
           <span class="icon icon-floppy icon-text"></span>
-          <!-- WONT SAVE, FOR TESTING -->
           Save
         </button>
 
@@ -144,6 +142,7 @@ import EditInput from '../common/EditInput'
 import About from '../common/About'
 import Test from '../common/Test'
 import Export from '../services/Export'
+import Storage from '../services/Storage'
 import MarkdownPreview from '../common/MarkdownPreview'
 
 export default {
@@ -225,7 +224,7 @@ export default {
     },
 
     save () {
-      console.log('saved', JSON.stringify(this.tabs))
+      Storage.save('tabs', this.tabs)
     },
 
     setTabContent (tabIndex, content) {
@@ -234,11 +233,10 @@ export default {
   },
 
   created () {
-    // later check if there are existing saves
-    let loadNotes = false
+    let stored = Storage.load('tabs')
 
-    if (loadNotes) {
-      this.tabs = []
+    if (stored) {
+      this.tabs = stored
     }
     else {
       let content = [
