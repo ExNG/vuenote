@@ -3,7 +3,7 @@ node_js:
   - "lts/*"
 before_script:
   - sudo apt-get update -qq
-  - sudo apt-get install wine -y
+  - sudo apt-get install wine zip -y
   - npm install -g quasar-cli
 install:
   - npm install
@@ -12,3 +12,18 @@ script:
   - cd ..
   - quasar build
   - cd electron && quasar build
+  - cd dist
+  - zip -r App-darwin-x64.zip Quasar\ Electron\ App-darwin-x64/
+  - zip -r App-linux-x64.zip Quasar\ Electron\ App-linux-x64/
+  - zip -r App-win32-x64.zip Quasar\ Electron\ App-win32-x64/
+deploy:
+  provider: releases
+  api_key: $gh_token
+  file:
+    - App-darwin-x64.zip
+    - App-linux-x64.zip
+    - App-win32-x64.zip
+  skip_cleanup: true
+  on:
+    repo: ExNG/vuenite
+    tags: true
