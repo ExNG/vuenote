@@ -13,16 +13,16 @@ script:
   - quasar build
   - cd electron && quasar build
   - cd dist
-  - zip -r App-darwin-x64.zip Quasar\ Electron\ App-darwin-x64/
-  - zip -r App-linux-x64.zip Quasar\ Electron\ App-linux-x64/
-  - zip -r App-win32-x64.zip Quasar\ Electron\ App-win32-x64/
+  - zip -r vuenite-darwin-x64.zip Vuenite-darwin-x64/
+  - zip -r vuenite-linux-x64.zip Vuenite-linux-x64/
+  - zip -r vuenite-win32-x64.zip Vuenite-win32-x64/
 deploy:
   provider: releases
   api_key: $gh_token
   file:
-    - App-darwin-x64.zip
-    - App-linux-x64.zip
-    - App-win32-x64.zip
+    - vuenite-darwin-x64.zip
+    - vuenite-linux-x64.zip
+    - vuenite-win32-x64.zip
   skip_cleanup: true
   on:
     repo: ExNG/vuenite

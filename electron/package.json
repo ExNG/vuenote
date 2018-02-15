@@ -1,9 +1,9 @@
 {
-  "name": "quasar-electron-app",
-  "productName": "Quasar Electron App",
+  "name": "vuenite",
+  "productName": "Vuenite",
   "version": "0.0.1",
-  "author": "Your name <your@email.com>",
-  "description": "Quasar App wrapped with Electron",
+  "author": "Johann Behr <johannbehr@exng.de>",
+  "description": "Lightweight note app",
   "main": "electron.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development electron src/main.js",

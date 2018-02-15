@@ -1,14 +1,33 @@
 # Vuenite
 
-[![Travis](https://img.shields.io/travis/ExNG/vuenite.svg)](https://travis-ci.org/ExNG/vuenite) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenite/total.svg)](http://github.com/ExNG/vuenite)
+> Simple note app build with Quasar and its Electron wrapper.
 
-Simple note app build with Quasar and its Electron wrapper.
+[![Travis](https://img.shields.io/travis/ExNG/vuenite.svg)](https://travis-ci.org/ExNG/vuenite) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenite/total.svg)](http://github.com/ExNG/vuenite)
 
 ![Vuenite Screenshot](docs/images/vuenite_screenshot.png)
 
 --------------------------------------------------------------------------------
 
+## TODO
+
+List of feature that i want to include
+
+- [ ] Cloud saves
+
+  - [ ] Google Drive
+  - [ ] WebPeer
+
+- [ ] Media features
+
+  - [ ] Graphs
+  - [ ] Video/Youtube embed support
+  - [ ] Slides
+
+**Got some idea?** Open an issue ticket and let me know, or even better create a pull request!
+
 ## Run Dev Server
+
+First run `npm install` in the root directory and the `èlectron/` folder.
 
 ```bash
 # serve with hot reload at localhost:8080 in one tab
@@ -22,15 +41,16 @@ $ quasar dev
 ## Build Setup
 
 ```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:8080
-$ quasar dev
-
 # build for production with minification
 $ quasar build
 
-# lint code
-$ quasar lint
+# build electron executables
+# you can type linux for example to just build for linux
+$ cd electron && quasar build
 ```
+
+**Attention!** When building for windows on linux you need wine installed.
+
+## License
+
+MIT
