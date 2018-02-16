@@ -6,7 +6,7 @@ import Html2Canvas from 'html2canvas'
 import Markdown from '../Markdown'
 
 export default {
-  dialog (content, name, activeTab) {
+  exportDialog (content, name, activeTab) {
     Dialog.create({
       title: 'Export',
       message: 'Select file format',
