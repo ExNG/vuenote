@@ -68,6 +68,12 @@
           <!-- Menu -->
           <q-popover ref="popover">
             <q-list separator link>
+              <q-item @click="exportDoc(), $refs.popover.close()">
+                Export
+              </q-item>
+              <q-item @click="openDebugDialog(), $refs.popover.close()">
+                Debug
+              </q-item>
               <q-item @click="$refs.aboutModal.open(), $refs.popover.close()">
                 About
                 <q-modal ref="aboutModal">
@@ -78,9 +84,6 @@
                     </div>
                   </div>
                 </q-modal>
-              </q-item>
-              <q-item @click="exportDoc(), $refs.popover.close()">
-                Export
               </q-item>
             </q-list>
           </q-popover>
@@ -138,12 +141,13 @@ import {
   QBtn,
   Dialog
 } from 'quasar'
-import EditInput from '../common/EditInput'
 import About from '../common/About'
-import Test from '../common/Test'
+import Debug from '../services/Debug'
+import EditInput from '../common/EditInput'
 import Export from '../services/Export'
-import Storage from '../services/Storage'
 import MarkdownPreview from '../common/MarkdownPreview'
+import Storage from '../services/Storage'
+import Test from '../common/Test'
 
 export default {
   components: {
@@ -202,7 +206,7 @@ export default {
         form: {
           title: {
             type: 'text',
-            label: 'Textbox',
+            label: 'Name',
             model: here.tabs[index].name,
             min: 3
           }
@@ -219,8 +223,12 @@ export default {
       })
     },
 
+    openDebugDialog () {
+      Debug.debugDialog()
+    },
+
     exportDoc () {
-      Export.dialog(this.tabs[this.activeTab].content, this.tabs[this.activeTab].name, this.activeTab)
+      Export.exportDialog(this.tabs[this.activeTab].content, this.tabs[this.activeTab].name, this.activeTab)
     },
 
     save () {
@@ -239,68 +247,8 @@ export default {
       this.tabs = stored
     }
     else {
-      let content = [
-        '# Welcome',
-        '',
-        '---',
-        '',
-        'Vuenite supports full Markdown syntax,',
-        '',
-        '## Typography',
-        '',
-        'Name | Usage | Alternative usage',
-        '--- | --- | ----',
-        '*Italic* | `*Text*` | `_Text_`',
-        '**Strong** | `**Text**` | `__Text__`',
-        '~~Strikethrough~~ | `~~Text~~` |',
-        '> Blockquote | `> Text` |',
-        '',
-        '## Lists',
-        '',
-        'Name | Usage',
-        '--- | ---',
-        'Simple List | `- Text` or `* Text` or `+ Text`',
-        'Simple List Child | `   - Text`',
-        'Numbered List | `1. Text`',
-        '',
-        '## Links',
-        '',
-        'Links can be automatically detected, but you should use the ' +
-          'markdown way if you want to be sure.',
-        '',
-        '`[Text](http://www.link-to.url)`',
-        '',
-        '## Images',
-        '',
-        '`![Alt Text](http://link.to/image)`',
-        '',
-        '## Tables',
-        '',
-        'Normal | Centered | Right aligned',
-        '--- | :---: | ---:',
-        'Text | Text | Text',
-        '',
-        '## Checkboxes',
-        '',
-        'Element | Code',
-        '--- | ---',
-        '[X] Text | `[X] Text` or `[x] Text`',
-        '[ ] Text | `[ ] Text`',
-        '',
-        '',
-        '---',
-        '',
-        'This is just a short introdution to Markdown, take a look at ' +
-          '[this Github article](https://github.com/adam-p/markdown-here/wiki' +
-          '/Markdown-Cheatsheet) for more in depth information',
-        ''
-      ]
-
-      content = content.join('\n')
-
-      this.addTab('Welcome',
-        content
-      )
+      Storage.init()
+      this.tabs = Storage.load('tabs')
     }
   }
 }
