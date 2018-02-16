@@ -2,6 +2,7 @@ import {
   Dialog,
   Toast
 } from 'quasar'
+import { shell } from 'electron'
 import Storage from '../Storage'
 
 export default {
@@ -26,6 +27,13 @@ export default {
               icon: 'error',
               timeout: (60 * 1000)
             })
+          }
+        },
+        {
+          label: 'Report issue (github.com/ExNG/vuenite/issues)',
+          color: 'positive',
+          handler () {
+            shell.openExternal('https://github.com/ExNG/vuenite/issues')
           }
         },
         {
