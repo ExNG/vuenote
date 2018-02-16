@@ -1,8 +1,6 @@
 <template>
   <div class="window">
     <header class="toolbar toolbar-header">
-      <!-- <h1 class="title">Header with actions</h1> -->
-
       <div class="toolbar-actions">
         <div class="btn-group">
           <button class="btn btn-default animated fadeIn"
@@ -63,31 +61,36 @@
           </button>
         </div>
 
-        <button class="btn btn-default btn-dropdown pull-right">
-          <span class="icon icon-menu icon-text"></span>
-          <!-- Menu -->
-          <q-popover ref="popover">
-            <q-list separator link>
-              <q-item @click="exportDoc(), $refs.popover.close()">
-                Export
-              </q-item>
-              <q-item @click="openDebugDialog(), $refs.popover.close()">
-                Debug
-              </q-item>
-              <q-item @click="$refs.aboutModal.open(), $refs.popover.close()">
-                About
-                <q-modal ref="aboutModal">
-                  <div class="padded-more">
-                    <about></about>
-                    <div style="text-align: right;">
-                      <q-btn color="primary" @click="$refs.aboutModal.close()">Close</q-btn>
+        <div class="pull-right">
+          <button class="btn btn-default btn-dropdown">
+            <span class="icon icon-menu icon-text"></span>
+            <!-- Menu -->
+            <q-popover ref="popover">
+              <q-list separator link>
+                <q-item @click="exportDoc(), $refs.popover.close()">
+                  Export
+                </q-item>
+                <q-item @click="openDebugDialog(), $refs.popover.close()">
+                  Debug
+                </q-item>
+                <q-item @click="$refs.aboutModal.open(), $refs.popover.close()">
+                  About
+                  <q-modal ref="aboutModal">
+                    <div class="padded-more">
+                      <about></about>
+                      <div style="text-align: right;">
+                        <q-btn color="primary" @click="$refs.aboutModal.close()">Close</q-btn>
+                      </div>
                     </div>
-                  </div>
-                </q-modal>
-              </q-item>
-            </q-list>
-          </q-popover>
-        </button>
+                  </q-modal>
+                </q-item>
+              </q-list>
+            </q-popover>
+          </button>
+
+          <window-controls></window-controls>
+        </div>
+
       </div>
     </header>
 
@@ -148,6 +151,7 @@ import Export from '../services/Export'
 import MarkdownPreview from '../common/MarkdownPreview'
 import Storage from '../services/Storage'
 import Test from '../common/Test'
+import WindowControls from '../common/WindowControls'
 
 export default {
   components: {
@@ -161,7 +165,8 @@ export default {
     QModal,
     QBtn,
     Dialog,
-    MarkdownPreview
+    MarkdownPreview,
+    WindowControls
   },
 
   data () {

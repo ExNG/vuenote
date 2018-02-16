@@ -16,7 +16,11 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     title: config.name,
     width: 800,
+    minWidth: 800,
     height: 600,
+    minHeight: 600,
+    fullscreenable: true,
+    frame: false,
     icon: path.join(__dirname, '../icons/icon.png')
   })
 
