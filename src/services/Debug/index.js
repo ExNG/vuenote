@@ -9,11 +9,11 @@ export default {
     Dialog.create({
       title: 'Debug Options',
       message: 'Hello traveler! This very dangerous and some say here be dragons. This is the last warning.',
-      form: {},
+      stackButtons: true,
       buttons: [
-        'Cancel',
         {
           label: 'Clear cache (Deletes all settings, tabs and debug settings)',
+          color: 'negative',
           handler () {
             let struture = Storage.structure
 
@@ -27,6 +27,9 @@ export default {
               timeout: (60 * 1000)
             })
           }
+        },
+        {
+          label: 'Cancel'
         }
       ]
     })
