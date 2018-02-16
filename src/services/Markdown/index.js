@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it'
+import markdownItCheckbox from 'markdown-it-checkbox'
 
 // Config documentation: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
 var md = new MarkdownIt({
@@ -11,6 +12,11 @@ var md = new MarkdownIt({
   quotes: '“”‘’',
   highlight: function (/* str, lang */) { return '' }
 })
+  .use(markdownItCheckbox, {
+    divWrap: true,
+    divClass: 'checkbox',
+    idPrefix: 'markdownpreview-checkbox-'
+  })
 
 export default {
   generateHtml (data) {

@@ -2,8 +2,9 @@
   "name": "vuenite",
   "productName": "Vuenite",
   "version": "0.0.1",
-  "author": "Johann Behr <johannbehr@exng.de>",
+  "license": "MIT",
   "description": "Lightweight note app",
+  "author": "Johann Behr <johannbehr@exng.de>",
   "main": "electron.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development electron src/main.js",

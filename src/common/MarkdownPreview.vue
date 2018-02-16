@@ -50,4 +50,9 @@ export default {
     border-radius: 2px;
     box-decoration-break: clone;
   }
+
+  input[id^="markdownpreview-checkbox-"] {
+    margin-left: 0px !important;
+    pointer-events: none;
+  }
 </style>
