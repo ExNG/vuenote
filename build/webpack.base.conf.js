@@ -16,6 +16,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  target: 'electron-renderer',
   entry: {
     app: './src/main.js'
   },
