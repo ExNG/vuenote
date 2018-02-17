@@ -1,6 +1,6 @@
 <template>
   <div class="window">
-    <header class="toolbar toolbar-header" style="-webkit-app-region: drag;">
+    <header class="toolbar toolbar-header">
       <h1 class="title">{{ packageInfo.productName }}</h1>
 
       <div class="toolbar-actions">
@@ -131,8 +131,6 @@
         </div>
       </div>
     </div>
-
-    <test></test>
   </div>
 </template>
 
