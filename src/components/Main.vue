@@ -158,7 +158,6 @@ export default {
   components: {
     EditInput,
     About,
-    Test,
     QPopover,
     QContextMenu,
     QList,
