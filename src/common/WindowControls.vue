@@ -2,19 +2,19 @@
   <div class="btn-group">
     <button class="btn btn-default">
       <span class="icon icon-down-open"
-            @click="minimize()"
+            @click.prevent="minimize()"
       ></span>
     </button>
 
     <button class="btn btn-default">
       <span class="icon icon-up-open"
-            @click="maximize()"
+            @click.prevent="maximize()"
       ></span>
     </button>
 
     <button class="btn btn-default">
       <span class="icon icon-cancel"
-            @click="close()"
+            @click.prevent="close()"
       ></span>
     </button>
   </div>

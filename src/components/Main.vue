@@ -152,7 +152,6 @@ import EditInput from '../common/EditInput'
 import Export from '../services/Export'
 import MarkdownPreview from '../common/MarkdownPreview'
 import Storage from '../services/Storage'
-import Test from '../common/Test'
 import WindowControls from '../common/WindowControls'
 
 export default {
