@@ -1,6 +1,8 @@
 <template>
   <div class="window">
-    <header class="toolbar toolbar-header">
+    <header class="toolbar toolbar-header" style="-webkit-app-region: drag;">
+      <h1 class="title">{{ packageInfo.productName }}</h1>
+
       <div class="toolbar-actions">
         <div class="btn-group">
           <button class="btn btn-default animated fadeIn"
@@ -77,7 +79,7 @@
                   About
                   <q-modal ref="aboutModal">
                     <div class="padded-more">
-                      <about></about>
+                      <about :packageInfo="packageInfo"></about>
                       <div style="text-align: right;">
                         <q-btn color="primary" @click="$refs.aboutModal.close()">Close</q-btn>
                       </div>
@@ -171,6 +173,8 @@ export default {
 
   data () {
     return {
+      packageInfo: require('../../package.json'),
+
       activeTab: 0,
       panes: {
         left: true,

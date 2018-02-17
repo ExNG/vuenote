@@ -21,8 +21,8 @@
 
     <div style="width: 100%; text-align: center; max-width: 500px;">
       <div class="animated fadeIn" v-show="activeTab === 'about'">
-        <h4>Vuenite <small>(Alpha)</small></h4>
-        <p>Vuenite is a lightweight note app, it aims at simplifying the way of taking notes.</p>
+        <h4>{{ packageInfo.productName }} <small>(v. {{ packageInfo.version }})</small></h4>
+        <p>{{ packageInfo.description }}</p>
 
         <br>
 
@@ -30,34 +30,34 @@
           <tr>
             <td><span class="icon icon-github"></span></td>
             <td>Source:</td>
-            <td><a>github.com/ExNG/vuenite</a></td>
+            <td>
+              <a @click="openURL(packageInfo.homepage)">
+                {{ packageInfo.homepage }}
+              </a>
+            </td>
           </tr>
           <tr>
             <td><span class="icon icon-attention"></span></td>
             <td>License:</td>
-            <td>MIT</td>
+            <td>{{ packageInfo.license }}</td>
           </tr>
           <tr>
             <td><span class="icon icon-book"></span></td>
             <td>Author:</td>
-            <td>Johann Behr <a>johannbehr@exng.de</a></td>
+            <td>{{ packageInfo.author }}</td>
           </tr>
         </table>
       </div>
       <div class="animated fadeIn" v-show="activeTab === 'dependencies'">
-        <p>Vuenite only works because of these libraries</p>
+        <p>{{ packageInfo.productName }} only works because of these libraries</p>
 
         <br>
 
         <div style="max-height: 50vh; overflow-y: scroll">
           <table>
-            <tr><td>Quasar Framework</td></tr>
-            <tr><td>VueJS</td></tr>
-            <tr><td>Electron</td></tr>
-            <tr><td>Photonkit</td></tr>
-            <tr><td>MarkdownIt</td></tr>
-            <tr><td>FileSaverJS</td></tr>
-            <tr><td>Html2Canvas</td></tr>
+            <tr v-for="(version, packageName) in packageInfo.dependencies">
+              <td>{{ packageName }}</td>
+            </tr>
           </table>
         </div>
       </div>
@@ -68,10 +68,20 @@
 </template>
 
 <script>
+import { shell } from 'electron'
+
 export default {
+  props: ['packageInfo'],
+
   data () {
     return {
       activeTab: 'about'
+    }
+  },
+
+  methods: {
+    openURL (url) {
+      shell.openExternal(url)
     }
   }
 }

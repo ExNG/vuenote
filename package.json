@@ -6,6 +6,11 @@
   "license": "MIT",
   "description": "Lightweight note app",
   "author": "Johann Behr <johannbehr@exng.de>",
+  "homepage": "https://github.com/ExNG/vuenite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ExNG/vuenite.git"
+  },
   "scripts": {
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
