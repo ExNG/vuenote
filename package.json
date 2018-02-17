@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "private": true,
   "license": "MIT",
-  "description": "Lightweight note app",
+  "description": "Vuenite is a lightweight note app build on web technologies.",
   "author": "Johann Behr <johannbehr@exng.de>",
   "homepage": "https://github.com/ExNG/vuenite",
   "repository": {
