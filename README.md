@@ -10,7 +10,7 @@
 
 ## TODO
 
-List of feature that i want to include
+List of features that are planned
 
 - [ ] Cloud saves
 
@@ -23,11 +23,11 @@ List of feature that i want to include
   - [ ] Video/Youtube embed support
   - [ ] Slides
 
-**Got some idea?** Open an issue ticket and let me know, or even better create a pull request!
+**Got some idea?** Open an issue and let me know, or even better create a pull request!
 
 ## Run Dev Server
 
-First run `npm install` in the root directory and the `èlectron/` folder.
+First run `npm install` in the root directory and the `electron/` folder.
 
 ```bash
 # serve with hot reload at localhost:8080 in one tab
