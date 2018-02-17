@@ -1,9 +1,9 @@
 <template>
   <div class="window">
     <header class="toolbar toolbar-header">
-      <h1 class="title">{{ packageInfo.productName }}</h1>
+      <h1 class="title animated fadeInDown">{{ packageInfo.productName }}</h1>
 
-      <div class="toolbar-actions">
+      <div class="toolbar-actions animated fadeIn">
         <div class="btn-group">
           <button class="btn btn-default animated fadeIn"
                   v-for="(tab, index) in tabs"
@@ -110,8 +110,7 @@
             ></edit-input>
           </div>
         </div>
-        <div class="pane padded-more animated"
-             :class="{ 'fadeInRight': panes.right }"
+        <div class="pane padded-more animated fadeInRight"
              v-show="panes.right"
         >
           <div v-for="(tab, index) in tabs">
@@ -121,9 +120,8 @@
             ></markdown-preview>
           </div>
         </div>
-        <div class="pane padded-more animated"
-             :class="{ 'fadeIn': !panes.left && !panes.right }"
-             v-if="!panes.left && !panes.right"
+        <div class="pane padded-more animated fadeIn"
+             v-show="!panes.left && !panes.right"
         >
           <div class="fixed-center" style="text-align: center;">
             <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
@@ -131,6 +129,18 @@
         </div>
       </div>
     </div>
+
+    <footer class="toolbar toolbar-footer">
+      <div class="toolbar-actions">
+        <div class="pull-right">
+          <button class="btn btn-default pull-right"
+                  @click="applyMarkdownStyle()"
+          >
+            <span class="icon icon-feather"></span>
+          </button>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -148,14 +158,13 @@ import About from '../common/About'
 import Debug from '../services/Debug'
 import EditInput from '../common/EditInput'
 import Export from '../services/Export'
+import Markdown from '../services/Markdown'
 import MarkdownPreview from '../common/MarkdownPreview'
 import Storage from '../services/Storage'
 import WindowControls from '../common/WindowControls'
 
 export default {
   components: {
-    EditInput,
-    About,
     QPopover,
     QContextMenu,
     QList,
@@ -163,6 +172,8 @@ export default {
     QModal,
     QBtn,
     Dialog,
+    About,
+    EditInput,
     MarkdownPreview,
     WindowControls
   },
@@ -242,6 +253,14 @@ export default {
 
     setTabContent (tabIndex, content) {
       this.tabs[tabIndex].content = content
+    },
+
+    applyMarkdownStyle () {
+      let content = this.tabs[this.activeTab].content
+      content = Markdown.applyStyle(content)
+      this.tabs[this.activeTab].content = String(content)
+
+      this.$emit('content-updated')
     }
   },
 

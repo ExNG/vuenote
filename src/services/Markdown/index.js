@@ -1,5 +1,6 @@
 import MarkdownIt from 'markdown-it'
 import markdownItCheckbox from 'markdown-it-checkbox'
+import remark from 'remark'
 
 // Config documentation: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
 var md = new MarkdownIt({
@@ -33,5 +34,14 @@ export default {
       this.generateHtml(data) + nl +
       '</body>' + nl +
       '</html>'
+  },
+
+  applyStyle (data) {
+    remark()
+      .process(data, function (err, file) {
+        console.error(err || file)
+        data = file.contents
+      })
+    return data
   }
 }
