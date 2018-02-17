@@ -1,7 +1,7 @@
 {
   "name": "vuenite",
   "productName": "Vuenite",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "license": "MIT",
   "description": "Vuenite is a lightweight note app build on web technologies.",
@@ -27,6 +27,7 @@
     "photonkit": "^0.1.2",
     "quasar-extras": "0.x",
     "quasar-framework": "0.14.9",
+    "remark": "^9.0.0",
     "vue": "^2.5.0",
     "vue-router": "^3.0.1"
   },
