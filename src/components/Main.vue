@@ -18,6 +18,9 @@
                 <q-item @click="renameTab(Number(index)), $refs.context.close()">
                   Rename
                 </q-item>
+                <q-item @click="archiveTab(Number(index)), $refs['context' + index].close()">
+                  Archive
+                </q-item>
                 <q-item @click="removeTab(Number(index)), $refs['context' + index].close()">
                   Close
                 </q-item>
@@ -50,13 +53,19 @@
 
         <div class="btn-group">
           <button class="btn btn-default"
-                  @click="panes.left = !panes.left"
+                  @click="togglePane('sm')"
+                  :class="{ 'active': panes.sm }"
+          >
+            <span class="icon icon-bookmark"></span>
+          </button>
+          <button class="btn btn-default"
+                  @click="togglePane('left')"
                   :class="{ 'active': panes.left }"
           >
             <span class="icon icon-pencil"></span>
           </button>
           <button class="btn btn-default"
-                  @click="panes.right = !panes.right"
+                  @click="togglePane('right')"
                   :class="{ 'active': panes.right }"
           >
             <span class="icon icon-eye"></span>
@@ -98,25 +107,42 @@
 
     <div class="window-content">
       <div class="pane-group" style="overflow: hidden;">
-        <div class="pane padded-more animated"
-             :class="{ 'fadeInLeft': panes.left }"
-             v-show="panes.left"
+        <div class="pane-sm sidebar animated slideInLeft"
+             v-if="panes.sm"
+        >
+          <nav class="nav-group">
+            <h5 class="nav-group-title">Archive</h5>
+            <span class="nav-group-item"
+                  v-for="(note, index) in archived"
+                  @click="restoreArchivedTab(index)"
+            >
+              <span class="icon icon-doc-text"></span>
+              {{ note.name }}
+            </span>
+            <span class="nav-group-item" v-show="archived.length === 0">
+              <span class="icon icon-info-circled"></span>
+              No archived notes
+            </span>
+          </nav>
+        </div>
+        <div class="pane padded-more animated fadeInUp"
+             v-if="panes.left"
         >
           <div v-for="(tab, index) in tabs">
             <edit-input :content="tab.content"
                         @update="setTabContent(index, $event)"
-                        v-show="activeTab === Number(index)"
+                        v-if="activeTab === Number(index)"
                         style="margin-left: -3px; padding-left: 3px; min-height: calc(100vh - 75px);"
             ></edit-input>
           </div>
         </div>
-        <div class="pane padded-more animated fadeInRight"
-             v-show="panes.right"
+        <div class="pane padded-more animated fadeInUp"
+             v-if="panes.right"
         >
           <div v-for="(tab, index) in tabs">
             <markdown-preview :content="tab.content"
                               :id="'preview-' + index"
-                              v-show="activeTab === Number(index)"
+                              v-if="activeTab === Number(index)"
             ></markdown-preview>
           </div>
         </div>
@@ -184,11 +210,13 @@ export default {
 
       activeTab: 0,
       panes: {
+        sm: true,
         left: true,
         right: true
       },
 
       tabs: [],
+      archived: [],
 
       newTab: {
         name: 'New Tab',
@@ -239,6 +267,31 @@ export default {
       })
     },
 
+    archiveTab (index) {
+      index = Number(index)
+      this.archived.push(this.tabs[index])
+      Storage.save('archived', this.archived)
+      this.activeTab = index - 1
+      this.tabs.splice(index, 1)
+    },
+
+    togglePane (paneName) {
+      let settings = Storage.load('settings')
+
+      this.panes[paneName] = !this.panes[paneName]
+      settings.panes = this.panes
+
+      Storage.save('settings', settings)
+    },
+
+    restoreArchivedTab (index) {
+      index = Number(index)
+      this.tabs.push(this.archived[index])
+      this.activeTab = this.tabs.length - 1
+      this.archived.splice(index, 1)
+      Storage.save('archived', this.archived)
+    },
+
     openDebugDialog () {
       Debug.debugDialog()
     },
@@ -265,15 +318,11 @@ export default {
   },
 
   created () {
-    let stored = Storage.load('tabs')
+    this.tabs = Storage.load('tabs')
 
-    if (stored) {
-      this.tabs = stored
-    }
-    else {
-      Storage.init()
-      this.tabs = Storage.load('tabs')
-    }
+    this.archived = Storage.load('archived')
+
+    this.panes = Storage.load('settings').panes
   }
 }
 </script>

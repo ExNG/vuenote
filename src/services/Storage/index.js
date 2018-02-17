@@ -2,7 +2,13 @@ import { Toast, Dialog } from 'quasar'
 
 export default {
   structure: {
-    settings: {},
+    settings: {
+      panes: {
+        sm: false,
+        left: true,
+        right: true
+      }
+    },
     tabs: [
       {
         name: 'Welcome',
@@ -64,6 +70,7 @@ export default {
         ].join('\n')
       }
     ],
+    archived: [],
     debug: {}
   },
 
@@ -82,7 +89,14 @@ export default {
   },
 
   load (name) {
-    return JSON.parse(localStorage.getItem(name))
+    if (!localStorage.getItem(name)) {
+      let value = this.structure[name]
+      this.save(name, value)
+      return value
+    }
+    else {
+      return JSON.parse(localStorage.getItem(name))
+    }
   },
 
   save (name, value) {
