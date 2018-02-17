@@ -1,21 +1,21 @@
 <template>
   <div class="btn-group">
-    <button class="btn btn-default">
-      <span class="icon icon-down-open"
-            @click.prevent="minimize()"
-      ></span>
+    <button class="btn btn-default"
+          @click.prevent="minimize()"
+    >
+      <span class="icon icon-down-open"></span>
     </button>
 
-    <button class="btn btn-default">
-      <span class="icon icon-up-open"
-            @click.prevent="maximize()"
-      ></span>
+    <button class="btn btn-default"
+          @click.prevent="maximize()"
+    >
+      <span class="icon icon-up-open"></span>
     </button>
 
-    <button class="btn btn-default">
-      <span class="icon icon-cancel"
-            @click.prevent="close()"
-      ></span>
+    <button class="btn btn-default"
+          @click.prevent="close()"
+    >
+      <span class="icon icon-cancel"></span>
     </button>
   </div>
 </template>

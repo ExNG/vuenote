@@ -15,9 +15,9 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     title: config.name,
-    width: 800,
+    width: 1200,
     minWidth: 800,
-    height: 600,
+    height: 800,
     minHeight: 600,
     fullscreenable: true,
     frame: false,
