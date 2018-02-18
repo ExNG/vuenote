@@ -186,6 +186,7 @@ import EditInput from '../common/EditInput'
 import Export from '../services/Export'
 import Markdown from '../services/Markdown'
 import MarkdownPreview from '../common/MarkdownPreview'
+import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
 import WindowControls from '../common/WindowControls'
 
@@ -318,6 +319,8 @@ export default {
   },
 
   created () {
+    StartupHandler()
+
     this.tabs = Storage.load('tabs')
 
     this.archived = Storage.load('archived')
