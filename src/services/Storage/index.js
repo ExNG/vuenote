@@ -2,6 +2,9 @@ import Notification from '../Notification'
 
 export default {
   structure: {
+    appData: {
+      version: require('../../../package.json').version
+    },
     settings: {
       panes: {
         sm: false,
