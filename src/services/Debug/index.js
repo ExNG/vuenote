@@ -1,8 +1,6 @@
-import {
-  Dialog,
-  Toast
-} from 'quasar'
+import { Dialog } from 'quasar'
 import { shell } from 'electron'
+import Notification from '../Notification'
 import Storage from '../Storage'
 
 export default {
@@ -22,11 +20,7 @@ export default {
               Storage.unset(name)
             }
 
-            Toast.create.negative({
-              html: 'In order for the changes to take effect you need to restart Vuenite',
-              icon: 'error',
-              timeout: (60 * 1000)
-            })
+            Notification('Debug', 'In order for the changes to take effect you need to restart Vuenite')
           }
         },
         {
