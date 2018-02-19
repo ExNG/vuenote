@@ -20,7 +20,7 @@ function createWindow () {
     height: 800,
     minHeight: 600,
     fullscreenable: true,
-    frame: false,
+    frame: true,
     icon: path.join(__dirname, '../icons/icon.png')
   })
 

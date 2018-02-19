@@ -1,11 +1,9 @@
 <template>
   <div class="window">
-    <header class="toolbar toolbar-header">
-      <h1 class="title animated fadeInDown">{{ packageInfo.productName }}</h1>
-
-      <div class="toolbar-actions animated fadeIn">
+    <header class="toolbar toolbar-header animated fadeInDown">
+      <div class="toolbar-actions">
         <div class="btn-group">
-          <button class="btn btn-default animated fadeIn"
+          <button class="btn btn-default"
                   v-for="(tab, index) in tabs"
                   @click="setActiveTab(Number(index))"
                   :class="{ 'active': activeTab === index }"
@@ -98,8 +96,6 @@
               </q-list>
             </q-popover>
           </button>
-
-          <window-controls></window-controls>
         </div>
 
       </div>
@@ -156,7 +152,7 @@
       </div>
     </div>
 
-    <footer class="toolbar toolbar-footer">
+    <footer class="toolbar toolbar-footer animated fadeInUp">
       <div class="toolbar-actions">
         <div class="pull-right">
           <button class="btn btn-default pull-right"
@@ -188,7 +184,6 @@ import Markdown from '../services/Markdown'
 import MarkdownPreview from '../common/MarkdownPreview'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
-import WindowControls from '../common/WindowControls'
 
 export default {
   components: {
@@ -201,8 +196,7 @@ export default {
     Dialog,
     About,
     EditInput,
-    MarkdownPreview,
-    WindowControls
+    MarkdownPreview
   },
 
   data () {
