@@ -1,5 +1,5 @@
 import { Dialog } from 'quasar'
-import { shell } from 'electron'
+import { shell, remote } from 'electron'
 import Notification from '../Notification'
 import Storage from '../Storage'
 
@@ -24,8 +24,13 @@ export default {
           }
         },
         {
+          label: 'Open dev tools',
+          handler () {
+            remote.getCurrentWindow().toggleDevTools()
+          }
+        },
+        {
           label: 'Report issue (github.com/ExNG/vuenite/issues)',
-          color: 'positive',
           handler () {
             shell.openExternal('https://github.com/ExNG/vuenite/issues')
           }
