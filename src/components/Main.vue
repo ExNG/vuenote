@@ -128,7 +128,7 @@
             <edit-input :content="tab.content"
                         @update="setTabContent(index, $event)"
                         v-if="activeTab === Number(index)"
-                        style="margin-left: -3px; padding-left: 3px; min-height: calc(100vh - 75px);"
+                        class="edit-input"
             ></edit-input>
           </div>
         </div>
@@ -325,4 +325,11 @@ export default {
 </script>
 
 <style>
+.edit-input {
+  margin-left: -3px;
+  padding-left: 3px;
+  min-height: calc(100vh - 110px);
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+}
 </style>
