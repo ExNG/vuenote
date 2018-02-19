@@ -24,6 +24,15 @@ export default {
           }
         },
         {
+          label: 'Open test notification',
+          handler () {
+            Notification('Test Notification', [
+              'Here`s a test notification!',
+              'It has multiple lines.'
+            ].join('\n'))
+          }
+        },
+        {
           label: 'Open dev tools',
           handler () {
             remote.getCurrentWindow().toggleDevTools()
