@@ -58,6 +58,12 @@
             <tr v-for="(version, packageName) in packageInfo.dependencies">
               <td>{{ packageName }}</td>
             </tr>
+            <tr>
+              <td>electron</td>
+            </tr>
+            <tr>
+              <td>webpack</td>
+            </tr>
           </table>
         </div>
       </div>
