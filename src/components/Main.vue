@@ -146,9 +146,9 @@
           </div>
         </div>
         <div class="pane padded-more animated fadeIn"
-             v-show="!panes.left && !panes.right"
+             v-if="!panes.left && !panes.right"
         >
-          <div class="fixed-center" style="text-align: center;">
+          <div class="absolute-center" style="text-align: center;">
             <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
           </div>
         </div>
