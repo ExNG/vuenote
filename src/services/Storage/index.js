@@ -1,6 +1,9 @@
 import Notification from '../Notification'
 
 export default {
+  /**
+   * Register of all available DB items and their default values
+   */
   structure: {
     appData: {
       version: require('../../../package.json').version
@@ -77,48 +80,89 @@ export default {
     debug: {}
   },
 
+  /**
+   * Initiate the DB
+   *
+   * @return {Bool}
+   */
   init () {
     try {
+      // set all items with their default value
       for (let name in this.structure) {
         let value = this.structure[name]
         this.save(name, value)
       }
 
+      // success
       return true
     }
     catch (e) {
+      // error
       return false
     }
   },
 
+  /**
+   * Get item from DB or from structure if not set yet
+   *
+   * @param {String} name
+   *
+   * @return {String}
+   */
   load (name) {
+    // check if item is already set
     if (!localStorage.getItem(name)) {
+      // no return default value if set
       let value = this.structure[name]
+
+      // save item with default value
       this.save(name, value)
+
       return value
     }
     else {
+      // item is set, return its value
       return JSON.parse(localStorage.getItem(name))
     }
   },
 
+  /**
+   * Save value of item
+   *
+   * @param {String} name
+   * @param {String} value
+   *
+   * @return {Bool}
+   */
   save (name, value) {
     try {
+      // save and return true
       localStorage.setItem(name, JSON.stringify(value))
       return true
     }
     catch (e) {
+      // something went wrong while saving
       Notification('Error while saving notes!', 'The problem is most likely that you ran out of space.')
       return false
     }
   },
 
+  /**
+   * Remove item from DB
+   *
+   * @param {String} value
+   *
+   * @return {Bool}
+   */
   unset (name) {
+    // check if item exists
     if (this.load(name)) {
+      // yes, remove it
       localStorage.removeItem(name)
       return true
     }
     else {
+      // item does not exist in DB
       return false
     }
   }
