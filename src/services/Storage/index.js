@@ -12,7 +12,8 @@ export default {
       panes: {
         sm: false,
         left: true,
-        right: true
+        right: true,
+        settings: false
       }
     },
     tabs: [

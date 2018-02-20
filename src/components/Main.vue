@@ -79,6 +79,9 @@
                 <q-item @click="exportDoc(), $refs.popover.close()">
                   Export
                 </q-item>
+                <q-item @click="togglePane('settings'), $refs.popover.close()">
+                  Settings
+                </q-item>
                 <q-item @click="openDebugDialog(), $refs.popover.close()">
                   Debug
                 </q-item>
@@ -149,6 +152,14 @@
             <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
           </div>
         </div>
+
+        <div class="pane padded-more"
+             v-if="panes.settings"
+        >
+          <settings @toggle-settings-pane="togglePane('settings')"
+                    :packageInfo="packageInfo"
+          ></settings>
+        </div>
       </div>
     </div>
 
@@ -182,6 +193,7 @@ import EditInput from '../common/EditInput'
 import Export from '../services/Export'
 import Markdown from '../services/Markdown'
 import MarkdownPreview from '../common/MarkdownPreview'
+import Settings from '../common/Settings'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
 
@@ -193,9 +205,10 @@ export default {
     QItem,
     QModal,
     QBtn,
-    Dialog,
     About,
+    Dialog,
     EditInput,
+    Settings,
     MarkdownPreview
   },
 
@@ -205,9 +218,10 @@ export default {
 
       activeTab: 0,
       panes: {
-        sm: true,
+        sm: false,
         left: true,
-        right: true
+        right: true,
+        settings: false
       },
 
       tabs: [],
