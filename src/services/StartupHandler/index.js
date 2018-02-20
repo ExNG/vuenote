@@ -1,6 +1,5 @@
 import Storage from '../Storage'
 
-
 /**
  * This handler will run everytime the application starts.
  * It's there for usefull to make sure all keys are
