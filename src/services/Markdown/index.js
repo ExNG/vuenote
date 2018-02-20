@@ -2,6 +2,7 @@ import MarkdownIt from 'markdown-it'
 import markdownItCheckbox from 'markdown-it-checkbox'
 import remark from 'remark'
 
+// Basic markdown configuration
 // Config documentation: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
 var md = new MarkdownIt({
   html: true,
@@ -20,10 +21,25 @@ var md = new MarkdownIt({
   })
 
 export default {
+  /**
+   * Return html string made from markdown string
+   *
+   * @param {String} data
+   *
+   * @return {String}
+   */
   generateHtml (data) {
     return md.render(String(data))
   },
 
+  /**
+   * Return html page string made from markdown string
+   *
+   * @param {String} data
+   * @param {String} name
+   *
+   * @return {String}
+   */
   generateHtmlPage (data, name) {
     let nl = '\n'
     return '<html>' + nl +
@@ -36,6 +52,13 @@ export default {
       '</html>'
   },
 
+  /**
+   * Format input markdown string
+   *
+   * @param {String} data
+   *
+   * @return {String}
+   */
   applyStyle (data) {
     remark()
       .process(data, function (err, file) {
