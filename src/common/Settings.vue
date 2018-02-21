@@ -13,6 +13,18 @@
 
     <hr>
 
+    <div class="form-group">
+      <label>Export</label>
+      <input type="text" class="form-control" placeholder="{}" v-model="jsonExport">
+
+      <button class="btn btn-primary"
+              style="width: 100%;"
+              @click="getExport()"
+      >Generate Export JSON</button>
+    </div>
+
+    <hr>
+
     <div class="row">
       <div class="col-xs-6">
         <button class="btn btn-negative"
@@ -37,13 +49,18 @@ export default {
 
   data () {
     return {
-      settings: Storage.load('settings')
+      settings: Storage.load('settings'),
+      jsonExport: null
     }
   },
 
   methods: {
     toggleSettings () {
       this.$emit('toggle-settings-pane')
+    },
+
+    getExport () {
+      this.jsonExport = Storage.getExportJSON()
     }
   }
 }
