@@ -166,5 +166,28 @@ export default {
       // item does not exist in DB
       return false
     }
+  },
+
+  /**
+   * Export structure as JSON
+   *
+   * @return {String}
+   */
+  getExportJSON () {
+    let data = {}
+
+    try {
+      // add all items to data
+      for (let name in this.structure) {
+        data[name] = this.structure[name]
+      }
+
+      // turn into JSOn and return it
+      return JSON.stringify(data)
+    }
+    catch (e) {
+      // error
+      return null
+    }
   }
 }
