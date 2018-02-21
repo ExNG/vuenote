@@ -189,5 +189,32 @@ export default {
       // error
       return null
     }
+  },
+
+  /**
+   * Import structure from JSON
+   *
+   * @param {String} jsonData
+   *
+   * @return {Bool}
+   */
+  importJSON (jsonData) {
+    let data = {}
+
+    try {
+      data = JSON.parse(jsonData)
+
+      for (let name in data) {
+        let value = data[name]
+
+        this.save(name, value)
+      }
+
+      return true
+    }
+    catch (e) {
+      console.log('Error importing JSON')
+      return false
+    }
   }
 }
