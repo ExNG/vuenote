@@ -4,7 +4,7 @@ node_js:
 before_script:
   - sudo apt-get update -qq
   - sudo apt-get install wine zip -y
-  - npm install -g quasar-cli
+  - npm install -g quasar-cli@0.6.5
 install:
   - npm install
   - cd electron && npm install
