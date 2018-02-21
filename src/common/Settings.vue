@@ -14,6 +14,16 @@
     <hr>
 
     <div class="form-group">
+      <label>Import</label>
+      <input type="text" class="form-control" placeholder="{}" v-model="jsonImport">
+
+      <button class="btn btn-warning"
+              style="width: 100%;"
+              @click="importJSON(jsonImport)"
+      >Import JSON</button>
+    </div>
+
+    <div class="form-group">
       <label>Export</label>
       <input type="text" class="form-control" placeholder="{}" v-model="jsonExport">
 
@@ -50,7 +60,8 @@ export default {
   data () {
     return {
       settings: Storage.load('settings'),
-      jsonExport: null
+      jsonExport: null,
+      jsonImport: null
     }
   },
 
@@ -61,6 +72,10 @@ export default {
 
     getExport () {
       this.jsonExport = Storage.getExportJSON()
+    },
+
+    importJSON (data) {
+      Storage.importJSON(data)
     }
   }
 }
