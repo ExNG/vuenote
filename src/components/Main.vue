@@ -153,7 +153,7 @@
           </div>
         </div>
 
-        <div class="pane padded-more"
+        <div class="pane padded-more animated fadeInRight"
              v-if="panes.settings"
         >
           <settings @toggle-settings-pane="togglePane('settings')"
