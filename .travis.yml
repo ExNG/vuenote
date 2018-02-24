@@ -8,7 +8,7 @@ before_script:
 install:
   - npm install
 script:
-  - quasar build -m electron -t ios
+  - quasar build -m electron -t ios --target all
   - cd dist
   - zip -r vuenite-darwin-x64.zip electron-ios/Vuenite-darwin-x64/
   - zip -r vuenite-linux-x64.zip electron-ios/Vuenite-linux-x64/
