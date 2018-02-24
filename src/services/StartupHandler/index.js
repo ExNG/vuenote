@@ -21,14 +21,12 @@ export default function () {
       if (!userData) {
         // no, save default value
         Storage.save(index, structureData)
-      }
-      else {
+      } else {
         // yes, merge default value with existing data and save it
         let newData = Object.assign(structureData, userData)
         Storage.save(index, newData)
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e)
     }
   }

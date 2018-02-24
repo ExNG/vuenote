@@ -4,18 +4,15 @@ node_js:
 before_script:
   - sudo apt-get update -qq
   - sudo apt-get install wine zip -y
-  - npm install -g quasar-cli@0.6.5
+  - npm install -g quasar-cli
 install:
   - npm install
-  - cd electron && npm install
 script:
-  - cd ..
-  - quasar build
-  - cd electron && quasar build
+  - quasar build -m electron -t ios
   - cd dist
-  - zip -r vuenite-darwin-x64.zip Vuenite-darwin-x64/
-  - zip -r vuenite-linux-x64.zip Vuenite-linux-x64/
-  - zip -r vuenite-win32-x64.zip Vuenite-win32-x64/
+  - zip -r vuenite-darwin-x64.zip electron-ios/Vuenite-darwin-x64/
+  - zip -r vuenite-linux-x64.zip electron-ios/Vuenite-linux-x64/
+  - zip -r vuenite-win32-x64.zip electron-ios/Vuenite-win32-x64/
 deploy:
   provider: releases
   api_key: $gh_token

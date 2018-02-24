@@ -96,8 +96,7 @@ export default {
 
       // success
       return true
-    }
-    catch (e) {
+    } catch (e) {
       // error
       return false
     }
@@ -120,8 +119,7 @@ export default {
       this.save(name, value)
 
       return value
-    }
-    else {
+    } else {
       // item is set, return its value
       return JSON.parse(localStorage.getItem(name))
     }
@@ -140,8 +138,7 @@ export default {
       // save and return true
       localStorage.setItem(name, JSON.stringify(value))
       return true
-    }
-    catch (e) {
+    } catch (e) {
       // something went wrong while saving
       Notification('Error while saving notes!', 'The problem is most likely that you ran out of space.')
       return false
@@ -161,8 +158,7 @@ export default {
       // yes, remove it
       localStorage.removeItem(name)
       return true
-    }
-    else {
+    } else {
       // item does not exist in DB
       return false
     }
@@ -184,8 +180,7 @@ export default {
 
       // turn into JSOn and return it
       return JSON.stringify(data)
-    }
-    catch (e) {
+    } catch (e) {
       // error
       return null
     }
@@ -211,8 +206,7 @@ export default {
       }
 
       return true
-    }
-    catch (e) {
+    } catch (e) {
       console.log('Error importing JSON')
       return false
     }
