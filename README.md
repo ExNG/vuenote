@@ -1,55 +1,30 @@
 # Vuenite
 
-> Simple note app build with Quasar and its Electron wrapper.
+> Simple note app build with Quasar.
 
 [![Travis](https://img.shields.io/travis/ExNG/vuenite.svg)](https://travis-ci.org/ExNG/vuenite) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenite/total.svg)](http://github.com/ExNG/vuenite)
 
-![Vuenite Screenshot](docs/images/vuenite_screenshot.png)
-
---------------------------------------------------------------------------------
-
-## TODO
-
-List of features that are planned
-
-- [ ] Cloud saves
-
-  - [ ] Google Drive
-  - [ ] WebPeer
-
-- [ ] Media features
-
-  - [ ] Graphs
-  - [ ] Video/Youtube embed support
-  - [ ] Slides
-
 **Got some idea?** Open an issue and let me know, or even better create a pull request!
 
-## Run Dev Server
-
-First run `npm install` in the root directory and the `electron/` folder.
+## Build
 
 ```bash
-# serve with hot reload at localhost:8080 in one tab
-$ quasar dev
+# install dependies
+npm install
 
-# open electron window in another tab
-$ cd electron/
-$ quasar dev
+# run quasar
+quasar build -t ios -m electron -T all
 ```
 
-## Build Setup
+## Dev
 
 ```bash
-# build for production with minification
-$ quasar build
+# install dependies
+npm install
 
-# build electron executables
-# you can type linux for example to just build for linux
-$ cd electron && quasar build
+# run quasar
+quasar dev -t ios -m electron
 ```
-
-**Attention!** When building for windows on linux you need wine installed.
 
 ## License
 
