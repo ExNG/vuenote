@@ -1,5 +1,8 @@
 <template>
-  <div class="window">
+  <div class="window"
+       @keydown="keydownRegistration($event)"
+       @keyup="keyupRegistration($event)"
+  >
     <header class="toolbar toolbar-header animated fadeInDown">
       <div class="toolbar-actions">
         <div class="btn-group">
@@ -202,6 +205,7 @@ import Export from '../pages/Export'
 import ExportDialog from '../services/Export'
 import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
+import Notification from '../services/Notification'
 import Settings from '../pages/Settings'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
@@ -221,6 +225,8 @@ export default {
       packageInfo: require('../../package.json'),
 
       aboutModal: false,
+
+      activeKeys: {},
 
       activeTab: 0,
       panes: {
@@ -304,6 +310,25 @@ export default {
 
     save () {
       Storage.save('tabs', this.tabs)
+    },
+
+    keydownRegistration (event) {
+      this.activeKeys[String(event.keyCode)] = true
+
+      if (this.activeKeys['17'] && this.activeKeys['83']) { // Ctrl + S
+        this.activeKeys['17'] = false
+        this.activeKeys['83'] = false
+        this.save()
+        Notification('Saved')
+      } else if (this.activeKeys['17'] && this.activeKeys['80']) { // Ctrl + P
+        this.activeKeys['17'] = false
+        this.activeKeys['80'] = false
+        this.applyMarkdownStyle()
+      }
+    },
+
+    keyupRegistration (event) {
+      this.activeKeys[String(event.keyCode)] = false
     },
 
     setTabContent (tabIndex, content) {
