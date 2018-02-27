@@ -316,13 +316,9 @@ export default {
       this.activeKeys[String(event.keyCode)] = true
 
       if (this.activeKeys['17'] && this.activeKeys['83']) { // Ctrl + S
-        this.activeKeys['17'] = false
-        this.activeKeys['83'] = false
         this.save()
         Notification('Saved')
       } else if (this.activeKeys['17'] && this.activeKeys['80']) { // Ctrl + P
-        this.activeKeys['17'] = false
-        this.activeKeys['80'] = false
         this.applyMarkdownStyle()
       }
     },
