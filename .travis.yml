@@ -9,6 +9,9 @@ install:
   - npm install
 script:
   - quasar build -m electron -t ios --target all
+  - cp src/statics/icon.png dist/electron-ios/Vuenite-darwin-x64/icon.png
+  - cp src/statics/icon.png dist/electron-ios/Vuenite-linux-x64/icon.png
+  - cp src/statics/icon.png dist/electron-ios/Vuenite-win32-x64/icon.png
   - cd dist
   - zip -r vuenite-darwin-x64.zip electron-ios/Vuenite-darwin-x64/
   - zip -r vuenite-linux-x64.zip electron-ios/Vuenite-linux-x64/
