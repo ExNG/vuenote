@@ -41,15 +41,21 @@ export default {
    * @return {String}
    */
   generateHtmlPage (data, name) {
-    let nl = '\n'
-    return '<html>' + nl +
-      '<head>' + nl +
-      '<title>' + String(name) + '</title>' + nl +
-      '</head>' + nl +
-      '<body>' + nl +
-      this.generateHtml(data) + nl +
-      '</body>' + nl +
-      '</html>'
+    return ['<html>',
+      '<head>',
+      '<title>' + String(name) + '</title>',
+      '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/connors/photon/ba7b496f/dist/css/photon.css">',
+      '</head>',
+      '<body>',
+      '<div class="window">',
+      '<div class="window-content">',
+      '<div class="padded-more">',
+      this.generateHtml(data),
+      '</div>',
+      '</div>',
+      '</div>',
+      '</body>',
+      '</html>'].join('\n')
   },
 
   /**
