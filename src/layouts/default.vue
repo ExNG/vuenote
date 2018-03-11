@@ -131,65 +131,89 @@
 
     <div class="window-content">
       <div class="pane-group" style="overflow: hidden;">
-        <div class="pane-sm sidebar animated slideInLeft"
-             v-if="panes.sm"
+        <transition appear
+                    enter-active-class="animated fadeInLeft"
         >
-          <nav class="nav-group">
-            <h5 class="nav-group-title">Archive</h5>
-            <span class="nav-group-item"
-                  v-for="(note, index) in archived"
-                  :key="index"
-                  @click="restoreArchivedTab(index)"
-            >
-              <span class="icon icon-doc-text"></span>
-              {{ note.name }}
-            </span>
-            <span class="nav-group-item" v-show="archived.length === 0">
-              <span class="icon icon-info-circled"></span>
-              No archived notes
-            </span>
-          </nav>
-        </div>
-        <div class="pane padded-more animated fadeInUp"
-             v-if="panes.left"
-        >
-          <div v-for="(tab, index) in tabs"
-               :key="index"
+          <div class="pane-sm sidebar"
+               v-if="panes.sm"
           >
-            <edit-input :content="tab.content"
-                        @update="setTabContent(index, $event)"
-                        v-if="activeTab === Number(index)"
-                        class="edit-input"
-            ></edit-input>
+            <nav class="nav-group">
+              <h5 class="nav-group-title">Archive</h5>
+              <span class="nav-group-item"
+                    v-for="(note, index) in archived"
+                    :key="index"
+                    @click="restoreArchivedTab(index)"
+              >
+                <span class="icon icon-doc-text"></span>
+                {{ note.name }}
+              </span>
+              <span class="nav-group-item" v-show="archived.length === 0">
+                <span class="icon icon-info-circled"></span>
+                No archived notes
+              </span>
+            </nav>
           </div>
-        </div>
-        <div class="pane padded-more animated fadeInUp"
-             v-if="panes.right"
-        >
-          <div v-for="(tab, index) in tabs"
-               :key="index"
-          >
-            <markdown-preview :content="tab.content"
-                              :id="'preview-' + index"
-                              v-if="activeTab === Number(index)"
-            ></markdown-preview>
-          </div>
-        </div>
-        <div class="pane padded-more animated fadeIn"
-             v-if="!panes.left && !panes.right"
-        >
-          <div class="absolute-center" style="text-align: center;">
-            <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
-          </div>
-        </div>
+        </transition>
 
-        <div class="pane padded-more animated fadeInRight"
-             v-if="panes.settings"
+        <transition appear
+                    enter-active-class="animated fadeInUp"
         >
-          <settings @toggle-settings-pane="togglePane('settings')"
-                    :packageInfo="packageInfo"
-          ></settings>
-        </div>
+          <div class="pane padded-more"
+               v-if="panes.left"
+          >
+            <div v-for="(tab, index) in tabs"
+                 :key="index"
+            >
+              <edit-input :content="tab.content"
+                          @update="setTabContent(index, $event)"
+                          v-if="activeTab === Number(index)"
+                          class="edit-input"
+              ></edit-input>
+            </div>
+          </div>
+        </transition>
+
+        <transition appear
+                    enter-active-class="animated fadeInUp"
+        >
+          <div class="pane padded-more"
+               v-if="panes.right"
+          >
+            <div v-for="(tab, index) in tabs"
+                 :key="index"
+            >
+              <markdown-preview :content="tab.content"
+                                :id="'preview-' + index"
+                                v-if="activeTab === Number(index)"
+              ></markdown-preview>
+            </div>
+
+          </div>
+        </transition>
+
+        <transition appear
+                    enter-active-class="animated fadeIn"
+        >
+          <div class="pane padded-more"
+               v-if="!panes.left && !panes.right"
+          >
+            <div class="absolute-center" style="text-align: center;">
+              <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
+            </div>
+          </div>
+        </transition>
+
+        <transition appear
+                    enter-active-class="animated fadeInRight"
+        >
+          <div class="pane padded-more animated fadeInRight"
+               v-if="panes.settings"
+          >
+            <settings @toggle-settings-pane="togglePane('settings')"
+                      :packageInfo="packageInfo"
+            ></settings>
+          </div>
+        </transition>
       </div>
     </div>
 
@@ -358,12 +382,12 @@ export default {
       return false
     })
 
-    Mousetrap.bind('alt+left', (e) => {
+    Mousetrap.bind('option+left', (e) => {
       this.togglePane('sm')
       return false
     })
 
-    Mousetrap.bind('alt+right', (e) => {
+    Mousetrap.bind('option+right', (e) => {
       this.togglePane('right')
       return false
     })
@@ -378,5 +402,39 @@ export default {
   min-height: calc(100vh - 110px);
   background-color: rgba(0, 0, 0, 0.04);
   border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #aeaeae;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #858585;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #6a6a6a;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 0px none #ffffff;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-track:active {
+  background: #dadada;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 </style>

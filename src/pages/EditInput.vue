@@ -1,6 +1,6 @@
 <template>
   <div contenteditable="true"
-       class="editor"
+       class="editor mousetrap"
        @input="update"
        @keydown.tab.prevent
        @keydown="keydownRegistration($event)"
