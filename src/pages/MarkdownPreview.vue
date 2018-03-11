@@ -48,6 +48,7 @@ export default {
   code {
     background-color: rgba(220,220,220,.5);
     border-radius: 2px;
+    padding: 5px;
     box-decoration-break: clone;
   }
 
