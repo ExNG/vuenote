@@ -23,6 +23,7 @@
     "html2canvas": "^1.0.0-alpha.10",
     "markdown-it": "^8.4.1",
     "markdown-it-checkbox": "^1.1.0",
+    "mousetrap": "^1.6.1",
     "photonkit": "^0.1.2",
     "remark": "^9.0.0"
   },
