@@ -1,8 +1,5 @@
 <template>
-  <div class="window"
-       @keydown="keydownRegistration($event)"
-       @keyup="keyupRegistration($event)"
-  >
+  <div class="window">
     <header class="toolbar toolbar-header animated fadeInDown">
       <div class="toolbar-actions">
         <div class="btn-group">
@@ -218,6 +215,7 @@ import Export from '../pages/Export'
 import ExportDialog from '../services/Export'
 import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
+import Mousetrap from 'mousetrap'
 import Notification from '../services/Notification'
 import Settings from '../pages/Settings'
 import Shortcuts from '../pages/Shortcuts'
@@ -241,8 +239,6 @@ export default {
 
       shortcutsModal: false,
       aboutModal: false,
-
-      activeKeys: {},
 
       activeTab: 0,
       panes: {
@@ -328,26 +324,6 @@ export default {
       Storage.save('tabs', this.tabs)
     },
 
-    keydownRegistration (event) {
-      this.activeKeys[String(event.keyCode)] = true
-
-      // TODO: Fix bug where alt will not be relead when tabbing out
-      if (this.activeKeys['17'] && this.activeKeys['83']) { // Ctrl + S
-        this.save()
-        Notification('Saved')
-      } else if (this.activeKeys['17'] && this.activeKeys['80']) { // Ctrl + P
-        this.applyMarkdownStyle()
-      } else if (this.activeKeys['18'] && this.activeKeys['37']) { // Alt + Left Arrow
-        this.togglePane('sm')
-      } else if (this.activeKeys['18'] && this.activeKeys['39']) { // Alt + Right Arrow
-        this.togglePane('right')
-      }
-    },
-
-    keyupRegistration (event) {
-      this.activeKeys[String(event.keyCode)] = false
-    },
-
     setTabContent (tabIndex, content) {
       this.tabs[tabIndex].content = content
     },
@@ -369,6 +345,28 @@ export default {
     this.archived = Storage.load('archived')
 
     this.panes = Storage.load('settings').panes
+
+    Mousetrap.bind('ctrl+s', (e) => {
+      this.save()
+      Notification('Saved')
+      return false
+    })
+
+    Mousetrap.bind('ctrl+p', (e) => {
+      this.applyMarkdownStyle()
+      Notification('Beautified')
+      return false
+    })
+
+    Mousetrap.bind('alt+left', (e) => {
+      this.togglePane('sm')
+      return false
+    })
+
+    Mousetrap.bind('alt+right', (e) => {
+      this.togglePane('right')
+      return false
+    })
   }
 }
 </script>
