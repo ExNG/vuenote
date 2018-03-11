@@ -337,6 +337,10 @@ export default {
         Notification('Saved')
       } else if (this.activeKeys['17'] && this.activeKeys['80']) { // Ctrl + P
         this.applyMarkdownStyle()
+      } else if (this.activeKeys['18'] && this.activeKeys['37']) { // Alt + Left Arrow
+        this.togglePane('sm')
+      } else if (this.activeKeys['18'] && this.activeKeys['39']) { // Alt + Right Arrow
+        this.togglePane('right')
       }
     },
 
