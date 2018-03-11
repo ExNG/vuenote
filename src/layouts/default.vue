@@ -99,6 +99,19 @@
                   <debug></debug>
                 </q-item>
 
+                <q-item v-close-overlay @click.native="shortcutsModal = true">
+                  Shortcuts
+
+                  <q-modal v-model="shortcutsModal">
+                    <div class="padded-more">
+                      <shortcuts></shortcuts>
+                      <div style="text-align: right;">
+                        <q-btn color="primary" @click="shortcutsModal = false">Close</q-btn>
+                      </div>
+                    </div>
+                  </q-modal>
+                </q-item>
+
                 <q-item v-close-overlay @click.native="aboutModal = true">
                   About
 
@@ -207,6 +220,7 @@ import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
 import Notification from '../services/Notification'
 import Settings from '../pages/Settings'
+import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
 
@@ -217,6 +231,7 @@ export default {
     EditInput,
     Export,
     Settings,
+    Shortcuts,
     MarkdownPreview
   },
 
@@ -224,6 +239,7 @@ export default {
     return {
       packageInfo: require('../../package.json'),
 
+      shortcutsModal: false,
       aboutModal: false,
 
       activeKeys: {},
@@ -315,6 +331,7 @@ export default {
     keydownRegistration (event) {
       this.activeKeys[String(event.keyCode)] = true
 
+      // TODO: Fix bug where alt will not be relead when tabbing out
       if (this.activeKeys['17'] && this.activeKeys['83']) { // Ctrl + S
         this.save()
         Notification('Saved')
