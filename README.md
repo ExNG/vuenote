@@ -4,6 +4,8 @@
 
 [![Travis](https://img.shields.io/travis/ExNG/vuenite.svg)](https://travis-ci.org/ExNG/vuenite) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenite/total.svg)](http://github.com/ExNG/vuenite)
 
+![vuenite Screenshot](docs/vuenite.png)
+
 **Got some idea?** Open an issue and let me know, or even better create a pull request!
 
 ## Build
@@ -28,4 +30,6 @@ quasar dev -t ios -m electron
 
 ## License
 
-MIT
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2018-present, Johann Behr
