@@ -44,7 +44,7 @@ export default {
     let prefix = process.env.NODE_ENV === 'development' ? 'DEV_' : ''
 
     // check if backup already exists, if not do it (async)
-    let backupFilename = Path.join(backupDir, prefix + Moment().format('YYYY-MM-DD_HH:mm_Z') + addittion + '.json')
+    let backupFilename = Path.join(backupDir, prefix + Moment().format('YYYY-MM-DD') + addittion + '.json')
     if (!FS.existsSync(backupFilename)) {
       FS.writeFile(backupFilename, Storage.getExportJSON(), (err) => {
         if (err) throw err
