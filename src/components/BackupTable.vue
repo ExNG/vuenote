@@ -4,11 +4,19 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th><!-- Button --></th>
+          <th>
+            <button class="btn btn-default pull-right"
+                    @click="showBackups = !showBackups"
+            >
+              <span class="icon icon-down-open" v-show="!showBackups"></span>
+              <span class="icon icon-up-open" v-show="showBackups"></span>
+            </button>
+          </th>
         </tr>
       </thead>
       <tbody v-for="(backup, index) in backups"
              :key="index"
+             v-if="showBackups"
       >
         <tr>
           <td>{{ backup.name }}</td>
@@ -53,7 +61,7 @@ export default {
   data () {
     return {
       backups: [],
-      showBackup: null
+      showBackups: false
     }
   },
 
