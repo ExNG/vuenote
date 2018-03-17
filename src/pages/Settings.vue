@@ -35,6 +35,10 @@
 
     <hr>
 
+    <backup-table></backup-table>
+
+    <hr>
+
     <div class="row">
       <div class="col-xs-6">
         <button class="btn btn-negative"
@@ -52,10 +56,15 @@
 </template>
 
 <script>
+import BackupTable from '../components/BackupTable'
 import Storage from '../services/Storage'
 
 export default {
   props: ['packageInfo'],
+
+  components: {
+    BackupTable
+  },
 
   data () {
     return {
