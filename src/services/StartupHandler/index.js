@@ -6,10 +6,8 @@ import Storage from '../Storage'
  * present before they're called.
  */
 export default function () {
-  let prefix = process.env.NODE_ENV === 'development' ? 'DEV_' : ''
-
   // Backup before structure merge
-  Storage.backup(prefix, '')
+  Storage.backup('')
 
   let structure = Storage.structure
 
@@ -37,5 +35,5 @@ export default function () {
   }
 
   // Backup after structure merge
-  Storage.backup(prefix, '_BU')
+  Storage.backup('_BU')
 }

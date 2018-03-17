@@ -222,17 +222,26 @@ export default {
    * @param {String} prefix
    * @param {String} addittion
    */
-  backup (prefix = '', addittion = '') {
+  backup (addittion = '') {
+    let prefix = process.env.NODE_ENV === 'development' ? 'DEV_' : ''
+
     // check if vuenite dir exists
     let vueniteDir = Path.join(OS.homedir(), '.vuenite')
     if (!FS.existsSync(vueniteDir)) {
-      FS.mkdir(vueniteDir)
+      FS.mkdirSync(vueniteDir)
     }
 
     // check if backup dir exists
     let backupDir = Path.join(vueniteDir, 'backup')
     if (!FS.existsSync(backupDir)) {
-      FS.mkdir(backupDir)
+      FS.mkdirSync(backupDir)
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      backupDir = Path.join(backupDir, 'dev')
+      if (!FS.existsSync(backupDir)) {
+        FS.mkdirSync(backupDir)
+      }
     }
 
     // check if backup already exists, if not do it (async)
