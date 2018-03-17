@@ -10,27 +10,35 @@ import Moment from 'moment'
  * present before they're called.
  */
 export default function () {
-  // check if vuenite dir exists
-  let vueniteDir = Path.join(OS.homedir(), '.vuenite')
-  if (!FS.existsSync(vueniteDir)) {
-    FS.mkdir(vueniteDir)
+  let backup = function (prefix = '', addittion = '') {
+    // check if vuenite dir exists
+    let vueniteDir = Path.join(OS.homedir(), '.vuenite')
+    if (!FS.existsSync(vueniteDir)) {
+      FS.mkdir(vueniteDir)
+    }
+
+    // check if backup dir exists
+    let backupDir = Path.join(vueniteDir, 'backup')
+    if (!FS.existsSync(backupDir)) {
+      FS.mkdir(backupDir)
+    }
+
+    // check if backup already exists, if not do it (async)
+    let backupFilename = Path.join(backupDir, prefix + Moment().format('YYYY-MM-DD_HH:mm') + addittion + '.json')
+    console.log('backupFilename', backupFilename)
+    if (!FS.existsSync(backupFilename)) {
+      FS.writeFile(backupFilename, Storage.getExportJSON(), (err) => {
+        if (err) throw err
+      })
+    }
+
+    console.log('madebackup')
   }
 
-  // check if backup dir exists
-  let backupDir = Path.join(vueniteDir, 'backup')
-  if (!FS.existsSync(backupDir)) {
-    FS.mkdir(backupDir)
-  }
+  let prefix = process.env.NODE_ENV === 'development' ? 'DEV_' : ''
 
-  // check if backup already exists, if not do it (async)
-  let backupFilename = Path.join(backupDir, Moment().format('YYYY-MM-DD_HH:MM') + '.json')
-  if (!FS.existsSync(backupFilename)) {
-    FS.writeFile(backupFilename, Storage.getExportJSON(), (err) => {
-      if (err) throw err
-    })
-  }
-
-  console.error('backupFilename', backupFilename)
+  // Backup before structure merge
+  backup(prefix, '')
 
   let structure = Storage.structure
 
@@ -56,4 +64,7 @@ export default function () {
       console.log(e)
     }
   }
+
+  // Backup after structure merge
+  backup(prefix, '_BU')
 }
