@@ -405,7 +405,7 @@ export default {
 }
 
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 7px;
   height: 11px;
 }
 ::-webkit-scrollbar-button {
