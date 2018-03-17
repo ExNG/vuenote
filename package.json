@@ -1,7 +1,7 @@
 {
   "name": "vuenite",
   "productName": "Vuenite",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "private": true,
   "license": "MIT",
   "description": "Vuenite is a lightweight note app build on web technologies.",

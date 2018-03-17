@@ -1,3 +1,4 @@
+import Backup from '../Backup'
 import Storage from '../Storage'
 
 /**
@@ -7,7 +8,7 @@ import Storage from '../Storage'
  */
 export default function () {
   // Backup before structure merge
-  Storage.backup('')
+  Backup.create('')
 
   let structure = Storage.structure
 
@@ -35,5 +36,5 @@ export default function () {
   }
 
   // Backup after structure merge
-  Storage.backup('_BU')
+  Backup.create('_BU')
 }
