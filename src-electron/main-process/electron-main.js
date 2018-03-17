@@ -21,7 +21,8 @@ function createWindow () {
     minHeight: 600,
     fullscreenable: true,
     frame: true,
-    useContentSize: true
+    useContentSize: true,
+    icon: require('path').join(__statics, 'icon.png')
   })
 
   mainWindow.loadURL(process.env.APP_URL)
