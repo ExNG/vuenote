@@ -65,7 +65,7 @@ export default {
     FS.readdirSync(backupDir).forEach(file => {
       out.push({
         name: file,
-        content: 'HERERELOL'
+        content: null
       })
     })
 

@@ -16,7 +16,7 @@
       </thead>
       <tbody v-for="(backup, index) in backups"
              :key="index"
-             v-if="showBackups"
+             v-if="backup.name !== 'dev' && showBackups"
       >
         <tr>
           <td>{{ backup.name }}</td>
