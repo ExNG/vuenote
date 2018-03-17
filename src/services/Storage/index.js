@@ -1,4 +1,8 @@
 import Notification from '../Notification'
+import OS from 'os'
+import Path from 'path'
+import FS from 'fs'
+import Moment from 'moment'
 
 export default {
   /**
@@ -210,5 +214,36 @@ export default {
       console.log('Error importing JSON')
       return false
     }
+  },
+
+  /**
+   * Create file with export JSON.
+   *
+   * @param {String} prefix
+   * @param {String} addittion
+   */
+  backup (prefix = '', addittion = '') {
+    // check if vuenite dir exists
+    let vueniteDir = Path.join(OS.homedir(), '.vuenite')
+    if (!FS.existsSync(vueniteDir)) {
+      FS.mkdir(vueniteDir)
+    }
+
+    // check if backup dir exists
+    let backupDir = Path.join(vueniteDir, 'backup')
+    if (!FS.existsSync(backupDir)) {
+      FS.mkdir(backupDir)
+    }
+
+    // check if backup already exists, if not do it (async)
+    let backupFilename = Path.join(backupDir, prefix + Moment().format('YYYY-MM-DD_HH:mm') + addittion + '.json')
+    console.log('backupFilename', backupFilename)
+    if (!FS.existsSync(backupFilename)) {
+      FS.writeFile(backupFilename, this.getExportJSON(), (err) => {
+        if (err) throw err
+      })
+    }
+
+    console.log('madebackup')
   }
 }
