@@ -244,7 +244,7 @@ export default {
     }
 
     // check if backup already exists, if not do it (async)
-    let backupFilename = Path.join(backupDir, prefix + Moment().format('YYYY-MM-DD_HH:mm') + addittion + '.json')
+    let backupFilename = Path.join(backupDir, prefix + Moment().format('YYYY-MM-DD_HH:mm_Z') + addittion + '.json')
     if (!FS.existsSync(backupFilename)) {
       FS.writeFile(backupFilename, this.getExportJSON(), (err) => {
         if (err) throw err
