@@ -36,5 +36,5 @@ export default function () {
   }
 
   // Backup after structure merge
-  Backup.create('_BU')
+  Backup.create('_AfterMerge')
 }
