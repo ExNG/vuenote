@@ -382,6 +382,11 @@ export default {
       return false
     })
 
+    Mousetrap.bind('option+up', (e) => {
+      this.togglePane('left')
+      return false
+    })
+
     Mousetrap.bind('option+left', (e) => {
       this.togglePane('sm')
       return false

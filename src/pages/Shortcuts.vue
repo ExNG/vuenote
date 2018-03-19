@@ -21,11 +21,15 @@
           <td>Beautify active Tab</td>
         </tr>
         <tr>
-          <td><code>Alt + Left Arrow</code></td>
+          <td><code>Alt + Arrow Up</code></td>
+          <td>Toggle Editor</td>
+        </tr>
+        <tr>
+          <td><code>Alt + Arrow Left</code></td>
           <td>Toggle Archive</td>
         </tr>
         <tr>
-          <td><code>Alt + Right Arrow</code></td>
+          <td><code>Alt + Arrow Right</code></td>
           <td>Toggle Preview</td>
         </tr>
         <tr>
