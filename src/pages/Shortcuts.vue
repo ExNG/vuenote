@@ -25,6 +25,10 @@
           <td>Toggle Editor</td>
         </tr>
         <tr>
+          <td><code>Alt + Arrow Down</code></td>
+          <td>Toggle Overlay</td>
+        </tr>
+        <tr>
           <td><code>Alt + Arrow Left</code></td>
           <td>Toggle Archive</td>
         </tr>

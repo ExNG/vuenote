@@ -1,133 +1,140 @@
 <template>
   <div class="window">
-    <header class="toolbar toolbar-header animated fadeInDown">
-      <div class="toolbar-actions">
-        <div class="btn-group">
-          <button class="btn btn-default"
-                  v-for="(tab, index) in tabs"
-                  :key="index"
-                  @click="setActiveTab(Number(index))"
-                  :class="{ 'active': activeTab === index }"
+
+    <transition appear
+                enter-active-class="animated fadeInDown"
+    >
+      <header class="toolbar toolbar-header animated fadeInDown"
+              v-if="showOverlay"
+      >
+        <div class="toolbar-actions">
+          <div class="btn-group">
+            <button class="btn btn-default"
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    @click="setActiveTab(Number(index))"
+                    :class="{ 'active': activeTab === index }"
+            >
+              <span class="icon icon-doc-text-inv"></span>
+              {{ tab.name }}
+
+              <q-context-menu>
+                <q-list link separator>
+                  <q-item v-close-overlay @click.native="renameTab(Number(index))">
+                    <q-item-main label="Rename" />
+                  </q-item>
+
+                  <q-item v-close-overlay @click.native="archiveTab(Number(index))">
+                    <q-item-main label="Archive" />
+                  </q-item>
+
+                  <q-item v-close-overlay @click.native="removeTab(Number(index))">
+                    <q-item-main label="Close" />
+                  </q-item>
+                </q-list>
+              </q-context-menu>
+            </button>
+          </div>
+
+          <button class="btn btn-primary"
+                  v-show="tabs.length === 0"
+                  @click="addTab()"
           >
-            <span class="icon icon-doc-text-inv"></span>
-            {{ tab.name }}
-
-            <q-context-menu>
-              <q-list link separator>
-                <q-item v-close-overlay @click.native="renameTab(Number(index))">
-                  <q-item-main label="Rename" />
-                </q-item>
-
-                <q-item v-close-overlay @click.native="archiveTab(Number(index))">
-                  <q-item-main label="Archive" />
-                </q-item>
-
-                <q-item v-close-overlay @click.native="removeTab(Number(index))">
-                  <q-item-main label="Close" />
-                </q-item>
-              </q-list>
-            </q-context-menu>
+            <span class="icon icon-plus icon-text" style="color: white;"></span>
+            New Tab
           </button>
-        </div>
 
-        <button class="btn btn-primary"
-                v-show="tabs.length === 0"
-                @click="addTab()"
-        >
-          <span class="icon icon-plus icon-text" style="color: white;"></span>
-          New Tab
-        </button>
-
-        <button class="btn btn-default"
-                v-show="tabs.length >= 1"
-                @click="addTab()"
-        >
-          <span class="icon icon-plus-circled"></span>
-        </button>
-
-        <button class="btn btn-default"
-                @click="save()"
-        >
-          <span class="icon icon-floppy icon-text"></span>
-          Save
-        </button>
-
-        <div class="btn-group">
           <button class="btn btn-default"
-                  @click="togglePane('sm')"
-                  :class="{ 'active': panes.sm }"
+                  v-show="tabs.length >= 1"
+                  @click="addTab()"
           >
-            <span class="icon icon-bookmark"></span>
+            <span class="icon icon-plus-circled"></span>
           </button>
+
           <button class="btn btn-default"
-                  @click="togglePane('left')"
-                  :class="{ 'active': panes.left }"
+                  @click="save()"
           >
-            <span class="icon icon-pencil"></span>
+            <span class="icon icon-floppy icon-text"></span>
+            Save
           </button>
-          <button class="btn btn-default"
-                  @click="togglePane('right')"
-                  :class="{ 'active': panes.right }"
-          >
-            <span class="icon icon-eye"></span>
-          </button>
-        </div>
 
-        <div class="pull-right">
-          <button class="btn btn-default btn-dropdown">
-            <span class="icon icon-menu icon-text"></span>
-            <!-- Menu -->
-            <q-popover>
-              <q-list separator link>
-                <q-item>
-                  Export
-                  <export :content="tabs[activeTab].content"
-                          :name="tabs[activeTab].name"
-                          :active-tab="activeTab"
-                  ></export>
-                </q-item>
+          <div class="btn-group">
+            <button class="btn btn-default"
+                    @click="togglePane('sm')"
+                    :class="{ 'active': panes.sm }"
+            >
+              <span class="icon icon-bookmark"></span>
+            </button>
+            <button class="btn btn-default"
+                    @click="togglePane('left')"
+                    :class="{ 'active': panes.left }"
+            >
+              <span class="icon icon-pencil"></span>
+            </button>
+            <button class="btn btn-default"
+                    @click="togglePane('right')"
+                    :class="{ 'active': panes.right }"
+            >
+              <span class="icon icon-eye"></span>
+            </button>
+          </div>
 
-                <q-item v-close-overlay @click.native="togglePane('settings')">
-                  Settings
-                </q-item>
+          <div class="pull-right">
+            <button class="btn btn-default btn-dropdown">
+              <span class="icon icon-menu icon-text"></span>
+              <!-- Menu -->
+              <q-popover>
+                <q-list separator link>
+                  <q-item>
+                    Export
+                    <export :content="tabs[activeTab].content"
+                            :name="tabs[activeTab].name"
+                            :active-tab="activeTab"
+                    ></export>
+                  </q-item>
 
-                <q-item>
-                  Debug
-                  <debug></debug>
-                </q-item>
+                  <q-item v-close-overlay @click.native="togglePane('settings')">
+                    Settings
+                  </q-item>
 
-                <q-item v-close-overlay @click.native="shortcutsModal = true">
-                  Shortcuts
+                  <q-item>
+                    Debug
+                    <debug></debug>
+                  </q-item>
 
-                  <q-modal v-model="shortcutsModal">
-                    <div class="padded-more">
-                      <shortcuts></shortcuts>
-                      <div style="text-align: right;">
-                        <q-btn color="primary" @click="shortcutsModal = false">Close</q-btn>
+                  <q-item v-close-overlay @click.native="shortcutsModal = true">
+                    Shortcuts
+
+                    <q-modal v-model="shortcutsModal">
+                      <div class="padded-more">
+                        <shortcuts></shortcuts>
+                        <div style="text-align: right;">
+                          <q-btn color="primary" @click="shortcutsModal = false">Close</q-btn>
+                        </div>
                       </div>
-                    </div>
-                  </q-modal>
-                </q-item>
+                    </q-modal>
+                  </q-item>
 
-                <q-item v-close-overlay @click.native="aboutModal = true">
-                  About
+                  <q-item v-close-overlay @click.native="aboutModal = true">
+                    About
 
-                  <q-modal v-model="aboutModal">
-                    <div class="padded-more">
-                      <about :packageInfo="packageInfo"></about>
-                      <div style="text-align: right;">
-                        <q-btn color="primary" @click="aboutModal = false">Close</q-btn>
+                    <q-modal v-model="aboutModal">
+                      <div class="padded-more">
+                        <about :packageInfo="packageInfo"></about>
+                        <div style="text-align: right;">
+                          <q-btn color="primary" @click="aboutModal = false">Close</q-btn>
+                        </div>
                       </div>
-                    </div>
-                  </q-modal>
-                </q-item>
-              </q-list>
-            </q-popover>
-          </button>
-        </div>
+                    </q-modal>
+                  </q-item>
+                </q-list>
+              </q-popover>
+            </button>
+          </div>
 
-      </div>
-    </header>
+        </div>
+      </header>
+    </transition>
 
     <div class="window-content">
       <div class="pane-group" style="overflow: hidden;">
@@ -217,17 +224,23 @@
       </div>
     </div>
 
-    <footer class="toolbar toolbar-footer animated fadeInUp">
-      <div class="toolbar-actions">
-        <div class="pull-right">
-          <button class="btn btn-default pull-right"
-                  @click="applyMarkdownStyle()"
-          >
-            <span class="icon icon-feather"></span>
-          </button>
+    <transition appear
+                enter-active-class="animated fadeInUp"
+    >
+      <footer class="toolbar toolbar-footer animated fadeInUp"
+              v-if="showOverlay"
+      >
+        <div class="toolbar-actions">
+          <div class="pull-right">
+            <button class="btn btn-default pull-right"
+                    @click="applyMarkdownStyle()"
+            >
+              <span class="icon icon-feather"></span>
+            </button>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </transition>
   </div>
 </template>
 
@@ -265,6 +278,7 @@ export default {
       aboutModal: false,
 
       activeTab: 0,
+      showOverlay: true,
       panes: {
         sm: false,
         left: true,
@@ -379,6 +393,11 @@ export default {
     Mousetrap.bind('ctrl+p', (e) => {
       this.applyMarkdownStyle()
       Notification('Beautified')
+      return false
+    })
+
+    Mousetrap.bind('option+down', (e) => {
+      this.showOverlay = !this.showOverlay
       return false
     })
 
