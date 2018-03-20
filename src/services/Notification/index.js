@@ -4,8 +4,6 @@ export default function (title, description) {
   let timeout = (15 * 1000)
 
   try {
-    console.log('here')
-    console.log(Notify)
     Notify.create({
       message: title,
       timeout: timeout,
@@ -19,14 +17,15 @@ export default function (title, description) {
       position: 'bottom-left'
     })
 
-    let notificationObj = new Notification(title, {
-      icon: 'statics/icon.png',
-      body: description
-    })
-
-    notificationObj.onclick = () => {
-      console.log('Notification clicked')
-    }
+    // TODO: Native notification not working on windows
+    // let notificationObj = new Notification(title, {
+    //   icon: 'statics/icon.png',
+    //   body: description
+    // })
+    //
+    // notificationObj.onclick = () => {
+    //   console.log('Notification clicked')
+    // }
   } catch (e) {
     Notify.create({
       message: 'Error occurred when displaying a notification',
