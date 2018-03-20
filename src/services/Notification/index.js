@@ -1,7 +1,7 @@
 import { Notify } from 'quasar'
 
 export default function (title, description) {
-  let timeout = (15 * 1000)
+  let timeout = (5 * 1000)
 
   try {
     Notify.create({

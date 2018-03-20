@@ -44,7 +44,7 @@ export default {
     testNotification () {
       Notification('Test Notification', [
         'Here`s a test notification!',
-        'It has multiple lines.'
+        'It does not have multiple lines.'
       ].join('\n'))
     },
 
