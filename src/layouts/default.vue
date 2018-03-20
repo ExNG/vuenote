@@ -303,8 +303,8 @@ export default {
 
     addTab (name = null, content = null) {
       let data = JSON.parse(JSON.stringify(this.newTab))
-      data.name = name ? String(name) : String('Unamed Tab')
-      data.content = content ? String(content) : String(Math.random())
+      data.name = name ? String(name) : 'Unamed Tab'
+      data.content = content ? String(content) : ''
       this.setActiveTab(Number(this.tabs.push(data)) - 1)
     },
 
