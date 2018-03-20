@@ -37,6 +37,10 @@
           <td>Toggle Preview</td>
         </tr>
         <tr>
+          <td><code>Alt + &lt;Number&gt;</code></td>
+          <td>Switch between tabs</td>
+        </tr>
+        <tr>
           <td><code>Tab</code></td>
           <td>4 Spaces</td>
         </tr>

@@ -298,7 +298,12 @@ export default {
 
   methods: {
     setActiveTab (tabIndex) {
-      this.activeTab = Number(tabIndex)
+      tabIndex = Number(tabIndex)
+      if (!this.tabs[tabIndex]) {
+        return
+      }
+
+      this.activeTab = tabIndex
     },
 
     addTab (name = null, content = null) {
@@ -387,34 +392,26 @@ export default {
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()
       Notification('Saved')
-      return false
     })
-
     Mousetrap.bind('ctrl+p', (e) => {
       this.applyMarkdownStyle()
       Notification('Beautified')
-      return false
     })
+    Mousetrap.bind('option+down', (e) => { this.showOverlay = !this.showOverlay })
+    Mousetrap.bind('option+up', (e) => { this.togglePane('left') })
+    Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
+    Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
 
-    Mousetrap.bind('option+down', (e) => {
-      this.showOverlay = !this.showOverlay
-      return false
-    })
-
-    Mousetrap.bind('option+up', (e) => {
-      this.togglePane('left')
-      return false
-    })
-
-    Mousetrap.bind('option+left', (e) => {
-      this.togglePane('sm')
-      return false
-    })
-
-    Mousetrap.bind('option+right', (e) => {
-      this.togglePane('right')
-      return false
-    })
+    Mousetrap.bind('option+1', (e) => { this.setActiveTab(0) })
+    Mousetrap.bind('option+2', (e) => { this.setActiveTab(1) })
+    Mousetrap.bind('option+3', (e) => { this.setActiveTab(2) })
+    Mousetrap.bind('option+4', (e) => { this.setActiveTab(3) })
+    Mousetrap.bind('option+5', (e) => { this.setActiveTab(4) })
+    Mousetrap.bind('option+6', (e) => { this.setActiveTab(5) })
+    Mousetrap.bind('option+7', (e) => { this.setActiveTab(6) })
+    Mousetrap.bind('option+8', (e) => { this.setActiveTab(7) })
+    Mousetrap.bind('option+9', (e) => { this.setActiveTab(8) })
+    Mousetrap.bind('option+0', (e) => { this.setActiveTab(9) })
   }
 }
 </script>
