@@ -13,6 +13,10 @@
       </thead>
       <tbody>
         <tr>
+          <td><code>Ctrl + N</code></td>
+          <td>New tab</td>
+        </tr>
+        <tr>
           <td><code>Ctrl + W</code></td>
           <td>Archive active tab</td>
         </tr>
