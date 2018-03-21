@@ -21,6 +21,10 @@
           <td>Beautify active Tab</td>
         </tr>
         <tr>
+          <td><code>Ctrl + Q</code></td>
+          <td>Quit</td>
+        </tr>
+        <tr>
           <td><code>Alt + Arrow Up</code></td>
           <td>Toggle Editor</td>
         </tr>
