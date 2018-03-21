@@ -398,6 +398,7 @@ export default {
       Notification('Beautified')
     })
     Mousetrap.bind('ctrl+q', (e) => { require('electron').remote.app.quit() })
+    Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
     Mousetrap.bind('option+down', (e) => { this.showOverlay = !this.showOverlay })
     Mousetrap.bind('option+up', (e) => { this.togglePane('left') })
     Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
