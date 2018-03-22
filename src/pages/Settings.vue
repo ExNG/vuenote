@@ -13,6 +13,49 @@
 
     <hr>
 
+    <!-- REPLACE -->
+    <div>
+      <button class="btn btn-default"
+              @click="resetReplace()"
+      >
+        Reset
+      </button>
+
+      <div class="pull-right">
+        <button class="btn btn-negative"
+                v-show="settings.replace"
+                @click="settings.replace = false; save()"
+        >
+          Disable
+        </button>
+        <button class="btn btn-positive"
+                v-show="!settings.replace"
+                @click="settings.replace = true; save()"
+        >
+          Enable
+        </button>
+      </div>
+
+      <br><br>
+
+      <table>
+        <thead>
+          <th>Input</th>
+          <th>Result</th>
+        </thead>
+        <tbody>
+          <tr v-for="(value, index) in settings.replaceList"
+              :key="index"
+          >
+            <td>{{ index }}</td>
+            <td>{{ value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
     <div class="form-group">
       <label>Import</label>
       <input type="text" class="form-control" placeholder="{}" v-model="jsonImport">
@@ -48,7 +91,7 @@
 
       <div class="col-xs-6">
         <button class="btn btn-positive pull-right"
-                @click="toggleSettings()"
+                @click="save(); toggleSettings()"
         >Save</button>
       </div>
     </div>
@@ -75,6 +118,10 @@ export default {
   },
 
   methods: {
+    save () {
+      Storage.save('settings', this.settings)
+    },
+
     toggleSettings () {
       this.$emit('toggle-settings-pane')
     },
@@ -85,6 +132,14 @@ export default {
 
     importJSON (data) {
       Storage.importJSON(data)
+    },
+
+    resetReplace () {
+      // TODO: Structure is returning wrong data
+      // ... so basically reset is not working
+      this.settings.replaceList = Storage.structure.settings.replaceList
+
+      this.save()
     }
   }
 }

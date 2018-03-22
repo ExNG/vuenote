@@ -287,6 +287,8 @@ export default {
         settings: false
       },
 
+      settings: {},
+
       tabs: [],
       archived: [],
 
@@ -379,7 +381,19 @@ export default {
 
     applyMarkdownStyle () {
       let content = this.tabs[this.activeTab].content
+
+      if (this.settings.replace) {
+        let strings = this.settings.replaceList
+
+        for (let string in strings) {
+          while (content.indexOf(string) !== -1) {
+            content = content.replace(string, strings[string])
+          }
+        }
+      }
+
       content = Markdown.applyStyle(content)
+
       this.tabs[this.activeTab].content = String(content)
 
       this.$emit('content-updated')
@@ -393,7 +407,8 @@ export default {
 
     this.archived = Storage.load('archived')
 
-    this.panes = Storage.load('settings').panes
+    this.settings = Storage.load('settings')
+    this.panes = this.settings.panes
 
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()

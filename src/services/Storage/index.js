@@ -9,6 +9,11 @@ export default {
       version: require('../../../package.json').version
     },
     settings: {
+      replace: false,
+      replaceList: {
+        '=>': '→',
+        '<=': '←'
+      },
       panes: {
         sm: false,
         left: true,
