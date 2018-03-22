@@ -87,7 +87,8 @@
                 <q-list separator link>
                   <q-item>
                     Export
-                    <export :content="tabs[activeTab].content"
+                    <export v-if="tabs.length >= 1"
+                            :content="tabs[activeTab].content"
                             :name="tabs[activeTab].name"
                             :active-tab="activeTab"
                     ></export>
@@ -315,6 +316,11 @@ export default {
 
     removeTab (index) {
       this.activeTab = Number(index - 1)
+
+      if (this.activeTab <= 0) {
+        this.activeTab = null
+      }
+
       this.tabs.splice(Number(index), 1)
     },
 
