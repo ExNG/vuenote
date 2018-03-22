@@ -53,8 +53,6 @@ export default {
                 )
                 break
               case 'picture':
-                // TODO: Fix white image bug
-                // UPDATE: Noticed that sometimes pictures are with pieces of text in it
                 Html2Canvas(document.querySelector('#preview-' + activeTab))
                   .then(canvas => {
                     document.body.appendChild(canvas)
