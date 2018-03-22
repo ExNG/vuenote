@@ -1,15 +1,14 @@
 import { Notify } from 'quasar'
 
-export default function (title, description) {
+export default function (title, description, type = 'info') {
   let timeout = (5 * 1000)
 
   try {
     Notify.create({
       message: title,
       timeout: timeout,
-      type: 'info',
+      type: type,
 
-      color: 'positive',
       textColor: 'black',
       avatar: 'statics/icon.png',
 

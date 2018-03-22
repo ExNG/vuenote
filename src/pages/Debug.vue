@@ -42,10 +42,11 @@ export default {
     },
 
     testNotification () {
-      Notification('Test Notification', [
-        'Here`s a test notification!',
-        'It does not have multiple lines.'
-      ].join('\n'))
+      Notification('Test Notification', 'Here`s a test notification! Default')
+      Notification('Test Notification', 'Here`s a test notification! Positive', 'positive')
+      Notification('Test Notification', 'Here`s a test notification! Negative', 'negative')
+      Notification('Test Notification', 'Here`s a test notification! Warning', 'warning')
+      Notification('Test Notification', 'Here`s a test notification! info', 'info')
     },
 
     openDevtools () {
