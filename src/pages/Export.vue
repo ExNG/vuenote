@@ -21,7 +21,6 @@
 import FileSaver from 'file-saver'
 import Html2Canvas from 'html2canvas'
 import Markdown from '../services/Markdown'
-import Notification from '../services/Notification'
 
 export default {
   props: ['content', 'name', 'activeTab'],
@@ -31,10 +30,6 @@ export default {
   },
 
   methods: {
-    test () {
-      Notification('Export', 'Exported')
-    },
-
     exportToTxt () {
       FileSaver.saveAs(
         new Blob(
