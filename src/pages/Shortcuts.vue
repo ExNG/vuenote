@@ -49,6 +49,10 @@
           <td>Toggle Preview</td>
         </tr>
         <tr>
+          <td><code>Alt + S</code></td>
+          <td>Toggle Settings</td>
+        </tr>
+        <tr>
           <td><code>Alt + &lt;Number&gt;</code></td>
           <td>Switch between tabs</td>
         </tr>

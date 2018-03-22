@@ -410,6 +410,7 @@ export default {
     Mousetrap.bind('option+up', (e) => { this.togglePane('left') })
     Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
+    Mousetrap.bind('option+s', (e) => { this.togglePane('settings') })
 
     Mousetrap.bind('option+1', (e) => { this.setActiveTab(0) })
     Mousetrap.bind('option+2', (e) => { this.setActiveTab(1) })
