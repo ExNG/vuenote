@@ -456,6 +456,12 @@ export default {
   border-radius: 5px;
 }
 
+a {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
