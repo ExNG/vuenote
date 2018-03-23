@@ -46,7 +46,7 @@ export default {
       Notification({title: 'Test Notification', description: 'Here`s a test notification! Positive', type: 'positive'})
       Notification({title: 'Test Notification', description: 'Here`s a test notification! Negative', type: 'negative'})
       Notification({title: 'Test Notification', description: 'Here`s a test notification! Warning', type: 'warning'})
-      Notification({title: 'Test Notification', description: 'Here`s a test notification! info', 'info'})
+      Notification({title: 'Test Notification', description: 'Here`s a test notification! info', type: 'info'})
     },
 
     openDevtools () {
