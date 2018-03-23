@@ -413,11 +413,11 @@ export default {
 
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()
-      Notification({title: 'Saved', type: 'primary'})
+      Notification({title: 'Saved', type: 'info'})
     })
     Mousetrap.bind('ctrl+p', (e) => {
       this.applyMarkdownStyle()
-      Notification({title: 'Beautified', type: 'primary'})
+      Notification({title: 'Beautified', type: 'info'})
     })
     Mousetrap.bind('ctrl+n', (e) => { this.addTab() })
     Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
