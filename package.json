@@ -1,16 +1,16 @@
 {
-  "name": "vuenite",
-  "productName": "Vuenite",
+  "name": "vuenote",
+  "productName": "Vuenote",
   "version": "0.0.16",
   "private": true,
   "license": "MIT",
-  "description": "Vuenite is a lightweight note app build on web technologies.",
-  "cordovaId": "org.cordova.exng.vuenite",
+  "description": "Vuenote is the simplest note app.",
+  "cordovaId": "org.cordova.exng.vuenote",
   "author": "Johann Behr <johannbehr@exng.de>",
-  "homepage": "https://github.com/ExNG/vuenite",
+  "homepage": "https://github.com/ExNG/vuenote",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ExNG/vuenite.git"
+    "url": "https://github.com/ExNG/vuenote.git"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue src",

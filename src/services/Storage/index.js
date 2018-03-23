@@ -29,7 +29,7 @@ export default {
           '',
           '---',
           '',
-          'Vuenite supports full Markdown syntax,',
+          'Vuenote supports full Markdown syntax,',
           '',
           '## Typography',
           '',

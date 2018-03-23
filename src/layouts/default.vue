@@ -413,11 +413,11 @@ export default {
 
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()
-      Notification('Saved', 'primary')
+      Notification({title: 'Saved', type: 'primary'})
     })
     Mousetrap.bind('ctrl+p', (e) => {
       this.applyMarkdownStyle()
-      Notification('Beautified', 'primary')
+      Notification({title: 'Beautified', type: 'primary'})
     })
     Mousetrap.bind('ctrl+n', (e) => { this.addTab() })
     Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
@@ -453,7 +453,7 @@ export default {
 
 ::-webkit-scrollbar {
   width: 7px;
-  height: 11px;
+  height: 7px;
 }
 ::-webkit-scrollbar-button {
   width: 0px;

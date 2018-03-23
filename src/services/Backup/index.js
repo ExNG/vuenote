@@ -6,14 +6,14 @@ import Moment from 'moment'
 
 export default {
   prepare () {
-    // check if vuenite dir exists
-    let vueniteDir = Path.join(OS.homedir(), '.vuenite')
-    if (!FS.existsSync(vueniteDir)) {
-      FS.mkdirSync(vueniteDir)
+    // check if vuenote dir exists
+    let vuenoteDir = Path.join(OS.homedir(), '.vuenote')
+    if (!FS.existsSync(vuenoteDir)) {
+      FS.mkdirSync(vuenoteDir)
     }
 
     // check if backup dir exists
-    let backupDir = Path.join(vueniteDir, 'backup')
+    let backupDir = Path.join(vuenoteDir, 'backup')
     if (!FS.existsSync(backupDir)) {
       FS.mkdirSync(backupDir)
     }
@@ -27,7 +27,7 @@ export default {
     }
 
     return {
-      vueniteDir: vueniteDir,
+      vuenoteDir: vuenoteDir,
       backupDir: backupDir
     }
   },

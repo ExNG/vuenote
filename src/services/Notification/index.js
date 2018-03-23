@@ -1,6 +1,6 @@
 import { Notify } from 'quasar'
 
-export default function (title, description, type = 'info') {
+export default function ({title, description, type = 'info'}) {
   let timeout = (5 * 1000)
 
   try {

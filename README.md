@@ -1,10 +1,10 @@
-# Vuenite
+# Vuenote
 
 > Simple note app build with Quasar.
 
-[![Travis](https://img.shields.io/travis/ExNG/vuenite.svg)](https://travis-ci.org/ExNG/vuenite) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenite/total.svg)](http://github.com/ExNG/vuenite)
+[![Travis](https://img.shields.io/travis/ExNG/vuenote.svg)](https://travis-ci.org/ExNG/vuenote) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenote/total.svg)](http://github.com/ExNG/vuenote)
 
-![vuenite Screenshot](docs/vuenite.png)
+![vuenote Screenshot](docs/vuenote.png)
 
 **Got some idea?** Open an issue and let me know, or even better create a pull request!
 

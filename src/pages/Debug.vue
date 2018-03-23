@@ -11,7 +11,7 @@
         Open dev tools
       </q-item>
       <q-item v-close-overlay @click.native="openIssues()">
-        Report issue (github.com/ExNG/vuenite/issues)
+        Report issue (github.com/ExNG/vuenote/issues)
       </q-item>
       <q-item v-close-overlay>
         Cancel
@@ -38,15 +38,15 @@ export default {
         Storage.unset(name)
       }
 
-      Notification('Debug', 'In order for the changes to take effect you need to restart Vuenite')
+      Notification({title: 'Debug', description: 'In order for the changes to take effect you need to restart Vuenote'})
     },
 
     testNotification () {
-      Notification('Test Notification', 'Here`s a test notification! Default')
-      Notification('Test Notification', 'Here`s a test notification! Positive', 'positive')
-      Notification('Test Notification', 'Here`s a test notification! Negative', 'negative')
-      Notification('Test Notification', 'Here`s a test notification! Warning', 'warning')
-      Notification('Test Notification', 'Here`s a test notification! info', 'info')
+      Notification({title: 'Test Notification', description: 'Here`s a test notification! Default'})
+      Notification({title: 'Test Notification', description: 'Here`s a test notification! Positive', type: 'positive'})
+      Notification({title: 'Test Notification', description: 'Here`s a test notification! Negative', type: 'negative'})
+      Notification({title: 'Test Notification', description: 'Here`s a test notification! Warning', type: 'warning'})
+      Notification({title: 'Test Notification', description: 'Here`s a test notification! info', 'info'})
     },
 
     openDevtools () {
@@ -54,7 +54,7 @@ export default {
     },
 
     openIssues () {
-      shell.openExternal('https://github.com/ExNG/vuenite/issues')
+      shell.openExternal('https://github.com/ExNG/vuenote/issues')
     }
   }
 }
