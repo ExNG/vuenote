@@ -4,6 +4,7 @@
 
 <script>
 import Markdown from '../services/Markdown'
+import { shell } from 'electron'
 
 export default {
   props: ['content'],
@@ -21,10 +22,13 @@ export default {
 
     parsedContent () {
       this.$nextTick(() => {
-        for (let linkIndex in document.links) {
-          if (String(linkIndex) !== 'length') {
-            document.links[linkIndex].target = '_blank'
-            document.links[linkIndex].rel = 'noopener noreferrer'
+        for (let element of document.body.querySelectorAll('a')) {
+          if (element.href && element.href !== null && element.href !== '') {
+            let href = element.href
+            element.removeAttribute('href')
+            element.onclick = () => {
+              shell.openExternal(href)
+            }
           }
         }
       })
