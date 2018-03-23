@@ -1,6 +1,6 @@
 # Vuenote
 
-> Simple note app build with Quasar.
+> Vuenote is the simplest note app.
 
 [![Travis](https://img.shields.io/travis/ExNG/vuenote.svg)](https://travis-ci.org/ExNG/vuenote) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenote/total.svg)](http://github.com/ExNG/vuenote)
 
