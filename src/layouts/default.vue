@@ -16,7 +16,12 @@
                     :class="{ 'active': activeTab === index }"
             >
               <span class="icon icon-doc-text-inv"></span>
-              <small class="pull-left" v-if="index + 1 <= 10">{{ index + 1 }}</small>
+              <small class="pull-left"
+                     v-if="index + 1 <= 10"
+                     style="margin-right: 2.5px;"
+              >
+                {{ index + 1 }}
+              </small>
               {{ tab.name }}
 
               <q-context-menu>
