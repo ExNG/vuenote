@@ -3,7 +3,6 @@
 module.exports = function (ctx) {
   return {
     plugins: [
-      'axios',
       'photonkit',
       'animatecss'
     ],
