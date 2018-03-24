@@ -15,13 +15,14 @@
 
     <!-- REPLACE -->
     <div>
-      <button class="btn btn-default"
-              @click="resetReplace()"
-      >
-        Reset
-      </button>
+      <label>Replace</label>
 
       <div class="pull-right">
+        <button class="btn btn-default"
+                @click="resetReplace()"
+        >
+          Reset
+        </button>
         <button class="btn btn-negative"
                 v-show="settings.replace"
                 @click="settings.replace = false; save()"
@@ -35,8 +36,6 @@
           Enable
         </button>
       </div>
-
-      <br><br>
 
       <table>
         <thead>

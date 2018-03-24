@@ -1,5 +1,6 @@
 <template>
-  <label>Backups
+  <div>
+    <label>Backups</label>
     <table>
       <thead>
         <tr>
@@ -14,43 +15,49 @@
           </th>
         </tr>
       </thead>
-      <tbody v-for="(backup, index) in backups"
-             :key="index"
-             v-if="backup.name !== 'dev' && showBackups"
-      >
-        <tr>
-          <td>{{ backup.name }}</td>
-          <td>
-            <button class="btn btn-negative"
-                    @click="restoreBackup(backup.name)"
-            >
-              Restore
-            </button>
-            <button class="btn btn-default"
-                    @click="deleteBackup(backup.name)"
-            >
-              <span class="icon icon-trash"></span>
-            </button>
-          </td>
-          <!-- <td>
-            <button class="btn btn-default"
-                    v-show="showBackup !== backup.name"
-                    @click="showBackup = backup.name"
-            >
-              <span class="icon icon-down-open"></span>
-            </button>
+      <tbody>
+        <transition appear
+                    enter-active-class="animated fadeIn"
+                    leave-active-class="animated fadeOut"
 
-            <button class="btn btn-default"
-                    v-show="showBackup === backup.name"
-                    @click="showBackup = null"
-            >
-              <span class="icon icon-up-open"></span>
-            </button>
-          </td> -->
-        </tr>
+                    v-for="(backup, index) in backups"
+                    :key="index"
+                    v-if="backup.name !== 'dev' && showBackups"
+        >
+            <tr>
+              <td>{{ backup.name }}</td>
+              <td>
+                <button class="btn btn-negative"
+                        @click="restoreBackup(backup.name)"
+                >
+                  Restore
+                </button>
+                <button class="btn btn-default"
+                        @click="deleteBackup(backup.name)"
+                >
+                  <span class="icon icon-trash"></span>
+                </button>
+              </td>
+              <!-- <td>
+                <button class="btn btn-default"
+                        v-show="showBackup !== backup.name"
+                        @click="showBackup = backup.name"
+                >
+                  <span class="icon icon-down-open"></span>
+                </button>
+
+                <button class="btn btn-default"
+                        v-show="showBackup === backup.name"
+                        @click="showBackup = null"
+                >
+                  <span class="icon icon-up-open"></span>
+                </button>
+              </td> -->
+            </tr>
+        </transition>
       </tbody>
     </table>
-  </label>
+  </div>
 </template>
 
 <script>
