@@ -152,8 +152,11 @@
                v-if="panes.sm"
           >
             <nav class="nav-group">
-              <h5 class="nav-group-title">Archive</h5>
-              <span class="nav-group-item"
+              <h5 class="nav-group-title">
+                <span class="icon icon-folder"></span>
+                Archive
+              </h5>
+              <span class="nav-group-item cursor-pointer"
                     v-for="(note, index) in archived"
                     :key="index"
                     @click="restoreArchivedTab(index)"
@@ -164,6 +167,15 @@
               <span class="nav-group-item" v-show="archived.length === 0">
                 <span class="icon icon-info-circled"></span>
                 No archived notes
+              </span>
+
+              <h5 class="nav-group-title">
+                <span class="icon icon-cloud"></span>
+                Cloud
+              </h5>
+              <span class="nav-group-item">
+                <span class="icon icon-info-circled"></span>
+                No cloud configured
               </span>
             </nav>
           </div>
@@ -460,6 +472,10 @@ a {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+button {
+  cursor: pointer !important;
 }
 
 ::-webkit-scrollbar {

@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <td><code>Alt + Arrow Left</code></td>
-          <td>Toggle Archive</td>
+          <td>Toggle Sidebar</td>
         </tr>
         <tr>
           <td><code>Alt + Arrow Right</code></td>
