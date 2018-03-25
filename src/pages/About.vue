@@ -57,7 +57,7 @@
 
         <div style="max-height: 50vh; overflow-y: scroll">
           <table>
-            <tr v-for="(version, packageName) in packageInfo.dependencies"
+            <tr v-for="(version, packageName) in dependencieList"
                 :key="packageName"
             >
               <td>{{ packageName }}</td>
@@ -79,7 +79,8 @@ export default {
 
   data () {
     return {
-      activeTab: 'about'
+      activeTab: 'about',
+      dependencieList: Object.assign(this.packageInfo.dependencies, this.packageInfo.devDependencies)
     }
   },
 
