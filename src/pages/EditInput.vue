@@ -1,20 +1,38 @@
 <template>
-  <div contenteditable="true"
+  <!-- <div contenteditable="true"
        class="editor mousetrap"
        @input="update"
        @keydown.tab.prevent
        @keydown="keydownRegistration($event)"
        @keyup="keyupRegistration($event)"
        style="white-space: pre-wrap; font-family: monospace;"
-  ></div>
+  ></div> -->
+  <a class="editor mousetrap"
+       @focus="focused = true"
+       @blur="focused = false"
+       :class="{ 'bg-red': focused }"
+  >
+    <div v-for="(editorContent, index) in contentSplited"
+         :key="index"
+         v-html="editorContent"
+    >
+    </div>
+  </a>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      activeKeys: {}
+      activeKeys: {},
+      focused: false,
+      contentSplited: []
     }
+  },
+
+  model: {
+    prop: 'inputContent',
+    event: 'bar'
   },
 
   props: ['content'],
@@ -25,63 +43,14 @@ export default {
 
   methods: {
     setText () {
+      this.contentSplited = []
       this.$nextTick(() => {
-        this.$el.innerText = this.content + '\n'
+        this.contentSplited = this.content.split('\n')
       })
     },
 
     update (event) {
       this.$emit('update', event.target.innerText + '\n')
-    },
-
-    keydownRegistration (event) {
-      let code = event.keyCode
-
-      this.activeKeys[String(code)] = true
-
-      if (this.activeKeys['9']) { // Tab
-        this.paste('    ')
-      } else if (this.activeKeys['17'] && this.activeKeys['191']) { // Ctrl + #
-        this.paste('<h1>Heading</h1>')
-      }
-    },
-
-    keyupRegistration (event) {
-      let code = event.keyCode
-
-      this.activeKeys[String(code)] = false
-    },
-
-    paste (html) {
-      console.log('window.getSelection', window.getSelection)
-
-      if (window.getSelection) {
-        let sel = window.getSelection()
-
-        if (sel.getRangeAt && sel.rangeCount) {
-          let range = sel.getRangeAt(0)
-          range.deleteContents()
-
-          let el = document.createElement('div')
-          el.innerHTML = html
-
-          let frag = document.createDocumentFragment()
-          let lastNode = frag.appendChild(el.firstChild)
-
-          range.insertNode(frag)
-
-          if (lastNode) {
-            range = range.cloneRange()
-            range.setStartAfter(lastNode)
-            range.collapse(true)
-
-            sel.removeAllRanges()
-            sel.addRange(range)
-          }
-        }
-      } else if (document.selection && document.selection.type !== 'Control') {
-        document.selection.createRange().pasteHTML(html)
-      }
     }
   },
 
@@ -93,6 +62,9 @@ export default {
 
 <style>
 .editor {
+  white-space: pre;
+  word-wrap: break-word;
+  font-family: monospace;
   outline: none;
   font-size: 15px;
   color: black;
