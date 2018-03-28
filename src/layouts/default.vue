@@ -44,7 +44,7 @@
 
           <button class="btn btn-primary"
                   v-show="tabs.length === 0"
-                  @click="addTab()"
+                  @click="addTab({})"
           >
             <span class="icon icon-plus icon-text" style="color: white;"></span>
             New Tab
@@ -52,7 +52,7 @@
 
           <button class="btn btn-default"
                   v-show="tabs.length >= 1"
-                  @click="addTab()"
+                  @click="addTab({})"
           >
             <span class="icon icon-plus-circled"></span>
           </button>
@@ -327,7 +327,7 @@ export default {
       this.activeTab = tabIndex
     },
 
-    addTab (name = null, content = null) {
+    addTab ({name = null, content = null}) {
       let data = JSON.parse(JSON.stringify(this.newTab))
       data.name = name ? String(name) : 'Unamed Tab'
       data.content = content ? String(content) : ''
@@ -436,7 +436,7 @@ export default {
       this.applyMarkdownStyle()
       Notification({title: 'Beautified', type: 'info'})
     })
-    Mousetrap.bind('ctrl+n', (e) => { this.addTab() })
+    Mousetrap.bind('ctrl+n', (e) => { this.addTab({}) })
     Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
     Mousetrap.bind('ctrl+q', (e) => { require('electron').remote.app.quit() })
     Mousetrap.bind('option+down', (e) => { this.showOverlay = !this.showOverlay })
