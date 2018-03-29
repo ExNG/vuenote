@@ -93,7 +93,7 @@
                 <q-list separator link>
                   <q-item>
                     Export
-                    <export v-if="tabs.length >= 1"
+                    <export v-if="tabs[activeTab] && tabs.length >= 1"
                             :content="tabs[activeTab].content"
                             :name="tabs[activeTab].name"
                             :active-tab="activeTab"
@@ -192,7 +192,7 @@
             >
               <edit-input :content="tab.content"
                           @update="setTabContent(index, $event)"
-                          v-if="activeTab === Number(index)"
+                          v-if="tabs[activeTab] && activeTab === Number(index)"
                           class="edit-input"
               ></edit-input>
             </div>
@@ -210,7 +210,7 @@
             >
               <markdown-preview :content="tab.content"
                                 :id="'preview-' + index"
-                                v-if="activeTab === Number(index)"
+                                v-if="tabs[activeTab] && activeTab === Number(index)"
               ></markdown-preview>
             </div>
 
