@@ -17,7 +17,7 @@
             >
               <span class="icon icon-doc-text-inv"></span>
               <small class="pull-left"
-                     v-if="index + 1 <= 10"
+                     v-if="showTooltip && (Number(index) + 1 <= 10)"
                      style="margin-right: 2.5px;"
               >
                 {{ index + 1 }}
@@ -296,6 +296,8 @@ export default {
       shortcutsModal: false,
       aboutModal: false,
 
+      showTooltip: false,
+
       activeTab: 0,
       showOverlay: true,
       panes: {
@@ -444,6 +446,9 @@ export default {
     Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
     Mousetrap.bind('option+s', (e) => { this.togglePane('settings') })
+
+    Mousetrap.bind('option', (e) => { this.showTooltip = true }, 'keydown')
+    Mousetrap.bind('option', (e) => { this.showTooltip = false }, 'keyup')
 
     Mousetrap.bind('option+1', (e) => { this.setActiveTab(0) })
     Mousetrap.bind('option+2', (e) => { this.setActiveTab(1) })
