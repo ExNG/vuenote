@@ -100,7 +100,7 @@
                     ></export>
                   </q-item>
 
-                  <q-item v-close-overlay @click.native="togglePane('settings')">
+                  <q-item v-close-overlay @click.native="$router.push('/settings')">
                     Settings
                   </q-item>
 
@@ -228,18 +228,6 @@
             </div>
           </div>
         </transition>
-
-        <transition appear
-                    enter-active-class="animated fadeInRight"
-        >
-          <div class="pane padded-more animated fadeInRight"
-               v-if="panes.settings"
-          >
-            <settings @toggle-settings-pane="togglePane('settings')"
-                      :packageInfo="packageInfo"
-            ></settings>
-          </div>
-        </transition>
       </div>
     </div>
 
@@ -274,7 +262,6 @@ import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
 import Mousetrap from 'mousetrap'
 import Notification from '../services/Notification'
-import Settings from '../pages/Settings'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
@@ -286,7 +273,6 @@ export default {
     CloudList,
     EditInput,
     Export,
-    Settings,
     Shortcuts,
     MarkdownPreview
   },
@@ -305,8 +291,7 @@ export default {
       panes: {
         sm: false,
         left: true,
-        right: true,
-        settings: false
+        right: true
       },
 
       settings: {},
@@ -450,7 +435,7 @@ export default {
     Mousetrap.bind('option+up', (e) => { this.togglePane('left') })
     Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
-    Mousetrap.bind('option+s', (e) => { this.togglePane('settings') })
+    Mousetrap.bind('option+s', (e) => { this.$router.push('/settings') })
 
     Mousetrap.bind('option', (e) => { this.showTooltip = true }, 'keydown')
     Mousetrap.bind('option', (e) => { this.showTooltip = false }, 'keyup')

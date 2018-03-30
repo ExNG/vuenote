@@ -17,8 +17,7 @@ export default {
       panes: {
         sm: false,
         left: true,
-        right: true,
-        settings: false
+        right: true
       }
     },
     cloud: {
