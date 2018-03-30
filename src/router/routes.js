@@ -3,7 +3,7 @@ export default [
   {
     path: '/',
     name: 'main',
-    component: () => import('layouts/default')
+    component: () => import('layouts/Main')
   },
 
   {
