@@ -173,10 +173,10 @@
                 <span class="icon icon-cloud"></span>
                 Cloud
               </h5>
-              <span class="nav-group-item">
-                <span class="icon icon-info-circled"></span>
-                No cloud configured
-              </span>
+              <cloud-list @addTab="addTab($event); save()"
+                          :cloud="cloud"
+                          :packageInfo="packageInfo"
+              ></cloud-list>
             </nav>
           </div>
         </transition>
@@ -266,6 +266,7 @@
 <script>
 import About from '../pages/About'
 import Debug from '../pages/Debug'
+import CloudList from '../pages/CloudList'
 import EditInput from '../pages/EditInput'
 import Export from '../pages/Export'
 import ExportDialog from '../services/Export'
@@ -282,6 +283,7 @@ export default {
   components: {
     About,
     Debug,
+    CloudList,
     EditInput,
     Export,
     Settings,
@@ -311,6 +313,7 @@ export default {
 
       tabs: [],
       archived: [],
+      cloud: {},
 
       newTab: {
         name: 'New Tab',
@@ -429,6 +432,8 @@ export default {
 
     this.settings = Storage.load('settings')
     this.panes = this.settings.panes
+
+    this.cloud = Storage.load('cloud')
 
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()

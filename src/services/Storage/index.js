@@ -21,7 +21,9 @@ export default {
         settings: false
       }
     },
-    cloud: {},
+    cloud: {
+      githubGists: []
+    },
     tabs: [
       {
         name: 'Welcome',
