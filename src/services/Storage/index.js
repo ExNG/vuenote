@@ -21,6 +21,7 @@ export default {
         settings: false
       }
     },
+    cloud: {},
     tabs: [
       {
         name: 'Welcome',
