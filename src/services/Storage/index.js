@@ -11,8 +11,8 @@ export default {
     settings: {
       replace: false,
       replaceList: {
-        '=>': '→',
-        '<=': '←'
+        '(=>)': '→',
+        '(<=)': '←'
       },
       panes: {
         sm: false,
