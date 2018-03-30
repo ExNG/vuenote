@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Mousetrap from 'mousetrap'
 
 import routes from './routes'
 
@@ -19,6 +20,11 @@ const Router = new VueRouter({
   base: process.env.VUE_ROUTER_BASE,
   scrollBehavior: () => ({ y: 0 }),
   routes
+})
+
+Router.beforeEach((to, from, next) => {
+  Mousetrap.reset()
+  next()
 })
 
 export default Router
