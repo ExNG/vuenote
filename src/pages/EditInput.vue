@@ -39,6 +39,11 @@ export default {
         for (let line of content) {
           let element = document.createElement('div')
 
+          // If the line is empty its necessary to put a line feed
+          if (line === '') {
+            line = '\n'
+          }
+
           // Append text to div
           element.appendChild(document.createTextNode(line))
           divs.push(element)
