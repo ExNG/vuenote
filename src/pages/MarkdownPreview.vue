@@ -49,15 +49,4 @@ export default {
 </script>
 
 <style>
-  code {
-    background-color: rgba(220,220,220,.5);
-    border-radius: 2px;
-    padding: 5px;
-    box-decoration-break: clone;
-  }
-
-  input[id^="markdownpreview-checkbox-"] {
-    margin-left: 0px !important;
-    pointer-events: none;
-  }
 </style>
