@@ -60,10 +60,6 @@
           <td><code>Tab</code></td>
           <td>4 Spaces</td>
         </tr>
-        <tr>
-          <td><code>Ctrl + #</code></td>
-          <td>Paste Heading</td>
-        </tr>
       </tbody>
     </table>
 

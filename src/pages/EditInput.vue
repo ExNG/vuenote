@@ -97,8 +97,6 @@ export default {
 
       if (this.activeKeys['9']) { // Tab
         this.paste('    ')
-      } else if (this.activeKeys['17'] && this.activeKeys['191']) { // Ctrl + #
-        this.paste('<h1>Heading</h1>')
       }
     },
 
