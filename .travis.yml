@@ -3,14 +3,13 @@ node_js:
   - "lts/*"
 before_script:
   - sudo apt-get update -qq
-  - npm install -g quasar-cli
 install:
   - npm install
 script:
-  - quasar build -m electron -t ios
+  - node_modules/quasar-cli/bin/quasar build -m electron -t ios
 before_deploy:
   - sudo apt-get install wine zip -y
-  - quasar build -m electron -t ios --target all
+  - node_modules/quasar-cli/bin/quasar build -m electron -t ios --target all
   - cp src/statics/icon.png dist/electron-ios/Vuenote-darwin-x64/icon.png
   - cp src/statics/icon.png dist/electron-ios/Vuenote-linux-x64/icon.png
   - cp src/statics/icon.png dist/electron-ios/Vuenote-win32-x64/icon.png

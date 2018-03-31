@@ -11,15 +11,17 @@ export default {
     settings: {
       replace: false,
       replaceList: {
-        '=>': '→',
-        '<=': '←'
+        '(=>)': '→',
+        '(<=)': '←'
       },
       panes: {
         sm: false,
         left: true,
-        right: true,
-        settings: false
+        right: true
       }
+    },
+    cloud: {
+      githubGists: []
     },
     tabs: [
       {

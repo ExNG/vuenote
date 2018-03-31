@@ -17,7 +17,7 @@
             >
               <span class="icon icon-doc-text-inv"></span>
               <small class="pull-left"
-                     v-if="index + 1 <= 10"
+                     v-if="showTooltip && (Number(index) + 1 <= 10)"
                      style="margin-right: 2.5px;"
               >
                 {{ index + 1 }}
@@ -44,7 +44,7 @@
 
           <button class="btn btn-primary"
                   v-show="tabs.length === 0"
-                  @click="addTab()"
+                  @click="addTab({})"
           >
             <span class="icon icon-plus icon-text" style="color: white;"></span>
             New Tab
@@ -52,7 +52,7 @@
 
           <button class="btn btn-default"
                   v-show="tabs.length >= 1"
-                  @click="addTab()"
+                  @click="addTab({})"
           >
             <span class="icon icon-plus-circled"></span>
           </button>
@@ -93,14 +93,14 @@
                 <q-list separator link>
                   <q-item>
                     Export
-                    <export v-if="tabs.length >= 1"
+                    <export v-if="tabs[activeTab] && tabs.length >= 1"
                             :content="tabs[activeTab].content"
                             :name="tabs[activeTab].name"
                             :active-tab="activeTab"
                     ></export>
                   </q-item>
 
-                  <q-item v-close-overlay @click.native="togglePane('settings')">
+                  <q-item v-close-overlay @click.native="$router.push('/settings')">
                     Settings
                   </q-item>
 
@@ -173,10 +173,10 @@
                 <span class="icon icon-cloud"></span>
                 Cloud
               </h5>
-              <span class="nav-group-item">
-                <span class="icon icon-info-circled"></span>
-                No cloud configured
-              </span>
+              <cloud-list @addTab="addTab($event); save()"
+                          :cloud="cloud"
+                          :packageInfo="packageInfo"
+              ></cloud-list>
             </nav>
           </div>
         </transition>
@@ -192,7 +192,7 @@
             >
               <edit-input :content="tab.content"
                           @update="setTabContent(index, $event)"
-                          v-if="activeTab === Number(index)"
+                          v-if="tabs[activeTab] && activeTab === Number(index)"
                           class="edit-input"
               ></edit-input>
             </div>
@@ -210,7 +210,7 @@
             >
               <markdown-preview :content="tab.content"
                                 :id="'preview-' + index"
-                                v-if="activeTab === Number(index)"
+                                v-if="tabs[activeTab] && activeTab === Number(index)"
               ></markdown-preview>
             </div>
 
@@ -226,18 +226,6 @@
             <div class="absolute-center" style="text-align: center;">
               <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
             </div>
-          </div>
-        </transition>
-
-        <transition appear
-                    enter-active-class="animated fadeInRight"
-        >
-          <div class="pane padded-more animated fadeInRight"
-               v-if="panes.settings"
-          >
-            <settings @toggle-settings-pane="togglePane('settings')"
-                      :packageInfo="packageInfo"
-            ></settings>
           </div>
         </transition>
       </div>
@@ -266,6 +254,7 @@
 <script>
 import About from '../pages/About'
 import Debug from '../pages/Debug'
+import CloudList from '../pages/CloudList'
 import EditInput from '../pages/EditInput'
 import Export from '../pages/Export'
 import ExportDialog from '../services/Export'
@@ -273,7 +262,6 @@ import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
 import Mousetrap from 'mousetrap'
 import Notification from '../services/Notification'
-import Settings from '../pages/Settings'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
@@ -282,9 +270,9 @@ export default {
   components: {
     About,
     Debug,
+    CloudList,
     EditInput,
     Export,
-    Settings,
     Shortcuts,
     MarkdownPreview
   },
@@ -296,19 +284,21 @@ export default {
       shortcutsModal: false,
       aboutModal: false,
 
+      showTooltip: false,
+
       activeTab: 0,
       showOverlay: true,
       panes: {
         sm: false,
         left: true,
-        right: true,
-        settings: false
+        right: true
       },
 
       settings: {},
 
       tabs: [],
       archived: [],
+      cloud: {},
 
       newTab: {
         name: 'New Tab',
@@ -327,7 +317,7 @@ export default {
       this.activeTab = tabIndex
     },
 
-    addTab (name = null, content = null) {
+    addTab ({name = null, content = null}) {
       let data = JSON.parse(JSON.stringify(this.newTab))
       data.name = name ? String(name) : 'Unamed Tab'
       data.content = content ? String(content) : ''
@@ -428,6 +418,8 @@ export default {
     this.settings = Storage.load('settings')
     this.panes = this.settings.panes
 
+    this.cloud = Storage.load('cloud')
+
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()
       Notification({title: 'Saved', type: 'info'})
@@ -436,14 +428,17 @@ export default {
       this.applyMarkdownStyle()
       Notification({title: 'Beautified', type: 'info'})
     })
-    Mousetrap.bind('ctrl+n', (e) => { this.addTab() })
+    Mousetrap.bind('ctrl+n', (e) => { this.addTab({}) })
     Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
     Mousetrap.bind('ctrl+q', (e) => { require('electron').remote.app.quit() })
     Mousetrap.bind('option+down', (e) => { this.showOverlay = !this.showOverlay })
     Mousetrap.bind('option+up', (e) => { this.togglePane('left') })
     Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
-    Mousetrap.bind('option+s', (e) => { this.togglePane('settings') })
+    Mousetrap.bind('option+s', (e) => { this.$router.push('/settings') })
+
+    Mousetrap.bind('option', (e) => { this.showTooltip = true }, 'keydown')
+    Mousetrap.bind('option', (e) => { this.showTooltip = false }, 'keyup')
 
     Mousetrap.bind('option+1', (e) => { this.setActiveTab(0) })
     Mousetrap.bind('option+2', (e) => { this.setActiveTab(1) })

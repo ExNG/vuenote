@@ -2,10 +2,14 @@
 export default [
   {
     path: '/',
-    component: () => import('layouts/default'),
-    children: [
-      // { path: '', component: () => import('pages/index') }
-    ]
+    name: 'main',
+    component: () => import('layouts/Main')
+  },
+
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('layouts/Settings')
   },
 
   { // Always leave this as last one
