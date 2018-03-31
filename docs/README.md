@@ -1,6 +1,6 @@
 ![Vuenote Screenshot](vuenote.png)
 
-# [Help](help)
+# Help
 
 - [Github Gists](help/GithubGists)
 
