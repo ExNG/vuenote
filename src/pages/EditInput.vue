@@ -37,11 +37,38 @@ export default {
         // For every line create a div
         let divs = []
         for (let line of content) {
-          let element = document.createElement('div')
-
           // If the line is empty its necessary to put a line feed
           if (line === '') {
             line = '\n'
+          }
+
+          let type = 'div'
+
+          if (/^# /.test(line)) { // #
+            type = 'h1'
+          } else if (/^## /.test(line)) { // ##
+            type = 'h2'
+          } else if (/^### /.test(line)) { // ###
+            type = 'h3'
+          } else if (/^#### /.test(line)) { // ####
+            type = 'h4'
+          } else if (/^!\[[a-zA-Z1-9]+\]\([a-zA-Z0-9:/.\-~?=#]+\)/.test(line)) { // image
+            type = 'img'
+          }
+
+          let element = null
+          if (type !== 'img') {
+            element = document.createElement(type)
+          } else {
+            element = document.createElement('div')
+          }
+
+          // Display image if url detected
+          if (type === 'img') {
+            let image = document.createElement('img')
+            let imageSrc = line.match(/http[a-zA-Z0-9:/.\-~?=#]+/)[0]
+            image.src = imageSrc
+            element.appendChild(image)
           }
 
           // Append text to div
@@ -59,6 +86,8 @@ export default {
     update (event) {
       // Send the content of the contenteditable div as plain text without div elements
       this.$emit('update', event.target.innerText + '\n')
+      // NOTE: To debug comment the line above and comment out the line below
+      // console.log(event.target.innerText)
     },
 
     keydownRegistration (event) {
@@ -133,6 +162,10 @@ export default {
 
 .editor div {
   width: 100%;
-  height: 24px;
+  min-height: 24px;
+}
+
+.editor * {
+  max-width: 100%;
 }
 </style>
