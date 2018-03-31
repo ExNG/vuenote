@@ -59,8 +59,9 @@
           <table>
             <tr v-for="(version, packageName) in dependencieList"
                 :key="packageName"
+                @click="openURL('https://npmjs.com/package/' + packageName)"
             >
-              <td>{{ packageName }}</td>
+              <td class="cursor-pointer">{{ packageName }}</td>
             </tr>
           </table>
         </div>
