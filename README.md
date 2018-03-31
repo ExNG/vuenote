@@ -2,7 +2,7 @@
 
 > Vuenote is the simplest note app.
 
-[![Travis](https://img.shields.io/travis/ExNG/vuenote.svg)](https://travis-ci.org/ExNG/vuenote) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenote/total.svg)](http://github.com/ExNG/vuenote) [![Coverage Status](https://coveralls.io/repos/github/ExNG/vuenote/badge.svg?branch=master)](https://coveralls.io/github/ExNG/vuenote?branch=master)
+[![Travis](https://img.shields.io/travis/ExNG/vuenote.svg)](https://travis-ci.org/ExNG/vuenote) [![GitHub tag](https://img.shields.io/github/tag/ExNG/vuenote.svg)](https://github.com/ExNG/vuenote) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenote/total.svg)](http://github.com/ExNG/vuenote) [![Coverage Status](https://coveralls.io/repos/github/ExNG/vuenote/badge.svg?branch=master)](https://coveralls.io/github/ExNG/vuenote?branch=master)
 
 ![vuenote Screenshot](docs/vuenote.png)
 
