@@ -322,6 +322,8 @@ export default {
       data.name = name ? String(name) : 'Unamed Tab'
       data.content = content ? String(content) : ''
       this.setActiveTab(Number(this.tabs.push(data)) - 1)
+
+      this.save()
     },
 
     removeTab (index) {
@@ -332,6 +334,8 @@ export default {
       }
 
       this.tabs.splice(Number(index), 1)
+
+      this.save()
     },
 
     renameTab (index) {
@@ -347,15 +351,26 @@ export default {
       })
         .then(data => {
           this.tabs[index].name = data
+          this.save()
         })
     },
 
     archiveTab (index) {
       index = Number(index)
       this.archived.push(this.tabs[index])
-      Storage.save('archived', this.archived)
       this.activeTab = index - 1
       this.tabs.splice(index, 1)
+
+      this.save()
+    },
+
+    restoreArchivedTab (index) {
+      index = Number(index)
+      this.tabs.push(this.archived[index])
+      this.activeTab = this.tabs.length - 1
+      this.archived.splice(index, 1)
+
+      this.save()
     },
 
     togglePane (paneName) {
@@ -367,19 +382,12 @@ export default {
       Storage.save('settings', settings)
     },
 
-    restoreArchivedTab (index) {
-      index = Number(index)
-      this.tabs.push(this.archived[index])
-      this.activeTab = this.tabs.length - 1
-      this.archived.splice(index, 1)
-      Storage.save('archived', this.archived)
-    },
-
     exportDoc () {
       ExportDialog.exportDialog(this.tabs[this.activeTab].content, this.tabs[this.activeTab].name, this.activeTab)
     },
 
     save () {
+      Storage.save('archived', this.archived)
       Storage.save('tabs', this.tabs)
     },
 
