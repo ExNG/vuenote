@@ -86,6 +86,11 @@
 
         <!-- BACKUPS -->
         <backup-table></backup-table>
+
+        <hr>
+
+        <!-- GITHUB GIST -->
+        <github-gist></github-gist>
       </div>
     </div>
 
@@ -113,11 +118,13 @@
 
 <script>
 import BackupTable from '../components/BackupTable'
+import GithubGist from '../components/GithubGist'
 import Storage from '../services/Storage'
 
 export default {
   components: {
-    BackupTable
+    BackupTable,
+    GithubGist
   },
 
   data () {

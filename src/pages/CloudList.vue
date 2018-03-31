@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- ADD GITHUB GIST ID -->
-    <span class="nav-group-item">
-      <span class="icon icon-github-circled"></span>
-      <button class="btn btn-default" @click="addGist()">Add Github Gist</button>
-    </span>
-
     <!-- GITHUB GIST TABS -->
     <span class="nav-group-item cursor-pointer"
           v-for="(tab, index) in githubGistTabs"
@@ -33,28 +27,6 @@ export default {
   },
 
   methods: {
-    addGist () {
-      this.$q.dialog({
-        title: 'Enter Gist Id',
-        message: 'By adding a Github Gist, tabs inside this Gist will appear on the left.',
-        color: 'primary',
-        ok: true,
-        cancel: true,
-        preventClose: false,
-
-        prompt: {
-          model: '',
-          type: 'text'
-        }
-      })
-        .then(data => {
-          if (data && data !== '') {
-            this.getGist(data)
-          }
-        }).catch(() => {
-        })
-    },
-
     getGist (gistId) {
       Github.getGist(gistId)
         .then((response) => {
