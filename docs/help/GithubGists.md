@@ -1,6 +1,6 @@
 # Github Gists
 
-> [Back to Help](..)
+> [Back to Help](help)
 
 ## What are Gists
 
