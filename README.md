@@ -12,20 +12,20 @@
 
 ```bash
 # install dependies
-npm install
+$ npm install
 
 # run quasar
-quasar build -t ios -m electron -T all
+$ quasar build -t ios -m electron -T all
 ```
 
 ## Dev
 
 ```bash
 # install dependies
-npm install
+$ npm install
 
-# run quasar
-quasar dev -t ios -m electron
+# run dev script
+$ ./dev.sh
 ```
 
 ## License
