@@ -1,6 +1,6 @@
 ![Vuenote Screenshot](vuenote.png)
 
-# [Help](/docs/help)
+# [Help](help)
 
 # Releases
 
