@@ -6,10 +6,10 @@ before_script:
 install:
   - npm install
 script:
-  - node_modules/quasar-cli/bin/quasar build -m electron -t ios
-# before_deploy:
+  - node_modules/quasar-cli/bin/quasar build -c -m electron -t ios
+before_deploy:
   - sudo apt-get install wine zip -y
-  - node_modules/quasar-cli/bin/quasar build -m electron -t ios --target all
+  - node_modules/quasar-cli/bin/quasar build -c -m electron -t ios --target all
   - npm run buildDeb
   - cp src/statics/icon.png dist/electron-ios/Vuenote-darwin-x64/icon.png
   - cp src/statics/icon.png dist/electron-ios/Vuenote-linux-x64/icon.png
@@ -26,7 +26,7 @@ deploy:
     - vuenote-darwin-x64.zip
     - vuenote-linux-x64.zip
     - vuenote-win32-x64.zip
-    - vuenote.deb
+    - vuenote_amd64.deb
   skip_cleanup: true
   on:
     repo: ExNG/vuenote
