@@ -7,7 +7,7 @@ install:
   - npm install
 script:
   - node_modules/quasar-cli/bin/quasar build -c -m electron -t ios
-  - ls -lsah
+  - ls -lsah dist/
 before_deploy:
   - sudo apt-get install wine zip -y
   - node_modules/quasar-cli/bin/quasar build -c -m electron -t ios --target all
@@ -19,7 +19,7 @@ before_deploy:
   - cd electron-ios/Vuenote-darwin-x64/ && zip -r ../../vuenote-darwin-x64.zip ./* -9 && cd ../../
   - cd electron-ios/Vuenote-linux-x64/ && zip -r ../../vuenote-linux-x64.zip ./* -9 && cd ../../
   - cd electron-ios/Vuenote-win32-x64/ && zip -r ../../vuenote-win32-x64.zip ./* -9 && cd ../../
-  - ls -lsah dist/
+  - ls -lsah
 deploy:
   provider: releases
   api_key: $gh_token
