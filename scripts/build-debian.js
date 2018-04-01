@@ -27,31 +27,67 @@ const mkdirSync = function (dirPath) {
 
 // Create package folder structure
 console.log('# Create package folder structure')
+
+// /
 mkdirSync(debPackageDir)
 console.log('--> Created: ' + debPackageDir)
+
+// /usr
 mkdirSync(path.join(debPackageDir, 'usr'))
 console.log('--> Created: ' + path.join(debPackageDir, 'usr'))
+
+// /usr/local
 mkdirSync(path.join(debPackageDir, 'usr', 'local'))
 console.log('--> Created: ' + path.join(debPackageDir, 'usr', 'local'))
 
 var debBin = path.join(debPackageDir, 'usr', 'local', 'bin')
+// /usr/local/bin
 mkdirSync(debBin)
 console.log('--> Created: ' + debBin)
+
+var appDir = path.join(debBin, packageInfo.name)
+
+// /usr/share
+mkdirSync(path.join(debPackageDir, 'usr', 'share'))
+console.log('--> Created: ' + path.join(debPackageDir, 'usr', 'share'))
+
+// /usr/share/applications
+var usrShareApps = path.join(debPackageDir, 'usr', 'share', 'applications')
+mkdirSync(usrShareApps)
+console.log('--> Created: ' + usrShareApps)
+
 console.log('--> Finished creating structure')
 console.log('')
 
+// Create /usr/share/applications/vuenite.desktop
+console.log('# Creating ' + path.join(usrShareApps, packageInfo.name + '.desktop'))
+var desktopentryContent = [
+  '[Desktop Entry]',
+  'Name=' + packageInfo.productName,
+  'Exec=/usr/local/bin/' + packageInfo.name + '/' + packageInfo.productName,
+  'Icon=/usr/local/bin/' + packageInfo.name + '/' + 'icon.png',
+  'Type=Application',
+  'Categories=GTK;GNOME;Utility;'
+].join('\n') + '\n'
+fs.writeFileSync(path.join(usrShareApps, packageInfo.name + '.desktop'), desktopentryContent)
+console.log('--> Created: ', path.join(usrShareApps, packageInfo.name + '.desktop'))
+console.log('--> ' + path.join(usrShareApps, packageInfo.name + '.desktop') + ' content: ', desktopentryContent)
+console.log('')
+
 // copy binaries to debianPackageDir
-console.log('# Copying binaries to ' + debBin)
-ncp(binDir, debBin, function () {
-  console.log('--> ' + debBin + ' content: ' , fs.readdirSync(debBin))
+console.log('# Copying binaries to ' + appDir)
+ncp(binDir, appDir, function () {
+  console.log('--> ' + appDir + ' content: ' , fs.readdirSync(appDir))
   console.log('')
 
+  // Create debian folder
   console.log('# Creating control file in DEBIAN')
   var debFolder = path.join(debPackageDir, 'DEBIAN')
   mkdirSync(debFolder)
   console.log('--> Created: ' + debFolder)
   console.log('')
 
+  // Create DEBIAN/content
   console.log('# Creating control file')
   var controlContent = [
     'Package: ' + packageInfo.name,
@@ -68,6 +104,7 @@ ncp(binDir, debBin, function () {
   console.log('--> ' + path.join(debFolder, 'control') + ' content: ', controlContent)
   console.log('')
 
+  // Build debian package
   console.log('# Start building .deb package')
   var debBuildCommand = 'dpkg-deb --verbose --build ' + debPackageDir + ' ' + path.join(debPackageDir, '..', debPackageFileName)
   console.log('--> Running ', debBuildCommand)
