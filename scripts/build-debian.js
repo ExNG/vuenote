@@ -10,6 +10,7 @@ var nrc = require('node-run-cmd')
 var scriptPath = path.dirname(require.main.filename)
 var packageInfo = require(path.join(scriptPath, '..', 'package.json'))
 var debPackageName = packageInfo.name + '_' + packageInfo.version
+var debPackageFileName = packageInfo.name + '_amd64.deb'
 
 var binDir = path.join(scriptPath, '..', 'dist', 'electron-ios', packageInfo.productName + '-linux-x64')
 var distdir = path.join(scriptPath, '..', 'dist')
@@ -68,12 +69,12 @@ ncp(binDir, debBin, function () {
   console.log('')
 
   console.log('# Start building .deb package')
-  var debBuildCommand = 'dpkg-deb --verbose --build ' + debPackageDir + ' ' + path.join(debPackageDir, '..', packageInfo.name + '.deb')
+  var debBuildCommand = 'dpkg-deb --verbose --build ' + debPackageDir + ' ' + path.join(debPackageDir, '..', debPackageFileName)
   console.log('--> Running ', debBuildCommand)
 
   // var buildDone = false
   nrc.run(debBuildCommand, {onDone: function () {
-    console.log('--> Done. File located at ' + path.join(debPackageDir, '..', packageInfo.name + '.deb'))
+    console.log('--> Done. File located at ' + path.join(debPackageDir, '..', debPackageFileName))
     console.log('')
     console.log('# Done')
     // buildDone = true
