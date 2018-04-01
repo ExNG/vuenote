@@ -19,7 +19,7 @@ before_deploy:
   - cd electron-ios/Vuenote-darwin-x64/ && zip -r ../../vuenote-darwin-x64.zip ./* -9 && cd ../../
   - cd electron-ios/Vuenote-linux-x64/ && zip -r ../../vuenote-linux-x64.zip ./* -9 && cd ../../
   - cd electron-ios/Vuenote-win32-x64/ && zip -r ../../vuenote-win32-x64.zip ./* -9 && cd ../../
-  - ls -lsah
+  - ls -lsah dist/
 deploy:
   provider: releases
   api_key: $gh_token
