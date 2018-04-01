@@ -44,6 +44,8 @@ export default {
 
           let type = 'div'
 
+          // TODO: Optimize regex
+
           if (/^# /.test(line)) { // #
             type = 'h1'
           } else if (/^## /.test(line)) { // ##
@@ -52,7 +54,7 @@ export default {
             type = 'h3'
           } else if (/^#### /.test(line)) { // ####
             type = 'h4'
-          } else if (/^!\[[a-zA-Z1-9 ]+\]\([a-zA-Z0-9:/.\-~?=#]+\)/.test(line)) { // image
+          } else if (/^!\[[a-zA-Z1-9 ]+\]\([a-zA-Z0-9:/.\-~?=#_%]+\)/.test(line)) { // image
             type = 'img'
           }
 
@@ -66,7 +68,7 @@ export default {
           // Display image if url detected
           if (type === 'img') {
             let image = document.createElement('img')
-            let imageSrc = line.match(/http[a-zA-Z0-9:/.\-~?=#]+/)[0]
+            let imageSrc = line.match(/http[a-zA-Z0-9:/.\-~?=#_%]+/)[0]
             image.src = imageSrc
             element.appendChild(image)
           }
