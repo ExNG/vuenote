@@ -14,7 +14,8 @@
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "buildDeb": "node scripts/build-debian.js"
   },
   "dependencies": {
     "animate.css": "^3.6.1",
@@ -44,6 +45,8 @@
     "eslint-plugin-promise": "3.4.0",
     "eslint-plugin-standard": "3.0.1",
     "eslint-plugin-vue": "4.0.0",
+    "ncp": "^2.0.0",
+    "node-run-cmd": "^1.0.1",
     "quasar-cli": "^0.15.14"
   },
   "engines": {
