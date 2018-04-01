@@ -8,6 +8,10 @@
 
 **Got some idea?** Open an issue and let me know, or even better create a pull request!
 
+## Help
+
+> See [Vuenote Help Page](https://exng.github.io/vuenote/help)
+
 ## Build
 
 ```bash
