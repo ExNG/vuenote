@@ -1,2 +1,5 @@
 theme: jekyll-theme-cayman
 show_downloads: "true"
+site:
+  title: "Vuenote"
+  description: "Vuenote is the simplest note app."
