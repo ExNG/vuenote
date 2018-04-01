@@ -52,7 +52,7 @@ export default {
             type = 'h3'
           } else if (/^#### /.test(line)) { // ####
             type = 'h4'
-          } else if (/^!\[[a-zA-Z1-9]+\]\([a-zA-Z0-9:/.\-~?=#]+\)/.test(line)) { // image
+          } else if (/^!\[[a-zA-Z1-9 ]+\]\([a-zA-Z0-9:/.\-~?=#]+\)/.test(line)) { // image
             type = 'img'
           }
 
