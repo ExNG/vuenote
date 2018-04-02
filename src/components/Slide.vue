@@ -44,6 +44,12 @@ export default {
   watch: {
     html (data) {
       this.splitToSlides(data)
+    },
+
+    parsedSlides (data) {
+      if (data.length < this.activeSlide + 1) {
+        this.activeSlide = data.length - 1
+      }
     }
   },
 
