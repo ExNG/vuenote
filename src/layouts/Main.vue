@@ -265,6 +265,7 @@ import Notification from '../services/Notification'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
+import Tab from '../services/Tab'
 
 export default {
   components: {
@@ -298,12 +299,7 @@ export default {
 
       tabs: [],
       archived: [],
-      cloud: {},
-
-      newTab: {
-        name: 'New Tab',
-        content: ''
-      }
+      cloud: {}
     }
   },
 
@@ -317,10 +313,12 @@ export default {
       this.activeTab = tabIndex
     },
 
-    addTab ({name = null, content = null}) {
-      let data = JSON.parse(JSON.stringify(this.newTab))
-      data.name = name ? String(name) : 'Unamed Tab'
-      data.content = content ? String(content) : ''
+    addTab ({name = 'Unamed Tab', content = ''}) {
+      let data = Tab.add({
+        name: name,
+        content: content
+      })
+
       this.setActiveTab(Number(this.tabs.push(data)) - 1)
 
       this.save()

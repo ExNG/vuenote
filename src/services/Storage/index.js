@@ -1,4 +1,5 @@
 import Notification from '../Notification'
+import Tab from '../Tab'
 
 export default {
   /**
@@ -24,7 +25,7 @@ export default {
       githubGists: []
     },
     tabs: [
-      {
+      Tab.add({
         name: 'Welcome',
         content: [
           '# Welcome',
@@ -64,7 +65,7 @@ export default {
           'This is just a short introdution to Markdown, take a look at [this Github article](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for more in depth information',
           ''
         ].join('\n')
-      }
+      })
     ],
     archived: [],
     debug: {}
