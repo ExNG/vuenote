@@ -59,28 +59,13 @@
 
         <hr>
 
-        <!-- IMPORT/EXPORT -->
-        <div>
-          <div class="form-group">
-            <label>Import</label>
-            <input type="text" class="form-control" placeholder="{}" v-model="jsonImport">
+        <!-- IMPORT -->
+        <json-import></json-import>
 
-            <button class="btn btn-warning"
-                    style="width: 100%;"
-                    @click="importJSON(jsonImport)"
-            >Import JSON</button>
-          </div>
+        <hr>
 
-          <div class="form-group">
-            <label>Export</label>
-            <input type="text" class="form-control" placeholder="{}" v-model="jsonExport">
-
-            <button class="btn btn-primary"
-                    style="width: 100%;"
-                    @click="getExport()"
-            >Generate Export JSON</button>
-          </div>
-        </div>
+        <!-- EXPORT -->
+        <json-export></json-export>
 
         <hr>
 
@@ -119,22 +104,23 @@
 <script>
 import BackupTable from '../components/BackupTable'
 import GithubGist from '../components/GithubGist'
+import JsonExport from '../components/JsonExport'
+import JsonImport from '../components/JsonImport'
 import Storage from '../services/Storage'
 
 export default {
   components: {
     BackupTable,
-    GithubGist
+    GithubGist,
+    JsonExport,
+    JsonImport
   },
 
   data () {
     return {
       packageInfo: require('../../package.json'),
 
-      settings: Storage.load('settings'),
-
-      jsonImport: '',
-      jsonExport: ''
+      settings: Storage.load('settings')
     }
   },
 
@@ -145,14 +131,6 @@ export default {
 
     save () {
       Storage.save('settings', this.settings)
-    },
-
-    getExport () {
-      this.jsonExport = Storage.getExportJSON()
-    },
-
-    importJSON (data) {
-      Storage.importJSON(data)
     },
 
     resetReplace () {
