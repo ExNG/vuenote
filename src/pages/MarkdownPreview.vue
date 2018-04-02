@@ -1,13 +1,25 @@
 <template>
-  <div v-html="parsedContent"></div>
+  <div>
+    <div v-html="parsedContent"
+         v-if="!tab.slide"
+    ></div>
+    <slide v-else
+           :html="parsedContent"
+    ></slide>
+  </div>
 </template>
 
 <script>
 import Markdown from '../services/Markdown'
+import Slide from '../components/Slide'
 import { shell } from 'electron'
 
 export default {
-  props: ['content'],
+  props: ['tab'],
+
+  components: {
+    Slide
+  },
 
   data () {
     return {
@@ -16,8 +28,11 @@ export default {
   },
 
   watch: {
-    content (data) {
-      this.renderMarkdown(data)
+    tab: {
+      deep: true,
+      handler (data) {
+        this.renderMarkdown(data.content)
+      }
     },
 
     parsedContent () {
@@ -37,7 +52,7 @@ export default {
 
   methods: {
     renderMarkdown (data = null) {
-      data = data ? String(data) : String(this.content)
+      data = data ? String(data) : String(this.tab.content)
       this.parsedContent = Markdown.generateHtml(data)
     }
   },

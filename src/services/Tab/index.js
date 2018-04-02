@@ -1,7 +1,8 @@
 export default {
   tab: {
     name: '',
-    content: ''
+    content: '',
+    slide: false
   },
 
   /**
@@ -10,10 +11,11 @@ export default {
    * @param {Object} tab
    * @return {Bool}
    */
-  add ({name = '', content = ''}) {
+  add ({name = '', content = '', slide = false}) {
     let newTab = {
       name: name,
-      content: content
+      content: content,
+      slide: slide
     }
 
     return Object.assign(this.tab, newTab)

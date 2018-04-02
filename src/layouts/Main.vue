@@ -208,7 +208,7 @@
             <div v-for="(tab, index) in tabs"
                  :key="index"
             >
-              <markdown-preview :content="tab.content"
+              <markdown-preview :tab="tab"
                                 :id="'preview-' + index"
                                 v-if="tabs[activeTab] && activeTab === Number(index)"
               ></markdown-preview>
@@ -239,7 +239,16 @@
       >
         <div class="toolbar-actions">
           <div class="pull-right">
-            <button class="btn btn-default pull-right"
+            <button class="btn btn-default"
+                    @click="tabs[activeTab].slide = !tabs[activeTab].slide"
+                    :class="{ 'btn-primary': tabs[activeTab].slide }"
+            >
+              <span class="icon icon-doc-landscape"
+                    :class="{ 'text-white': tabs[activeTab].slide }"
+              ></span>
+            </button>
+
+            <button class="btn btn-default"
                     @click="applyMarkdownStyle()"
             >
               <span class="icon icon-feather"></span>
