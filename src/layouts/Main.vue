@@ -153,7 +153,7 @@
           >
             <nav class="nav-group">
               <h5 class="nav-group-title">
-                <span class="icon icon-folder"></span>
+                <span class="icon icon-archive"></span>
                 Archive
               </h5>
               <span class="nav-group-item cursor-pointer"
