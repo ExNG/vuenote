@@ -24,7 +24,7 @@
          :key="index"
          v-html="slide"
          v-show="parsedSlides[activeSlide] && activeSlide === index"
-         class="animated fadeInUp"
+         class="animated fadeInUp slide-content"
     >
     </div>
   </div>
@@ -74,4 +74,7 @@ export default {
 </script>
 
 <style>
+.slide-content * {
+  max-width: 100%;
+}
 </style>
