@@ -1,5 +1,5 @@
 import Notification from '../Notification'
-import Tab from '../Tab'
+import Essential from '../Essential'
 
 export default {
   /**
@@ -25,7 +25,7 @@ export default {
       githubGists: []
     },
     tabs: [
-      Tab.add({
+      Essential.add({
         name: 'Welcome',
         content: [
           '# Welcome',

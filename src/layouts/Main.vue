@@ -274,7 +274,7 @@ import Notification from '../services/Notification'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
-import Tab from '../services/Tab'
+import Essential from '../services/Essential'
 
 export default {
   components: {
@@ -323,7 +323,7 @@ export default {
     },
 
     addTab ({name = 'Unamed Tab', content = ''}) {
-      let data = Tab.add({
+      let data = Essential.add({
         name: name,
         content: content
       })
