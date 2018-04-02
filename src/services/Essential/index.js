@@ -5,6 +5,16 @@ export default {
   },
 
   /**
+   * Clone object.
+   *
+   * @param {Object} toClone
+   * @return {Object}
+   */
+  clone (toClone) {
+    return JSON.parse(JSON.stringify(toClone))
+  },
+
+  /**
    * Create new tab
    *
    * @param {Object} tab
@@ -16,6 +26,6 @@ export default {
       content: content
     }
 
-    return Object.assign(this.tab, newTab)
+    return Object.assign(this.clone(this.tab), newTab)
   }
 }

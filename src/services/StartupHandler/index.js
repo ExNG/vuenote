@@ -1,6 +1,6 @@
 import Backup from '../Backup'
 import Storage from '../Storage'
-import Tab from '../Tab'
+import Essential from '../Essential'
 
 /**
  * This handler will run everytime the application starts.
@@ -33,7 +33,7 @@ export default function () {
 
           // Let all tabs go through tab creation
           for (let tab of userData) {
-            newTabs.push(Tab.add(tab))
+            newTabs.push(Essential.add(tab))
           }
 
           userData = newTabs
