@@ -1,4 +1,4 @@
 # Help
 
-- [Github Gists](GithubGists)
-- [Tab Slides](Slides)
+-   [Github Gists](GithubGists)
+-   [Tab Slides](Slides)
