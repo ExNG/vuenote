@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "animate.css": "^3.6.1",
+    "antimatterkit": "^2.0.0",
     "axios": "^0.18.0",
     "file-saver": "^1.3.3",
     "html2canvas": "^1.0.0-alpha.10",
@@ -26,7 +27,6 @@
     "markdown-it-checkbox": "^1.1.0",
     "moment": "^2.21.0",
     "mousetrap": "^1.6.1",
-    "photonkit": "^0.1.2",
     "remark": "^9.0.0"
   },
   "devDependencies": {

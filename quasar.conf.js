@@ -3,7 +3,7 @@
 module.exports = function (ctx) {
   return {
     plugins: [
-      'photonkit',
+      'antimatterkit',
       'animatecss'
     ],
     css: [
