@@ -19,7 +19,8 @@ export default {
         sm: false,
         left: true,
         right: false
-      }
+      },
+      darkmode: false
     },
     cloud: {
       githubGists: []

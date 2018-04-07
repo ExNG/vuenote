@@ -17,6 +17,27 @@
 
         <hr>
 
+        <div>
+          <label>Darkmode</label>
+
+          <div class="pull-right">
+            <button class="btn btn-primary"
+                    v-show="!settings.darkmode"
+                    @click="settings.darkmode = true; save()"
+            >
+              Enable
+            </button>
+            <button class="btn btn-primary"
+                    v-show="settings.darkmode"
+                    @click="settings.darkmode = false; save()"
+            >
+              Disable
+            </button>
+          </div>
+        </div>
+
+        <hr>
+
         <!-- REPLACE -->
         <div>
           <label>Replace</label>
