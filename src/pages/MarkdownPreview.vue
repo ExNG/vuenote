@@ -2,6 +2,7 @@
   <div>
     <div v-html="parsedContent"
          v-if="!tab.slide"
+         id="preview-container"
     ></div>
     <slide v-else
            :html="parsedContent"
@@ -64,4 +65,7 @@ export default {
 </script>
 
 <style>
+#preview-container * {
+  max-width: 100%;
+}
 </style>
