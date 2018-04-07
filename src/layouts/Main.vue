@@ -240,6 +240,7 @@
         <div class="toolbar-actions">
           <div class="pull-right">
             <button class="btn btn-default"
+                    v-if="tabs[activeTab] && Object.keys(tabs[activeTab]).includes('slide')"
                     @click="tabs[activeTab].slide = !tabs[activeTab].slide"
                     :class="{ 'btn-primary': tabs[activeTab].slide }"
             >
@@ -336,13 +337,17 @@ export default {
     removeTab (index) {
       this.activeTab = Number(index - 1)
 
-      if (this.activeTab <= 0) {
-        this.activeTab = null
-      }
+      this.tabs[index].slide = false
 
-      this.tabs.splice(Number(index), 1)
+      this.$nextTick(() => {
+        if (this.activeTab <= 0) {
+          this.activeTab = null
+        }
 
-      this.save()
+        this.tabs.splice(Number(index), 1)
+
+        this.save()
+      })
     },
 
     renameTab (index) {
