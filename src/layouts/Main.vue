@@ -457,7 +457,13 @@ export default {
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
     Mousetrap.bind('option+s', (e) => { this.$router.push('/settings') })
 
-    Mousetrap.bind('option', (e) => { this.showTooltip = true }, 'keydown')
+    Mousetrap.bind('option', (e) => {
+      this.showTooltip = true
+
+      setTimeout(() => {
+        this.showTooltip = false
+      }, 5000)
+    }, 'keydown')
     Mousetrap.bind('option', (e) => { this.showTooltip = false }, 'keyup')
 
     Mousetrap.bind('option+1', (e) => { this.setActiveTab(0) })
