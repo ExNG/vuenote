@@ -263,10 +263,10 @@
       <div class="padded-more">
         <search :tabs.sync="tabs"
                 :modal.sync="searchModal"
+                :activetab="activeTab"
+                v-on:activetab="setActiveTab($event)"
+                v-on:togglemodal="searchModal = !searchModal"
         ></search>
-        <div style="text-align: right;">
-          <q-btn color="primary" @click="searchModal = false">Close</q-btn>
-        </div>
       </div>
     </q-modal>
   </div>
