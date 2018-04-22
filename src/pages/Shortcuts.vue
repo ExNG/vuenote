@@ -33,6 +33,10 @@
           <td>Quit</td>
         </tr>
         <tr>
+          <td><code>Ctrl + Space</code></td>
+          <td>Toggle Search</td>
+        </tr>
+        <tr>
           <td><code>Alt + Arrow Up</code></td>
           <td>Toggle Editor</td>
         </tr>

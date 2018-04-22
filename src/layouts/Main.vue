@@ -258,6 +258,17 @@
         </div>
       </footer>
     </transition>
+
+    <q-modal v-model="searchModal">
+      <div class="padded-more">
+        <search :tabs.sync="tabs"
+                :modal.sync="searchModal"
+        ></search>
+        <div style="text-align: right;">
+          <q-btn color="primary" @click="searchModal = false">Close</q-btn>
+        </div>
+      </div>
+    </q-modal>
   </div>
 </template>
 
@@ -272,6 +283,7 @@ import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
 import Mousetrap from 'mousetrap'
 import Notification from '../services/Notification'
+import Search from '../pages/Search'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
@@ -284,6 +296,7 @@ export default {
     CloudList,
     EditInput,
     Export,
+    Search,
     Shortcuts,
     MarkdownPreview
   },
@@ -294,6 +307,7 @@ export default {
 
       shortcutsModal: false,
       aboutModal: false,
+      searchModal: false,
 
       showTooltip: false,
 
@@ -456,6 +470,8 @@ export default {
     Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
     Mousetrap.bind('option+s', (e) => { this.$router.push('/settings') })
+
+    Mousetrap.bind('ctrl+space', (e) => { this.searchModal = true })
 
     Mousetrap.bind('option', (e) => {
       this.showTooltip = true
