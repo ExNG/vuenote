@@ -27,9 +27,7 @@
     "markdown-it-checkbox": "^1.1.0",
     "moment": "^2.21.0",
     "mousetrap": "^1.6.1",
-    "node-sass": "^4.8.3",
-    "remark": "^9.0.0",
-    "sass-loader": "^7.0.1"
+    "remark": "^9.0.0"
   },
   "devDependencies": {
     "babel-eslint": "8.2.1",
