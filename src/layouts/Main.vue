@@ -481,7 +481,7 @@ export default {
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
     Mousetrap.bind('option+s', (e) => { this.$router.push('/settings') })
 
-    Mousetrap.bind('ctrl+space', (e) => { this.searchModal = true })
+    Mousetrap.bind('ctrl+space', (e) => { this.searchModal = !this.searchModal })
 
     Mousetrap.bind('option', (e) => {
       this.showTooltip = true
