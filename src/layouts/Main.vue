@@ -462,6 +462,12 @@ export default {
       this.applyMarkdownStyle()
       Notification({title: 'Beautified', type: 'info'})
     })
+    Mousetrap.bind('ctrl+shift+s', (e) => {
+      this.applyMarkdownStyle()
+      this.save()
+      Notification({title: 'Saved and Beautified', type: 'info'})
+    })
+
     Mousetrap.bind('ctrl+n', (e) => { this.addTab({}) })
     Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
     Mousetrap.bind('ctrl+q', (e) => { require('electron').remote.app.quit() })

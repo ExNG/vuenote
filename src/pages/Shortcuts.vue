@@ -29,6 +29,10 @@
           <td>Beautify active Tab</td>
         </tr>
         <tr>
+          <td><code>Ctrl + Shift + S</code></td>
+          <td>Beautify active Tab and Save</td>
+        </tr>
+        <tr>
           <td><code>Ctrl + Q</code></td>
           <td>Quit</td>
         </tr>
