@@ -68,9 +68,10 @@ export default {
   applyStyle (data) {
     remark()
       .process(data, function (err, file) {
-        console.error(err || file)
+        if (err) throw err
         data = file.contents
       })
+
     return data
   }
 }
