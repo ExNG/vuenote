@@ -44,7 +44,7 @@ export default {
     return ['<html>',
       '<head>',
       '<title>' + String(name) + '</title>',
-      '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/connors/photon/ba7b496f/dist/css/photon.css">',
+      '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ExNG/antimatter/73e5bbc4/dist/antimatter.css">',
       '</head>',
       '<body>',
       '<div class="window">',
