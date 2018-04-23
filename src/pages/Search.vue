@@ -4,7 +4,7 @@
            placeholder="Search"
            v-model="search"
            id="searchbox"
-           class="form-control"
+           class="form-control mousetrap"
            tabindex="1000"
     >
 
@@ -24,7 +24,7 @@
         </tr>
         <tr v-for="(tab, index) in tabs"
             :key="index"
-            v-show="applySearch(tab)"
+            v-show="applySearch(tab) && index < 10"
         >
           <td @click="setActiveTab(index)"
               @keydown.enter="setActiveTab(index)"
@@ -45,11 +45,11 @@
         </tr>
         <tr v-for="(tab, index) in archive"
             :key="index"
-            v-show="applySearch(tab)"
+            v-show="applySearch(tab) && index < 10"
         >
           <td @click="restoreArchivedTab(index)"
               @keydown.enter="restoreArchivedTab(index)"
-              :tabindex="1000 + index"
+              :tabindex="1100 + index"
           >
             {{ tab.name }}
           </td>
@@ -73,6 +73,11 @@ export default {
     modal () {
       if (!this.modal) {
         this.search = ''
+      } else {
+        // Why is this working but not $nextTick ?!
+        setTimeout(() => {
+          document.querySelector('#searchbox').focus()
+        }, 0)
       }
     }
   },
