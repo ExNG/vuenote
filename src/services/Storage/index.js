@@ -68,7 +68,14 @@ export default {
         ].join('\n')
       })
     ],
-    archived: [],
+    archived: [
+      Essential.add({
+        name: 'The cake is a lie!',
+        content: [
+          '# The cake is a lie!'
+        ].join('\n')
+      })
+    ],
     debug: {}
   },
 
