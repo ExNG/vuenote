@@ -22,26 +22,36 @@
             </small>
           </td>
         </tr>
-        <tr v-for="(result, index) in tabs"
+        <tr v-for="(tab, index) in tabs"
             :key="index"
-            v-show="applySearch(result)"
+            v-show="applySearch(tab)"
         >
           <td @click="setActiveTab(index)"
               @keydown.enter="setActiveTab(index)"
               :tabindex="1000 + index"
           >
-            {{ result.name }}
+            {{ tab.name }}
           </td>
         </tr>
 
         <!-- ARCHIVED TABS -->
-        <!-- TODO -->
         <tr>
           <td class="border-below">
             <small>
               <span class="icon icon-archive"></span>
               Archive
             </small>
+          </td>
+        </tr>
+        <tr v-for="(tab, index) in archive"
+            :key="index"
+            v-show="applySearch(tab)"
+        >
+          <td @click="restoreArchivedTab(index)"
+              @keydown.enter="restoreArchivedTab(index)"
+              :tabindex="1000 + index"
+          >
+            {{ tab.name }}
           </td>
         </tr>
       </tbody>
@@ -51,7 +61,7 @@
 
 <script>
 export default {
-  props: ['tabs', 'modal'],
+  props: ['tabs', 'modal', 'archive'],
 
   data () {
     return {
@@ -78,6 +88,11 @@ export default {
 
     setActiveTab (index) {
       this.$emit('activetab', index)
+      this.$emit('togglemodal')
+    },
+
+    restoreArchivedTab (index) {
+      this.$emit('restorearchivedtab', index)
       this.$emit('togglemodal')
     }
   }

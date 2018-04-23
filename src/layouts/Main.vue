@@ -262,9 +262,11 @@
     <q-modal v-model="searchModal">
       <div class="padded-more">
         <search :tabs.sync="tabs"
+                :archive.sync="archived"
                 :modal.sync="searchModal"
                 :activetab="activeTab"
                 v-on:activetab="setActiveTab($event)"
+                v-on:restorearchivedtab="restoreArchivedTab($event)"
                 v-on:togglemodal="searchModal = !searchModal"
         ></search>
       </div>
@@ -392,11 +394,13 @@ export default {
 
     restoreArchivedTab (index) {
       index = Number(index)
-      this.tabs.push(this.archived[index])
-      this.activeTab = this.tabs.length - 1
-      this.archived.splice(index, 1)
+      if (this.archived[index]) {
+        this.tabs.push(this.archived[index])
+        this.activeTab = this.tabs.length - 1
+        this.archived.splice(index, 1)
 
-      this.save()
+        this.save()
+      }
     },
 
     togglePane (paneName) {
