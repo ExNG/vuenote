@@ -12,7 +12,7 @@
     <br>
 
     <table>
-      <tbody>
+      <tbody id="search-tabs-container">
         <!-- TABS -->
         <tr>
           <td class="border-below">
@@ -24,7 +24,7 @@
         </tr>
         <tr v-for="(tab, index) in tabs"
             :key="index"
-            v-show="applySearch(tab) && index < 10"
+            v-if="index < 10 && applySearch(tab)"
         >
           <td @click="setActiveTab(index)"
               @keydown.enter="setActiveTab(index)"
@@ -45,7 +45,7 @@
         </tr>
         <tr v-for="(tab, index) in archive"
             :key="index"
-            v-show="applySearch(tab) && index < 10"
+            v-if="index < 10 && applySearch(tab)"
         >
           <td @click="restoreArchivedTab(index)"
               @keydown.enter="restoreArchivedTab(index)"
