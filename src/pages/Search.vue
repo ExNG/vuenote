@@ -63,24 +63,11 @@
 
 <script>
 export default {
-  props: ['tabs', 'modal', 'archive'],
+  props: ['tabs', 'archive'],
 
   data () {
     return {
       search: ''
-    }
-  },
-
-  watch: {
-    modal () {
-      if (!this.modal) {
-        this.search = ''
-      } else {
-        // Why is this working but not $nextTick ?!
-        setTimeout(() => {
-          document.querySelector('#searchbox').focus()
-        }, 0)
-      }
     }
   },
 
@@ -102,6 +89,12 @@ export default {
       this.$emit('restorearchivedtab', index)
       this.$emit('togglemodal')
     }
+  },
+
+  created () {
+    setTimeout(() => {
+      document.querySelector('#searchbox').focus()
+    }, 0)
   }
 }
 </script>

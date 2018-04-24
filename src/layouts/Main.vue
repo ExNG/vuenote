@@ -264,9 +264,9 @@
 
     <q-modal v-model="searchModal">
       <div class="padded-more">
-        <search :tabs="tabs"
+        <search v-if="searchModal"
+                :tabs="tabs"
                 :archive="archived"
-                :modal.sync="searchModal"
                 :activetab="activeTab"
                 v-on:activetab="setActiveTab($event)"
                 v-on:restorearchivedtab="restoreArchivedTab($event)"
