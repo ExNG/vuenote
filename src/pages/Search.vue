@@ -33,7 +33,9 @@
             {{ tab.name }}
           </td>
         </tr>
+      </tbody>
 
+      <tbody id="search-tabs-container">
         <!-- ARCHIVED TABS -->
         <tr>
           <td class="border-below">
