@@ -33,6 +33,10 @@
           <td>Beautify active Tab and Save</td>
         </tr>
         <tr>
+          <td><code>Ctrl + F</code></td>
+          <td>Toggle Fullscreen</td>
+        </tr>
+        <tr>
           <td><code>Ctrl + Q</code></td>
           <td>Quit</td>
         </tr>

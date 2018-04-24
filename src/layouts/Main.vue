@@ -275,6 +275,8 @@
 </template>
 
 <script>
+import { remote } from 'electron'
+
 import About from '../pages/About'
 import Debug from '../pages/Debug'
 import CloudList from '../pages/CloudList'
@@ -470,6 +472,11 @@ export default {
       this.applyMarkdownStyle()
       this.save()
       Notification({title: 'Saved and Beautified', type: 'info'})
+    })
+
+    Mousetrap.bind('Ctrl + f', (e) => {
+      let isFullscreen = remote.getCurrentWindow().isFullScreen()
+      remote.getCurrentWindow().setFullScreen(!isFullscreen)
     })
 
     Mousetrap.bind('ctrl+n', (e) => { this.addTab({}) })
