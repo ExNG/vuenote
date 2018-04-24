@@ -31,7 +31,9 @@
                   </q-item>
 
                   <q-item v-close-overlay @click.native="archiveTab(Number(index))">
-                    <q-item-main label="Archive" />
+                    <q-item-main label="Archive"
+                                 sublabel="Ctrl + W"
+                    />
                   </q-item>
 
                   <q-item v-close-overlay @click.native="removeTab(Number(index))">
