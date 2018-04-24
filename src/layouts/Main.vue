@@ -17,10 +17,11 @@
             >
               <span class="icon icon-doc-text-inv"></span>
               <small class="pull-left"
-                     v-if="showTooltip && (Number(index) + 1 <= 10)"
-                     style="margin-right: 2.5px;"
+                     style="width: 4px; margin-right: 2.5px;"
               >
-                {{ index + 1 }}
+                <span v-if="showTooltip && (Number(index) + 1 <= 10)">
+                  {{ index + 1 }}
+                </span>
               </small>
               {{ tab.name }}
 
