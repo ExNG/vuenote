@@ -1,3 +1,5 @@
+import { remote } from 'electron'
+
 import Notification from '../Notification'
 import Essential from '../Essential'
 
@@ -203,6 +205,7 @@ export default {
         this.save(name, value)
       }
 
+      remote.getCurrentWindow().reload()
       return true
     } catch (e) {
       console.log('Error importing JSON')
