@@ -17,7 +17,7 @@
             >
               <span class="icon icon-doc-text-inv"></span>
               <small class="pull-left"
-                     style="width: 4px; margin-right: 2.5px;"
+                     style="width: 10px; margin-right: 2.5px;"
               >
                 <span v-if="showTooltip && (Number(index) + 1 <= 10)">
                   {{ index + 1 }}
