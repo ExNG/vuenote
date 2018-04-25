@@ -159,7 +159,7 @@ export default {
     // check if item exists
     if (this.load(name)) {
       // yes, remove it
-      localStorage.removeItem(name)
+      Config.unset(name)
       return true
     } else {
       // item does not exist in DB

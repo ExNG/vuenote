@@ -61,6 +61,23 @@ export default {
   },
 
   /**
+   * Remove item from data.
+   *
+   * @param {String} name
+   * @return {Bool}
+   */
+  unset (name) {
+    let file = path.join(this.paths.data, name)
+
+    if (fs.existsSync(file)) {
+      fs.unlinkSync(file)
+      return true
+    } else {
+      return false
+    }
+  },
+
+  /**
    * Return data saved in data folder.
    *
    * @param {String} name
