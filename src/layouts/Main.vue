@@ -477,7 +477,7 @@ export default {
       Notification({title: 'Saved and Beautified', type: 'info'})
     })
 
-    Mousetrap.bind('Ctrl + f', (e) => {
+    Mousetrap.bind('ctrl+f', (e) => {
       let isFullscreen = remote.getCurrentWindow().isFullScreen()
       remote.getCurrentWindow().setFullScreen(!isFullscreen)
     })
