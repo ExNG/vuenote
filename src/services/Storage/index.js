@@ -1,5 +1,6 @@
 import { remote } from 'electron'
 
+import Config from '../Config'
 import Notification from '../Notification'
 import Essential from '../Essential'
 
@@ -110,18 +111,20 @@ export default {
    * @return {String}
    */
   load (name) {
+    let value = Config.get(name)
+
     // check if item is already set
-    if (!localStorage.getItem(name)) {
+    if (!value) {
       // no return default value if set
-      let value = this.structure[name]
+      let newValue = this.structure[name]
 
       // save item with default value
-      this.save(name, value)
+      this.save(name, newValue)
 
-      return value
+      return newValue
     } else {
       // item is set, return its value
-      return JSON.parse(localStorage.getItem(name))
+      return JSON.parse(Config.get(name))
     }
   },
 
@@ -136,7 +139,7 @@ export default {
   save (name, value) {
     try {
       // save and return true
-      localStorage.setItem(name, JSON.stringify(value))
+      Config.set(name, JSON.stringify(value))
       return true
     } catch (e) {
       // something went wrong while saving
