@@ -17,6 +17,10 @@
           <td>New tab</td>
         </tr>
         <tr>
+          <td><code>Ctrl + T</code></td>
+          <td>Add Table</td>
+        </tr>
+        <tr>
           <td><code>Ctrl + W</code></td>
           <td>Archive active tab</td>
         </tr>

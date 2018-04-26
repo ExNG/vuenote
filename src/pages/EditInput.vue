@@ -1,19 +1,38 @@
 <template>
-  <div contenteditable="true"
-       class="editor mousetrap"
-       @input="update"
-       @keydown.tab.prevent
-       @keydown="keydownRegistration($event)"
-       @keyup="keyupRegistration($event)"
-       style="white-space: pre-wrap; font-family: monospace;"
-  ></div>
+  <div>
+    <div contenteditable="true"
+         class="editor mousetrap"
+         id="editor"
+         @input="update"
+         @keydown.tab.prevent
+         @keydown="keydownRegistration($event)"
+         @keyup="keyupRegistration($event)"
+         style="white-space: pre-wrap; font-family: monospace;"
+    ></div>
+
+    <q-modal v-model="tableCreator">
+      <div class="padded-more">
+        <table-creator v-on:tablecreate="paste($event)"
+                       v-on:closemodal="tableCreator = false"
+        >
+        </table-creator>
+      </div>
+    </q-modal>
+  </div>
 </template>
 
 <script>
+import TableCreator from '../components/TableCreator'
+
 export default {
+  components: {
+    TableCreator
+  },
+
   data () {
     return {
-      activeKeys: {}
+      activeKeys: {},
+      tableCreator: false
     }
   },
 
@@ -29,7 +48,7 @@ export default {
       //       after an electron update the following code might break.
       this.$nextTick(() => {
         // Reset content of the editor
-        this.$el.innerHTML = null
+        this.$el.querySelector('#editor').innerHTML = null
 
         // Split text into lines
         let content = this.content.split('\n')
@@ -80,7 +99,7 @@ export default {
 
         // Append the div to the contenteditable div
         for (let div of divs) {
-          this.$el.appendChild(div)
+          this.$el.querySelector('#editor').appendChild(div)
         }
       })
     },
@@ -99,6 +118,8 @@ export default {
 
       if (this.activeKeys['9']) { // Tab
         this.paste('    ')
+      } else if (this.activeKeys['17'] && this.activeKeys['84']) { // Ctrl + T
+        this.tableCreator = true
       }
     },
 
