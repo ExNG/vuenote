@@ -159,6 +159,8 @@ export default {
       } else if (document.selection && document.selection.type !== 'Control') {
         document.selection.createRange().pasteHTML(html)
       }
+
+      this.$emit('update', this.$el.querySelector('#editor').innerText + '\n')
     }
   },
 
