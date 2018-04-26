@@ -130,7 +130,7 @@ export default {
     },
 
     paste (html) {
-      console.log('window.getSelection', window.getSelection)
+      // console.log('window.getSelection', window.getSelection)
 
       if (window.getSelection) {
         let sel = window.getSelection()
