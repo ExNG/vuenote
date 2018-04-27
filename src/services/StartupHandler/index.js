@@ -11,6 +11,16 @@ export default function () {
   // Backup before structure merge
   Backup.create('')
 
+  let appData = Storage.load('appData')
+
+  if (!appData || !appData.version) {
+    Storage.init()
+
+    appData['version'] = require('../../../package.json').version
+
+    Storage.save('appData', appData)
+  }
+
   let structure = Storage.structure
 
   // loop over every item
@@ -49,5 +59,5 @@ export default function () {
   }
 
   // Backup after structure merge
-  Backup.create('_AfterMerge')
+  // Backup.create('_AfterMerge')
 }

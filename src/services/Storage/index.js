@@ -10,7 +10,7 @@ export default {
    */
   structure: {
     appData: {
-      version: require('../../../package.json').version
+      version: null
     },
     settings: {
       replace: false,
@@ -28,59 +28,58 @@ export default {
     cloud: {
       githubGists: []
     },
-    tabs: [
-      Essential.add({
-        name: 'Welcome',
-        content: [
-          '# Welcome',
-          '',
-          '* * *',
-          '',
-          'Vuenote supports full Markdown syntax',
-          '',
-          '## Typography',
-          '',
-          '| Name              | Usage      |',
-          '| ----------------- | ---------- |',
-          '| _Italic_          | `*Text*`   |',
-          '| **Strong**        | `**Text**` |',
-          '| ~~Strikethrough~~ | `~~Text~~` |',
-          '| > Blockquote      | `> Text`   |',
-          '',
-          '## Lists',
-          '',
-          '-   List Item',
-          '    -   Child Item',
-          '',
-          '## Links',
-          '',
-          '[Vuenote Website](https://exng.github.io/vuenote)',
-          '',
-          '## Images',
-          '',
-          '![Vuenote Logo](https://github.com/ExNG/vuenote/blob/master/docs/vuenote.png?raw=true)',
-          '',
-          '## Tables',
-          '',
-          '| Normal | Centered | Right aligned |',
-          '| ------ | :------: | ------------: |',
-          '| Text   |   Text   |          Text |',
-          '',
-          'This is just a short introdution to Markdown, take a look at [this Github article](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for more in depth information',
-          ''
-        ].join('\n')
-      })
-    ],
-    archived: [
-      Essential.add({
-        name: 'The cake is a lie!',
-        content: [
-          '# The cake is a lie!'
-        ].join('\n')
-      })
-    ],
+    tabs: [],
+    archived: [],
     debug: {}
   },
+
+  _welcomeTab: Essential.add({
+    name: 'Welcome',
+    content: [
+      '# Welcome',
+      '',
+      '* * *',
+      '',
+      'Vuenote supports full Markdown syntax',
+      '',
+      '## Typography',
+      '',
+      '| Name              | Usage      |',
+      '| ----------------- | ---------- |',
+      '| _Italic_          | `*Text*`   |',
+      '| **Strong**        | `**Text**` |',
+      '| ~~Strikethrough~~ | `~~Text~~` |',
+      '| > Blockquote      | `> Text`   |',
+      '',
+      '## Lists',
+      '',
+      '-   List Item',
+      '    -   Child Item',
+      '',
+      '## Links',
+      '',
+      '[Vuenote Website](https://exng.github.io/vuenote)',
+      '',
+      '## Images',
+      '',
+      '![Vuenote Logo](https://github.com/ExNG/vuenote/blob/master/docs/vuenote.png?raw=true)',
+      '',
+      '## Tables',
+      '',
+      '| Normal | Centered | Right aligned |',
+      '| ------ | :------: | ------------: |',
+      '| Text   |   Text   |          Text |',
+      '',
+      'This is just a short introdution to Markdown, take a look at [this Github article](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for more in depth information',
+      ''
+    ].join('\n')
+  }),
+  _archivedTabExample: Essential.add({
+    name: 'The cake is a lie!',
+    content: [
+      '# The cake is a lie!'
+    ].join('\n')
+  }),
 
   /**
    * Initiate the DB
@@ -92,6 +91,13 @@ export default {
       // set all items with their default value
       for (let name in this.structure) {
         let value = this.structure[name]
+
+        if (name === 'tabs') {
+          value.push(this._welcomeTab)
+        } else if (name === 'archived') {
+          value.push(this._archivedTabExample)
+        }
+
         this.save(name, value)
       }
 
