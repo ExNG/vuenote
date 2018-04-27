@@ -73,7 +73,7 @@ export default {
             type = 'h3'
           } else if (/^#### /.test(line)) { // ####
             type = 'h4'
-          } else if (/^!\[[a-zA-Z1-9 ]+\]\([a-zA-Z0-9:/.\-~?=#_%]+\)/.test(line)) { // image
+          } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
             type = 'img'
           }
 
@@ -87,7 +87,8 @@ export default {
           // Display image if url detected
           if (type === 'img') {
             let image = document.createElement('img')
-            let imageSrc = line.match(/http[a-zA-Z0-9:/.\-~?=#_%]+/)[0]
+            image.style.cssText = 'display: block;'
+            let imageSrc = line.match(/http[^\\]+/)[0]
             image.src = imageSrc
             element.appendChild(image)
           }
