@@ -104,31 +104,30 @@ ncp(binDir, appDir, function () {
   console.log('--> ' + path.join(debFolder, 'control') + ' content: ', controlContent)
   console.log('')
 
+  console.log('# Creating copyright file')
+  var copyrightContent = [
+    'Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/',
+    'Upstream-Name: ' + packageInfo.productName,
+    'Upstream-Contact: ' + packageInfo.author,
+    'Source: ' + packageInfo.homepage,
+    '',
+    'Files: *',
+    'Copyright: ' + packageInfo.author,
+    'License: MIT'
+  ].join('\n') + '\n'
+  fs.writeFileSync(path.join(debFolder, 'copyright'), copyrightContent)
+  console.log('--> Created: ', path.join(debFolder, 'copyright'))
+  console.log('--> ' + path.join(debFolder, 'copyright') + ' content: ', controlContent)
+  console.log('')
+
   // Build debian package
   console.log('# Start building .deb package')
   var debBuildCommand = 'dpkg-deb --verbose --build ' + debPackageDir + ' ' + path.join(debPackageDir, '..', debPackageFileName)
   console.log('--> Running ', debBuildCommand)
 
-  // var buildDone = false
   nrc.run(debBuildCommand, {onDone: function () {
     console.log('--> Done. File located at ' + path.join(debPackageDir, '..', debPackageFileName))
     console.log('')
     console.log('# Done')
-    // buildDone = true
   }})
-
-  // TODO: any while loop will prevent the onDone function from running,
-  //       so the package will be build but the callback cannot signall it
-  // var wait = function (ms){
-  //    var start = new Date().getTime();
-  //    var end = start;
-  //    while(end < start + ms) {
-  //      end = new Date().getTime();
-  //   }
-  // }
-  //
-  // while (!buildDone) {
-  //   wait(30 * 1000)
-  //   console.log('--> Building...')
-  // }
 })

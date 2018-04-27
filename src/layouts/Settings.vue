@@ -155,8 +155,6 @@ export default {
     },
 
     resetReplace () {
-      // TODO: Structure is returning wrong data
-      // ... so basically reset is not working
       this.settings.replaceList = Storage.structure.settings.replaceList
 
       this.save()
