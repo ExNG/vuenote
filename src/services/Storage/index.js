@@ -143,7 +143,11 @@ export default {
       return true
     } catch (e) {
       // something went wrong while saving
-      Notification('Error while saving notes!', 'The problem is most likely that you ran out of space.', 'negative')
+      Notification({
+        title: 'Error while saving notes!',
+        description: 'The problem is most likely that you ran out of space.',
+        type: 'negative'
+      })
       return false
     }
   },
