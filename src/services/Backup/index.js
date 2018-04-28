@@ -1,35 +1,17 @@
+import Config from '../Config'
 import Storage from '../Storage'
-import OS from 'os'
 import Path from 'path'
 import FS from 'fs'
 import Moment from 'moment'
 
 export default {
-  prepare () {
-    // check if vuenote dir exists
-    let vuenoteDir = Path.join(OS.homedir(), '.vuenote')
-    if (!FS.existsSync(vuenoteDir)) {
-      FS.mkdirSync(vuenoteDir)
-    }
-
-    // check if backup dir exists
-    let backupDir = Path.join(vuenoteDir, 'backup')
-    if (!FS.existsSync(backupDir)) {
-      FS.mkdirSync(backupDir)
-    }
-
-    // if not in production env save backups in dev/
-    if (process.env.NODE_ENV !== 'production') {
-      backupDir = Path.join(backupDir, 'dev')
-      if (!FS.existsSync(backupDir)) {
-        FS.mkdirSync(backupDir)
-      }
-    }
-
-    return {
-      vuenoteDir: vuenoteDir,
-      backupDir: backupDir
-    }
+  /**
+   * Get backup path from Config service.
+   *
+   * @return {String}
+   */
+  getBackupDir () {
+    return Config.paths.backup
   },
 
   /**
@@ -38,8 +20,7 @@ export default {
    * @param {String} addittion
    */
   create (addittion = '') {
-    let prepare = this.prepare()
-    let backupDir = prepare.backupDir
+    let backupDir = this.getBackupDir()
 
     let prefix = process.env.NODE_ENV === 'development' ? 'DEV_' : ''
 
@@ -58,8 +39,7 @@ export default {
    * @return {Array}
    */
   list () {
-    let prepare = this.prepare()
-    let backupDir = prepare.backupDir
+    let backupDir = this.getBackupDir()
     let out = []
 
     FS.readdirSync(backupDir).forEach(file => {
@@ -79,8 +59,7 @@ export default {
    * @return {Null} || {Array}
    */
   getContent (name) {
-    let prepare = this.prepare()
-    let backupDir = prepare.backupDir
+    let backupDir = this.getBackupDir()
     let backupPath = Path.join(backupDir, name)
 
     if (FS.existsSync(backupPath)) {
@@ -98,8 +77,7 @@ export default {
    * @param {Null} || {Bool}
    */
   restore (name) {
-    let prepare = this.prepare()
-    let backupDir = prepare.backupDir
+    let backupDir = this.getBackupDir()
     let backupPath = Path.join(backupDir, name)
 
     if (FS.existsSync(backupPath)) {
@@ -117,8 +95,7 @@ export default {
    * @param {Null} || {Bool}
    */
   delete (name) {
-    let prepare = this.prepare()
-    let backupDir = prepare.backupDir
+    let backupDir = this.getBackupDir()
     let backupPath = Path.join(backupDir, name)
 
     if (FS.existsSync(backupPath)) {
