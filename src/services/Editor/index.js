@@ -1,4 +1,5 @@
 export default {
+  _elementBackgroundStyle: 'background-color: rgba(0, 0, 0, 0.025);',
 
   /**
    * Parse editor content and create
@@ -75,6 +76,8 @@ export default {
     // Append text to base div
     element.appendChild(document.createTextNode(line))
 
+    element.style.cssText += this._elementBackgroundStyle
+
     return element
   },
 
@@ -88,6 +91,7 @@ export default {
     let element = document.createElement(type)
 
     element.appendChild(document.createTextNode(line))
+    element.style.cssText += this._elementBackgroundStyle
 
     return element
   }
