@@ -29,14 +29,14 @@ export default {
     TableCreator
   },
 
+  props: ['content'],
+
   data () {
     return {
       activeKeys: {},
       tableCreator: false
     }
   },
-
-  props: ['content'],
 
   mounted () {
     this.setText()
