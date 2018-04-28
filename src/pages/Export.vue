@@ -1,14 +1,25 @@
 <template>
   <q-popover>
     <q-list separator link>
-      <q-item v-close-overlay @click.native="exportToTxt()">
+      <q-item v-close-overlay
+              @click="exportToTxt()"
+      >
         Text
       </q-item>
-      <q-item v-close-overlay @click.native="exportToHtml()">
+      <q-item v-close-overlay
+              @click="exportToHtml()"
+      >
         Html
       </q-item>
-      <q-item v-close-overlay @click.native="exportToPicture()">
+      <q-item v-close-overlay
+              @click="exportToPicture()"
+              :disabled="!previewVisible"
+      >
         Picture
+
+        <q-tooltip :disable="previewVisible">
+          Open the preview
+        </q-tooltip>
       </q-item>
       <q-item v-close-overlay>
         Cancel
@@ -23,7 +34,7 @@ import Html2Canvas from 'html2canvas'
 import Markdown from '../services/Markdown'
 
 export default {
-  props: ['content', 'name', 'activeTab'],
+  props: ['content', 'name', 'activeTab', 'previewVisible'],
 
   data () {
     return {}

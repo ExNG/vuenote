@@ -87,6 +87,7 @@
                             :content="tabs[activeTab].content"
                             :name="tabs[activeTab].name"
                             :active-tab="activeTab"
+                            :preview-visible="panes.right"
                     ></export>
                   </q-item>
 
