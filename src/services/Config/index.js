@@ -5,9 +5,6 @@ import path from 'path'
 // import Notification from '../Notification'
 import Essential from '../Essential'
 
-var packageInfo = require('../../../package.json')
-
-var notProduction = process.env.NODE_ENV !== 'production'
 var createDir = (path) => {
   if (!fs.existsSync(path)) {
     fs.mkdirSync(path)
@@ -15,8 +12,12 @@ var createDir = (path) => {
 }
 
 // Paths
+
+var packageInfo = require('../../../package.json')
 var dir = path.join(os.homedir(), '.' + packageInfo.name)
-if (notProduction) {
+
+// Deciding if dev enviroment
+if (process.env.NODE_ENV !== 'production') {
   dir = path.join(os.homedir(), '.' + packageInfo.name + '_dev')
 }
 createDir(dir)
@@ -93,6 +94,12 @@ export default {
     }
   },
 
+  /**
+   * Check if dir exists, if not create it.
+   *
+   * @param {String} path
+   * @return {Bool}
+   */
   _exist (path) {
     if (fs.existsSync(path)) {
       return true
