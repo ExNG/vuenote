@@ -25,23 +25,10 @@
               </small>
               {{ tab.name }}
 
-              <q-context-menu>
-                <q-list link separator>
-                  <q-item v-close-overlay @click.native="renameTab(Number(index))">
-                    <q-item-main label="Rename" />
-                  </q-item>
-
-                  <q-item v-close-overlay @click.native="archiveTab(Number(index))">
-                    <q-item-main label="Archive"
-                                 sublabel="Ctrl + W"
-                    />
-                  </q-item>
-
-                  <q-item v-close-overlay @click.native="removeTab(Number(index))">
-                    <q-item-main label="Close" />
-                  </q-item>
-                </q-list>
-              </q-context-menu>
+              <tab-context @rename="renameTab(Number(index))"
+                           @archive="archiveTab(Number(index))"
+                           @close="removeTab(Number(index))"
+              ></tab-context>
             </button>
           </div>
 
@@ -294,6 +281,7 @@ import Search from '../pages/Search'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
+import TabContext from '../components/TabContext'
 import Essential from '../services/Essential'
 
 export default {
@@ -305,6 +293,7 @@ export default {
     Export,
     Search,
     Shortcuts,
+    TabContext,
     MarkdownPreview
   },
 
