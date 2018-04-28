@@ -16,45 +16,24 @@
         </tr>
       </thead>
       <tbody>
-        <transition appear
-                    enter-active-class="animated fadeIn"
-                    leave-active-class="animated fadeOut"
-
-                    v-for="(backup, index) in backups"
-                    :key="index"
-                    v-if="backup.name !== 'dev' && showBackups"
+        <tr v-for="(backup, index) in backups"
+            :key="index"
+            v-if="backup.name !== 'dev' && showBackups"
         >
-            <tr>
-              <td>{{ backup.name }}</td>
-              <td>
-                <button class="btn btn-negative"
-                        @click="restoreBackup(backup.name)"
-                >
-                  Restore
-                </button>
-                <button class="btn btn-default"
-                        @click="deleteBackup(backup.name)"
-                >
-                  <span class="icon icon-trash"></span>
-                </button>
-              </td>
-              <!-- <td>
-                <button class="btn btn-default"
-                        v-show="showBackup !== backup.name"
-                        @click="showBackup = backup.name"
-                >
-                  <span class="icon icon-down-open"></span>
-                </button>
-
-                <button class="btn btn-default"
-                        v-show="showBackup === backup.name"
-                        @click="showBackup = null"
-                >
-                  <span class="icon icon-up-open"></span>
-                </button>
-              </td> -->
-            </tr>
-        </transition>
+          <td>{{ backup.name }}</td>
+          <td>
+            <button class="btn btn-negative"
+                    @click="restoreBackup(backup.name)"
+            >
+              Restore
+            </button>
+            <button class="btn btn-default"
+                    @click="deleteBackup(backup.name)"
+            >
+              <span class="icon icon-trash"></span>
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -64,7 +43,6 @@
 import Backup from '../services/Backup'
 
 export default {
-  // name: 'ComponentName',
   data () {
     return {
       backups: [],
@@ -73,6 +51,10 @@ export default {
   },
 
   methods: {
+    getBackups () {
+      this.backups = Backup.list()
+    },
+
     getContent (name) {
       return Backup.getContent(name)
     },
@@ -83,11 +65,12 @@ export default {
 
     deleteBackup (name) {
       Backup.delete(name)
+      this.getBackups()
     }
   },
 
   created () {
-    this.backups = Backup.list()
+    this.getBackups()
   }
 }
 </script>
