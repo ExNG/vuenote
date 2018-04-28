@@ -117,6 +117,10 @@ export default {
 
       this.activeKeys[String(code)] = true
 
+      setTimeout(() => {
+        this.activeKeys[String(code)] = false
+      }, 1000)
+
       if (this.activeKeys['9']) { // Tab
         this.paste('    ')
       } else if (this.activeKeys['17'] && this.activeKeys['84']) { // Ctrl + T
