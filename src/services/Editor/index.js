@@ -18,24 +18,33 @@ export default {
         line = '\n'
       }
 
-      let type = 'div'
-
       // TODO: Optimize regex
 
       if (/^# /.test(line)) { // #
-        type = 'h1'
+        divs.push(this.heading(line, 'h1'))
+        continue
       } else if (/^## /.test(line)) { // ##
-        type = 'h2'
+        divs.push(this.heading(line, 'h2'))
+        continue
       } else if (/^### /.test(line)) { // ###
-        type = 'h3'
+        divs.push(this.heading(line, 'h3'))
+        continue
       } else if (/^#### /.test(line)) { // ####
-        type = 'h4'
+        divs.push(this.heading(line, 'h4'))
+        continue
+      } else if (/^##### /.test(line)) { // #####
+        divs.push(this.heading(line, 'h5'))
+        continue
+      } else if (/^###### /.test(line)) { // ######
+        divs.push(this.heading(line, 'h6'))
+        continue
       } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
         divs.push(this.img(line))
         continue
       }
 
-      let element = document.createElement(type)
+      // Nothing before matched sp just display the line as text
+      let element = document.createElement('div')
 
       // Append text to div
       element.appendChild(document.createTextNode(line))
@@ -64,6 +73,20 @@ export default {
     element.appendChild(image)
 
     // Append text to base div
+    element.appendChild(document.createTextNode(line))
+
+    return element
+  },
+
+  /**
+   * Convert markdown heading to HTML heading
+   *
+   * @param {String} line
+   * @param {String} type = 'h1'
+   */
+  heading (line, type = 'h1') {
+    let element = document.createElement(type)
+
     element.appendChild(document.createTextNode(line))
 
     return element
