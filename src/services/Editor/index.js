@@ -42,6 +42,9 @@ export default {
       } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
         divs.push(this.img(line))
         continue
+      } else if (/^[*\- ]+/.test(line)) { // image
+        divs.push(this.hr(line))
+        continue
       }
 
       // Nothing before matched sp just display the line as text
@@ -86,12 +89,38 @@ export default {
    *
    * @param {String} line
    * @param {String} type = 'h1'
+   * @return {Element}
    */
   heading (line, type = 'h1') {
     let element = document.createElement(type)
 
     element.appendChild(document.createTextNode(line))
     element.style.cssText += this._elementBackgroundStyle
+
+    return element
+  },
+
+  /**
+   * Create line with hr and text.
+   *
+   * @param {String} line
+   * @return {Element}
+   */
+  hr (line) {
+    // Base div
+    let element = document.createElement('div')
+
+    // create hr
+    let hr = document.createElement('div')
+    hr.appendChild(document.createElement('hr'))
+    hr.setAttribute('contenteditable', false)
+    hr.style.cssText = 'min-height: 1px;'
+
+    // Append img to base div
+    element.appendChild(hr)
+
+    // Append text to base div
+    element.appendChild(document.createTextNode(line))
 
     return element
   }
