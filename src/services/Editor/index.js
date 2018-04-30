@@ -1,7 +1,3 @@
-import Gadget from '../../components/Gadget'
-import Notification from '../Notification'
-import Vue from 'vue'
-
 export default {
   _elementBackgroundStyle: 'background-color: rgba(0, 0, 0, 0.025);',
 
@@ -45,9 +41,6 @@ export default {
         continue
       } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
         divs.push(this.img(line))
-        continue
-      } else if (/%[^%]+%/.test(line)) {
-        divs.push(this.parseJSON(line))
         continue
       }
 
@@ -99,42 +92,6 @@ export default {
 
     element.appendChild(document.createTextNode(line))
     element.style.cssText += this._elementBackgroundStyle
-
-    return element
-  },
-
-  parseJSON (line) {
-    let gadgetJSON = line.match(/%[^%]+%/)[0] // get part which matched the test
-    gadgetJSON = gadgetJSON.match(/[^%]+/)[0] // get JSON part
-
-    let data = null
-    try {
-      data = JSON.parse(gadgetJSON)
-    } catch (error) {
-      if (error instanceof SyntaxError) {
-        // JSON not valid
-        Notification({
-          title: 'Gadget',
-          description: 'The JSON provied in the editor contains errors.',
-          type: 'warning'
-        })
-      } else {
-        throw error
-      }
-    }
-
-    let component = new Vue({
-      ...Gadget,
-      propsData: {data}
-    }).$mount().$el
-
-    // Stop the user from editing the gadget directly
-    component.setAttribute('contenteditable', 'false')
-
-    let element = document.createElement('div')
-
-    element.appendChild(component)
-    element.appendChild(document.createTextNode(line))
 
     return element
   }

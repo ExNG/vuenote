@@ -62,42 +62,7 @@ export default {
 
     update (event) {
       // Send the content of the contenteditable div as plain text without div elements
-
-      let textCollection = []
-      // Go through all "Lines"
-      for (let el of event.target.childNodes) {
-        let text = ''
-
-        // Its a element with children or pure text
-        if (el.innerText) {
-          // Check if its a gadget to not copy the gadgets text
-          //    and only the line containing the information
-          if (el.children[0] && el.children[0].id && el.children[0].id === 'gadget') {
-            // Clone it
-            el = el.cloneNode(true)
-
-            // Remove the gadget so only text remains
-            el.removeChild(el.children[0])
-
-            // Get the text
-            text = String(el.textContent)
-          } else {
-            // Its a normal line so just text
-            text = String(el.innerText)
-          }
-        } else if (el.textContent) { // Its just pure text
-          text = String(el.textContent)
-        }
-
-        // Adde the text to the list of text
-        textCollection.push(text)
-      }
-
-      // Set the line together to pure text
-      textCollection = textCollection.join('\n') + '\n'
-
-      // this.$emit('update', event.target.innerText + '\n')
-      this.$emit('update', textCollection)
+      this.$emit('update', event.target.innerText + '\n')
     },
 
     keydownRegistration (event) {
