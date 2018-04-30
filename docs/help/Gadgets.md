@@ -2,6 +2,8 @@
 
 > [Back to Help](../help)
 
+<!-- TODO: Think about implementing this feature usefull so exports and markdown preview wont look as weird as of now -->
+
 ## What are Gadgets
 
 A Gadget is a markdown addon only available in Vuenote. With them you can easily visualize data or set marker in your tab.
