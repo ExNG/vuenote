@@ -12,7 +12,9 @@
     <br>
 
     <table>
-      <tbody id="search-tabs-container">
+      <tbody id="search-tabs-container"
+             v-if="settings.tabs"
+      >
         <!-- TABS -->
         <tr>
           <td class="border-below">
@@ -35,7 +37,9 @@
         </tr>
       </tbody>
 
-      <tbody id="search-tabs-container">
+      <tbody id="search-tabs-container"
+             v-if="settings.archived"
+      >
         <!-- ARCHIVED TABS -->
         <tr>
           <td class="border-below">
@@ -58,16 +62,91 @@
         </tr>
       </tbody>
     </table>
+
+    <small>
+      <span class="icon icon-help"></span>
+      <b>Pro tip</b>: <code>Ctrl + Shift + Space</code> toggles the search settings
+    </small>
+
+    <q-fab v-model="fab"
+           color="white"
+           text-color="grey-7"
+           class="fixed animated fadeInUp"
+           style="left: 10px; bottom: 10px;"
+           icon="keyboard_arrow_up"
+           direction="up"
+    >
+      <!-- TOOLTIP FOR TOGGLE -->
+      <q-tooltip slot="tooltip"
+                 anchor="center left"
+                 self="center right"
+                 :offset="[10, 0]"
+      >
+        Search Settings
+      </q-tooltip>
+
+      <!-- TABS TOGGLE -->
+      <q-fab-action :color="tabsSettingsColor[0]"
+                    :text-color="tabsSettingsColor[1]"
+                    icon="tab"
+                    @click="settings.tabs = !settings.tabs"
+      >
+        <q-tooltip anchor="center left"
+                   self="center right"
+                   :offset="[20, 0]"
+        >
+          Toggle Tabs
+        </q-tooltip>
+      </q-fab-action>
+
+      <q-fab-action :color="archivedSettingsColor[0]"
+                    :text-color="archivedSettingsColor[1]"
+                    icon="archive"
+                    @click="settings.archived = !settings.archived"
+      >
+        <q-tooltip anchor="center left"
+                   self="center right"
+                   :offset="[20, 0]"
+        >
+          Toggle Archived
+        </q-tooltip>
+      </q-fab-action>
+    </q-fab>
   </div>
 </template>
 
 <script>
+import Mousetrap from 'mousetrap'
+
 export default {
   props: ['tabs', 'archive'],
 
   data () {
     return {
-      search: ''
+      search: '',
+      fab: false,
+      settings: {
+        tabs: true,
+        archived: true
+      }
+    }
+  },
+
+  computed: {
+    tabsSettingsColor () {
+      if (this.settings.tabs) {
+        return ['primary', 'white']
+      } else {
+        return ['white', 'grey-7']
+      }
+    },
+
+    archivedSettingsColor () {
+      if (this.settings.archived) {
+        return ['primary', 'white']
+      } else {
+        return ['white', 'grey-7']
+      }
     }
   },
 
@@ -95,6 +174,8 @@ export default {
     setTimeout(() => {
       document.querySelector('#searchbox').focus()
     }, 0)
+
+    Mousetrap.bind('ctrl+shift+space', (e) => { this.fab = !this.fab })
   }
 }
 </script>
