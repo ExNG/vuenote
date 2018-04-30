@@ -46,6 +46,8 @@ module.exports = function (ctx) {
     framework: {
       components: [
         'QContextMenu',
+        'QFab',
+        'QFabAction',
         'QModal',
         'QPopover',
         'QBtn',
