@@ -23,6 +23,10 @@ export default {
         left: true,
         right: false
       },
+      search: {
+        tabs: true,
+        archived: true
+      },
       darkmode: false
     },
     cloud: {

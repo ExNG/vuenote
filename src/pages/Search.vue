@@ -89,7 +89,7 @@
       <q-fab-action :color="tabsSettingsColor[0]"
                     :text-color="tabsSettingsColor[1]"
                     icon="tab"
-                    @click="settings.tabs = !settings.tabs"
+                    @click="toggleSetting('tabs')"
       >
         <q-tooltip anchor="center left"
                    self="center right"
@@ -102,7 +102,7 @@
       <q-fab-action :color="archivedSettingsColor[0]"
                     :text-color="archivedSettingsColor[1]"
                     icon="archive"
-                    @click="settings.archived = !settings.archived"
+                    @click="toggleSetting('archived')"
       >
         <q-tooltip anchor="center left"
                    self="center right"
@@ -117,6 +117,7 @@
 
 <script>
 import Mousetrap from 'mousetrap'
+import Storage from '../services/Storage'
 
 export default {
   props: ['tabs', 'archive'],
@@ -167,10 +168,26 @@ export default {
     restoreArchivedTab (index) {
       this.$emit('restorearchivedtab', index)
       this.$emit('togglemodal')
+    },
+
+    getSearchSettings () {
+      let settings = Storage.load('settings').search
+      if (settings) {
+        this.settings = settings
+      }
+    },
+
+    toggleSetting (name) {
+      this.settings[name] = !this.settings[name]
+
+      let settings = Storage.load('settings')
+      settings.search = this.settings
     }
   },
 
   created () {
+    this.getSearchSettings()
+
     setTimeout(() => {
       document.querySelector('#searchbox').focus()
     }, 0)
