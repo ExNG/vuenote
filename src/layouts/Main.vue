@@ -252,14 +252,19 @@
 
     <q-modal v-model="searchModal">
       <div class="padded-more">
-        <search v-if="searchModal"
-                :tabs="tabs"
-                :archive="archived"
-                :activetab="activeTab"
-                v-on:activetab="setActiveTab($event)"
-                v-on:restorearchivedtab="restoreArchivedTab($event)"
-                v-on:togglemodal="searchModal = !searchModal"
-        ></search>
+        <transition appear
+                    leave-active-class="animated fadeOut"
+                    enter-active-class="animated fadeIn"
+        >
+          <search v-if="searchModal"
+                  :tabs="tabs"
+                  :archive="archived"
+                  :activetab="activeTab"
+                  v-on:activetab="setActiveTab($event)"
+                  v-on:restorearchivedtab="restoreArchivedTab($event)"
+                  v-on:togglemodal="searchModal = !searchModal"
+          ></search>
+        </transition>
       </div>
     </q-modal>
   </div>
