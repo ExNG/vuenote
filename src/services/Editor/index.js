@@ -118,6 +118,7 @@ export default {
 
     // Append img to base div
     element.appendChild(hr)
+    element.style.cssText += this._elementBackgroundStyle
 
     // Append text to base div
     element.appendChild(document.createTextNode(line))
