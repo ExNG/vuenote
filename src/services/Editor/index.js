@@ -42,7 +42,7 @@ export default {
       } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
         divs.push(this.img(line))
         continue
-      } else if (/^[*\- ]{5,}/.test(line)) { // hr
+      } else if (/^\* \* \*/.test(line)) { // hr
         divs.push(this.hr(line))
         continue
       }
