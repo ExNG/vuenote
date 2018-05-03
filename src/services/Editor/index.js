@@ -45,6 +45,9 @@ export default {
       } else if (/^\* \* \*/.test(line)) { // hr
         divs.push(this.hr(line))
         continue
+      } else if (/^[- ]{2,}/.test(line)) { // list
+        divs.push(this.list(line))
+        continue
       }
 
       // Nothing before matched sp just display the line as text
@@ -116,12 +119,33 @@ export default {
     hr.setAttribute('contenteditable', false)
     hr.style.cssText = 'min-height: 1px;'
 
-    // Append img to base div
+    // Append hr to base div
     element.appendChild(hr)
     element.style.cssText += this._elementBackgroundStyle
 
     // Append text to base div
     element.appendChild(document.createTextNode(line))
+
+    return element
+  },
+
+  /**
+   * Create line with list.
+   *
+   * @param {String} line
+   * @return {Element}
+   */
+  list (line) {
+    // Base div
+    let element = document.createElement('div')
+
+    // create li element without ul
+    // TODO: implement ul with nested ul elements
+    let li = document.createElement('li')
+    li.innerText = line
+
+    // Append li to base div
+    element.appendChild(li)
 
     return element
   }
