@@ -75,6 +75,7 @@ export default {
     let image = document.createElement('img')
     image.style.cssText = 'display: block;'
     image.src = line.match(/http[^)]+/)[0]
+    image.contenteditable = 'false'
 
     // Append img to base div
     element.appendChild(image)
