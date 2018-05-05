@@ -15,7 +15,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
-    "buildDeb": "node scripts/build-debian.js"
+    "buildDeb": "node scripts/build-debian.js",
+    "testBuild": "sh scripts/test-build.sh",
+    "build": "sh scripts/build.sh"
   },
   "dependencies": {
     "animate.css": "^3.6.1",

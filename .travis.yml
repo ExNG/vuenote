@@ -3,28 +3,17 @@ node_js:
   - "lts/*"
 before_script:
   - sudo apt-get update -qq
-install:
-  - npm install
 script:
-  - node_modules/quasar-cli/bin/quasar build -c -m electron -t ios
+  - npm run testBuild
   - ls -lsah dist/
 before_deploy:
-  - sudo apt-get install wine zip -y
-  - node_modules/quasar-cli/bin/quasar build -c -m electron -t ios --target all
-  - cp src/statics/icon.png dist/electron-ios/Vuenote-darwin-x64/icon.png
-  - cp src/statics/icon.png dist/electron-ios/Vuenote-linux-x64/icon.png
-  - cp src/statics/icon.png dist/electron-ios/Vuenote-win32-x64/icon.png
-  - npm run buildDeb
-  - cd dist
-  - cd electron-ios/Vuenote-darwin-x64/ && zip -r ../../vuenote-darwin-x64.zip ./* -9 && cd ../../
-  - cd electron-ios/Vuenote-linux-x64/ && zip -r ../../vuenote-linux-x64.zip ./* -9 && cd ../../
-  - cd electron-ios/Vuenote-win32-x64/ && zip -r ../../vuenote-win32-x64.zip ./* -9 && cd ../../
+  - npm run build
   - ls -lsah
 deploy:
   provider: releases
   api_key: $gh_token
   file:
-    - vuenote-darwin-x64.zip
+    # - vuenote-darwin-x64.zip
     - vuenote-linux-x64.zip
     - vuenote-win32-x64.zip
     - vuenote_amd64.deb
