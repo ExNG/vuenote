@@ -17,7 +17,7 @@ var packageInfo = require('../../../package.json')
 var dir = path.join(os.homedir(), '.' + packageInfo.name)
 
 // Deciding if dev enviroment
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.PROD) {
   dir = path.join(os.homedir(), '.' + packageInfo.name + '_dev')
 }
 createDir(dir)
