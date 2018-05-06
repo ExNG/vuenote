@@ -49,7 +49,9 @@
     "eslint-plugin-vue": "4.0.0",
     "ncp": "^2.0.0",
     "node-run-cmd": "^1.0.1",
-    "quasar-cli": "^0.15.14"
+    "node-sass": "^4.9.0",
+    "quasar-cli": "^0.15.14",
+    "sass-loader": "^7.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",
