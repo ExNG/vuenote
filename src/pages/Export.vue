@@ -2,17 +2,17 @@
   <q-popover>
     <q-list separator link>
       <q-item v-close-overlay
-              @click="exportToTxt()"
+              @click.native="exportToTxt()"
       >
         Text
       </q-item>
       <q-item v-close-overlay
-              @click="exportToHtml()"
+              @click.native="exportToHtml()"
       >
         Html
       </q-item>
       <q-item v-close-overlay
-              @click="exportToPicture()"
+              @click.native="exportToPicture()"
               :disabled="!previewVisible"
       >
         Picture
