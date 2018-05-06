@@ -67,6 +67,7 @@ export default {
    */
   applyStyle (data) {
     remark()
+      .data('settings', {commonmark: true, emphasis: '*', strong: '*'})
       .process(data, function (err, file) {
         if (err) throw err
         data = file.contents
