@@ -232,7 +232,7 @@
           <div class="pull-right">
             <button class="btn btn-default"
                     v-if="tabs[activeTab] && Object.keys(tabs[activeTab]).includes('slide')"
-                    @click="tabs[activeTab].slide = !tabs[activeTab].slide"
+                    @click="toggleSlides()"
                     :class="{ 'btn-primary': tabs[activeTab].slide }"
             >
               <span class="icon icon-doc-landscape"
@@ -443,6 +443,21 @@ export default {
       this.tabs[this.activeTab].content = String(content)
 
       this.$emit('content-updated')
+    },
+
+    toggleSlides () {
+      let activeTab = this.tabs[this.activeTab]
+      activeTab.slide = !activeTab.slide
+
+      // Toggle Preview if not already active
+      if (!this.panes.right) {
+        this.togglePane('right')
+
+        // If editor is open, close it
+        if (this.panes.left) {
+          this.togglePane('left')
+        }
+      }
     }
   },
 
