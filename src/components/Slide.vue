@@ -24,9 +24,8 @@
          :key="index"
          v-html="slide"
          v-show="parsedSlides[activeSlide] && activeSlide === index"
-         class="animated fadeInUp slide-content"
-    >
-    </div>
+         class="animated flipInX slide-content"
+    ></div>
   </div>
 </template>
 
