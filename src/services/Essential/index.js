@@ -21,11 +21,11 @@ export default {
    * @param {Object} tab
    * @return {Bool}
    */
-  add ({name = '', content = '', slide = false}) {
+  add ({name = '', content = ''}) {
     let newTab = {
-      name: name,
-      content: content,
-      slide: slide
+      name,
+      content,
+      slide: false
     }
 
     return Object.assign(this.clone(this.tab), newTab)

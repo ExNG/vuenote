@@ -449,13 +449,26 @@ export default {
       let activeTab = this.tabs[this.activeTab]
       activeTab.slide = !activeTab.slide
 
-      // Toggle Preview if not already active
-      if (!this.panes.right) {
-        this.togglePane('right')
-
-        // If editor is open, close it
+      // Slide is active
+      if (activeTab.slide) {
+        // Disable editor
         if (this.panes.left) {
           this.togglePane('left')
+        }
+
+        // Enable Preview
+        if (!this.panes.right) {
+          this.togglePane('right')
+        }
+      } else {
+        // Enable Editor
+        if (!this.panes.left) {
+          this.togglePane('left')
+        }
+
+        // Disable Preview
+        if (this.panes.right) {
+          this.togglePane('right')
         }
       }
     }
