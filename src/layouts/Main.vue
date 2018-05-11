@@ -274,9 +274,10 @@
 import { remote } from 'electron'
 
 import About from '../pages/About'
-import Debug from '../pages/Debug'
 import CloudList from '../pages/CloudList'
+import Debug from '../pages/Debug'
 import EditInput from '../pages/EditInput'
+import Essential from '../services/Essential'
 import Export from '../pages/Export'
 import ExportDialog from '../services/Export'
 import Markdown from '../services/Markdown'
@@ -288,7 +289,6 @@ import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
 import TabContext from '../components/TabContext'
-import Essential from '../services/Essential'
 
 export default {
   components: {
