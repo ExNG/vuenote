@@ -8,30 +8,6 @@
               v-if="showOverlay"
       >
         <div class="toolbar-actions">
-          <div class="btn-group">
-            <button class="btn btn-default"
-                    v-for="(tab, index) in tabs"
-                    :key="index"
-                    @click="setActiveTab(Number(index))"
-                    :class="{ 'active': activeTab === index }"
-            >
-              <span class="icon icon-doc-text-inv"></span>
-              <small class="pull-left"
-                     style="width: 10px; margin-right: 2.5px;"
-              >
-                <span v-if="showTooltip && (Number(index) + 1 <= 10)">
-                  {{ index + 1 }}
-                </span>
-              </small>
-              {{ tab.name }}
-
-              <tab-context @rename="renameTab(Number(index))"
-                           @archive="archiveTab(Number(index))"
-                           @close="removeTab(Number(index))"
-              ></tab-context>
-            </button>
-          </div>
-
           <button class="btn btn-primary"
                   v-show="tabs.length === 0"
                   @click="addTab({})"
@@ -144,13 +120,41 @@
           >
             <nav class="nav-group">
               <h5 class="nav-group-title">
+                <span class="icon icon-doc-text-inv"></span>
+                Tabs
+              </h5>
+              <span class="nav-group-item cursor-pointer"
+                    :class="{ 'active': activeTab === Number(index) }"
+                    v-for="(tab, index) in tabs"
+                    :key="`tab-${index}`"
+                    @click="setActiveTab(Number(index))"
+              >
+                <span class="icon icon-doc-text"></span>
+
+                <small class="pull-left"
+                       style="width: 10px; margin-right: 2.5px;"
+                >
+                  <span v-if="showTooltip && (Number(index) + 1 <= 10)">
+                    {{ index + 1 }}
+                  </span>
+                </small>
+
+                {{ tab.name }}
+
+                <tab-context @rename="renameTab(Number(index))"
+                             @archive="archiveTab(Number(index))"
+                             @close="removeTab(Number(index))"
+                ></tab-context>
+              </span>
+
+              <h5 class="nav-group-title">
                 <span class="icon icon-archive"></span>
                 Archive
               </h5>
               <span class="nav-group-item cursor-pointer"
                     v-for="(note, index) in archived"
-                    :key="index"
-                    @click="restoreArchivedTab(index)"
+                    :key="`archive-${index}`"
+                    @click="restoreArchivedTab(Number(index))"
               >
                 <span class="icon icon-doc-text"></span>
                 {{ note.name }}
