@@ -32,12 +32,6 @@
 
           <div class="btn-group">
             <button class="btn btn-default"
-                    @click="togglePane('sm')"
-                    :class="{ 'active': panes.sm }"
-            >
-              <span class="icon icon-bookmark"></span>
-            </button>
-            <button class="btn btn-default"
                     @click="togglePane('left')"
                     :class="{ 'active': panes.left }"
             >
@@ -112,84 +106,79 @@
 
     <div class="window-content">
       <div class="pane-group" style="overflow: hidden;">
-        <transition appear
-                    enter-active-class="animated fadeInLeft"
-        >
-          <div class="pane-sm sidebar"
-               v-if="panes.sm"
-          >
-            <nav class="nav-group">
-              <h5 class="nav-group-title">
-                <span class="icon icon-doc-text-inv"></span>
-                Tabs
-              </h5>
-              <transition-group appear
-                                enter-active-class="animated fadeInLeft"
-                                leave-active-class="animated fadeOutLeft"
+
+        <div class="pane-sm sidebar animated fadeInLeft">
+          <nav class="nav-group">
+            <h5 class="nav-group-title">
+              <span class="icon icon-doc-text-inv"></span>
+              Tabs
+            </h5>
+            <transition-group appear
+                              enter-active-class="animated fadeInLeft"
+                              leave-active-class="animated fadeOutLeft"
+            >
+              <span class="nav-group-item cursor-pointer"
+                    :class="{ 'active': activeTab === Number(index) }"
+                    v-for="(tab, index) in tabs"
+                    :key="`tab-${index}`"
+                    @click="setActiveTab(Number(index))"
               >
-                <span class="nav-group-item cursor-pointer"
-                      :class="{ 'active': activeTab === Number(index) }"
-                      v-for="(tab, index) in tabs"
-                      :key="`tab-${index}`"
-                      @click="setActiveTab(Number(index))"
+                <span class="icon icon-doc-text"></span>
+
+                <small class="pull-left"
+                       style="width: 10px; margin-right: 2.5px;"
                 >
-                  <span class="icon icon-doc-text"></span>
+                  <span v-if="showTooltip && (Number(index) + 1 <= 10)">
+                    {{ index + 1 }}
+                  </span>
+                </small>
 
-                  <small class="pull-left"
-                         style="width: 10px; margin-right: 2.5px;"
-                  >
-                    <span v-if="showTooltip && (Number(index) + 1 <= 10)">
-                      {{ index + 1 }}
-                    </span>
-                  </small>
+                {{ tab.name }}
 
-                  {{ tab.name }}
+                <tab-context @rename="renameTab(Number(index))"
+                             @archive="archiveTab(Number(index))"
+                             @close="removeTab(Number(index))"
+                ></tab-context>
+              </span>
+            </transition-group>
 
-                  <tab-context @rename="renameTab(Number(index))"
-                               @archive="archiveTab(Number(index))"
-                               @close="removeTab(Number(index))"
-                  ></tab-context>
-                </span>
-              </transition-group>
-
-              <h5 class="nav-group-title">
-                <span class="icon icon-archive"></span>
-                Archive
-              </h5>
-              <transition-group appear
-                                enter-active-class="animated fadeInLeft"
-                                leave-active-class="animated fadeOutLeft"
+            <h5 class="nav-group-title">
+              <span class="icon icon-archive"></span>
+              Archive
+            </h5>
+            <transition-group appear
+                              enter-active-class="animated fadeInLeft"
+                              leave-active-class="animated fadeOutLeft"
+            >
+              <span class="nav-group-item cursor-pointer"
+                    v-for="(note, index) in archived"
+                    :key="`archive-${index}`"
+                    @click="restoreArchivedTab(Number(index))"
               >
-                <span class="nav-group-item cursor-pointer"
-                      v-for="(note, index) in archived"
-                      :key="`archive-${index}`"
-                      @click="restoreArchivedTab(Number(index))"
-                >
-                  <span class="icon icon-doc-text"></span>
-                  {{ note.name }}
-                </span>
-              </transition-group>
-              <transition appear
-                          enter-active-class="animated fadeInLeft"
-                          leave-active-class="animated fadeOutLeft"
-              >
-                <span class="nav-group-item" v-show="archived.length === 0">
-                  <span class="icon icon-info-circled"></span>
-                  No archived notes
-                </span>
-              </transition>
+                <span class="icon icon-doc-text"></span>
+                {{ note.name }}
+              </span>
+            </transition-group>
+            <transition appear
+                        enter-active-class="animated fadeInLeft"
+                        leave-active-class="animated fadeOutLeft"
+            >
+              <span class="nav-group-item" v-show="archived.length === 0">
+                <span class="icon icon-info-circled"></span>
+                No archived notes
+              </span>
+            </transition>
 
-              <h5 class="nav-group-title">
-                <span class="icon icon-cloud"></span>
-                Cloud
-              </h5>
-              <cloud-list @addTab="addTab($event); save()"
-                          :cloud="cloud"
-                          :packageInfo="packageInfo"
-              ></cloud-list>
-            </nav>
-          </div>
-        </transition>
+            <h5 class="nav-group-title">
+              <span class="icon icon-cloud"></span>
+              Cloud
+            </h5>
+            <cloud-list @addTab="addTab($event); save()"
+                        :cloud="cloud"
+                        :packageInfo="packageInfo"
+            ></cloud-list>
+          </nav>
+        </div>
 
         <transition appear
                     enter-active-class="animated fadeInUp"
@@ -238,6 +227,7 @@
             </div>
           </div>
         </transition>
+
       </div>
     </div>
 
@@ -335,7 +325,6 @@ export default {
       activeTab: 0,
       showOverlay: true,
       panes: {
-        sm: false,
         left: true,
         right: true
       },
@@ -529,7 +518,6 @@ export default {
     Mousetrap.bind('ctrl+q', (e) => { require('electron').remote.app.quit() })
     Mousetrap.bind('option+down', (e) => { this.showOverlay = !this.showOverlay })
     Mousetrap.bind('option+up', (e) => { this.togglePane('left') })
-    Mousetrap.bind('option+left', (e) => { this.togglePane('sm') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })
     Mousetrap.bind('option+s', (e) => { this.$router.push('/settings') })
 

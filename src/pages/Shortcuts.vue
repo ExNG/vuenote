@@ -57,10 +57,6 @@
           <td>Toggle Overlay</td>
         </tr>
         <tr>
-          <td><code>Alt + Arrow Left</code></td>
-          <td>Toggle Sidebar</td>
-        </tr>
-        <tr>
           <td><code>Alt + Arrow Right</code></td>
           <td>Toggle Preview</td>
         </tr>
