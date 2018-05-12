@@ -46,6 +46,18 @@
           </div>
 
           <div class="pull-right">
+            <button class="btn btn-default"
+                    @click="paste('** Text **')"
+            >
+              <b>B</b>
+            </button>
+            <button class="btn btn-default"
+                    @click="paste('* Text *')"
+                    style="margin-right: 10px;"
+            >
+              <i>I</i>
+            </button>
+
             <button class="btn btn-default btn-dropdown">
               <span class="icon icon-menu icon-text"></span>
               <!-- Menu -->
@@ -190,6 +202,7 @@
                  :key="index"
             >
               <edit-input :content="tab.content"
+                          :index="Number(index)"
                           @update="setTabContent(index, $event)"
                           v-if="tabs[activeTab] && activeTab === Number(index)"
                           class="edit-input"
@@ -479,6 +492,16 @@ export default {
           this.togglePane('right')
         }
       }
+    },
+
+    paste (str) {
+      let data = {
+        index: this.activeTab,
+        data: str
+      }
+
+      // Emit datato paste
+      this.$emit('content-paste', data)
     }
   },
 

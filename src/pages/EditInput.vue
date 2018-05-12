@@ -30,7 +30,7 @@ export default {
     TableCreator
   },
 
-  props: ['content'],
+  props: ['content', 'index'],
 
   data () {
     return {
@@ -124,6 +124,15 @@ export default {
 
   created () {
     this.$parent.$on('content-updated', this.setText)
+
+    // Listen for paste events
+    this.$parent.$on('content-paste', (data) => {
+      // Check if this tab is the target
+      if (data.index === this.index) {
+        // yes, paste string
+        this.paste(String(data.data))
+      }
+    })
   }
 }
 </script>
