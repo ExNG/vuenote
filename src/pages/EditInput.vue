@@ -142,6 +142,7 @@ necessary to avoid scrollbar on the right */
   /* text-shadow: -1px 0 rgb(200, 200, 200), 0 1px rgb(200, 200, 200), 1px 0 rgb(200, 200, 200), 0 -1px rgb(200, 200, 200); */
 
   * {
+    cursor: text;
     max-width: 100%;
   }
 
