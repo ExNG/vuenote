@@ -14,9 +14,9 @@ deploy:
   api_key: $gh_token
   file:
     # - vuenote-darwin-x64.zip
-    - vuenote-linux-x64.zip
-    - vuenote-win32-x64.zip
-    - vuenote_amd64.deb
+    - dist/vuenote-linux-x64.zip
+    - dist/vuenote-win32-x64.zip
+    - dist/vuenote_amd64.deb
   skip_cleanup: true
   on:
     repo: ExNG/vuenote
