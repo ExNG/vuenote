@@ -128,7 +128,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 /* TODO: Only apply padding at bottom if text reaches point where its
 necessary to avoid scrollbar on the right */
 .editor {
@@ -140,14 +140,14 @@ necessary to avoid scrollbar on the right */
   color: black;
   padding-bottom: 60vh;
   /* text-shadow: -1px 0 rgb(200, 200, 200), 0 1px rgb(200, 200, 200), 1px 0 rgb(200, 200, 200), 0 -1px rgb(200, 200, 200); */
-}
 
-.editor div {
-  width: 100%;
-  min-height: 24px;
-}
+  * {
+    max-width: 100%;
+  }
 
-.editor * {
-  max-width: 100%;
+  div {
+    width: 100%;
+    min-height: 24px;
+  }
 }
 </style>
