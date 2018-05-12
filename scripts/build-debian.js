@@ -117,7 +117,7 @@ ncp(binDir, appDir, function () {
   ].join('\n') + '\n'
   fs.writeFileSync(path.join(debFolder, 'copyright'), copyrightContent)
   console.log('--> Created: ', path.join(debFolder, 'copyright'))
-  console.log('--> ' + path.join(debFolder, 'copyright') + ' content: ', controlContent)
+  console.log('--> ' + path.join(debFolder, 'copyright') + ' content: ', copyrightContent)
   console.log('')
 
   // Build debian package
