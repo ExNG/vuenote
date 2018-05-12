@@ -1,5 +1,7 @@
 <template>
-  <div class="window">
+  <div class="window"
+       id="window"
+  >
 
     <transition appear
                 enter-active-class="animated fadeInDown"
@@ -46,17 +48,27 @@
           </div>
 
           <div class="pull-right">
-            <button class="btn btn-default"
-                    @click="paste('** Text **')"
+            <div class="btn-group"
+                 style="margin-right: 10px;"
             >
-              <b>B</b>
-            </button>
-            <button class="btn btn-default"
-                    @click="paste('* Text *')"
-                    style="margin-right: 10px;"
-            >
-              <i>I</i>
-            </button>
+              <button class="btn btn-default text-buttons"
+                      @click="paste('** Text **')"
+              >
+                <b>B</b>
+              </button>
+              <button class="btn btn-default text-buttons"
+                      @click="paste('* Text *')"
+              >
+                <i>I</i>
+              </button>
+              <button class="btn btn-default text-buttons"
+              >
+                <span class="icon icon-down-open"></span>
+
+                <text-options :paste="paste"
+                ></text-options>
+              </button>
+            </div>
 
             <button class="btn btn-default btn-dropdown">
               <span class="icon icon-menu icon-text"></span>
@@ -311,18 +323,20 @@ import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
 import TabContext from '../components/TabContext'
+import TextOptions from '../components/TextOptions'
 
 export default {
   components: {
     About,
-    Debug,
     CloudList,
+    Debug,
     EditInput,
     Export,
+    MarkdownPreview,
     Search,
     Shortcuts,
     TabContext,
-    MarkdownPreview
+    TextOptions
   },
 
   data () {
@@ -569,5 +583,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+#window {
+  .text-buttons {
+    min-width: 40px;
+  }
+}
 </style>
