@@ -182,6 +182,7 @@ export default {
 
       let settings = Storage.load('settings')
       settings.search = this.settings
+      Storage.save('settings', settings)
     }
   },
 
