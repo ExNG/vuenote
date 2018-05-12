@@ -49,7 +49,7 @@
           <td>Toggle Search</td>
         </tr>
         <tr>
-          <td><code>Alt + Arrow Up</code></td>
+          <td><code>Alt + Arrow Left</code></td>
           <td>Toggle Editor</td>
         </tr>
         <tr>
