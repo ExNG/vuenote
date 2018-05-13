@@ -205,7 +205,7 @@
         </div>
 
         <transition appear
-                    enter-active-class="animated fadeInUp"
+                    enter-active-class="animated fadeIn"
         >
           <div class="pane padded-more"
                v-if="panes.left"

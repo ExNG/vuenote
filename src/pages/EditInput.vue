@@ -40,11 +40,11 @@ export default {
   },
 
   mounted () {
-    this.setText()
+    this.setText(true)
   },
 
   methods: {
-    setText () {
+    setText (mounted = false) {
       // NOTE: Since contenteditable isnt in its final form it might be that
       //       after an electron update the following code might break.
       this.$nextTick(() => {
@@ -54,8 +54,20 @@ export default {
         let divs = Editor.getElements(this.content)
 
         // Append the div to the contenteditable div
-        for (let div of divs) {
-          this.$el.querySelector('#editor').appendChild(div)
+        if (mounted) {
+          let i = 0.0
+          for (let div of divs) {
+            div.setAttribute('class', 'animated fadeInUp')
+            div.style.cssText += `-webkit-animation-delay: ${i}s;`
+
+            this.$el.querySelector('#editor').appendChild(div)
+
+            i += 0.05
+          }
+        } else {
+          for (let div of divs) {
+            this.$el.querySelector('#editor').appendChild(div)
+          }
         }
       })
     },
@@ -149,6 +161,8 @@ necessary to avoid scrollbar on the right */
   color: black;
   padding-bottom: 60vh;
   /* text-shadow: -1px 0 rgb(200, 200, 200), 0 1px rgb(200, 200, 200), 1px 0 rgb(200, 200, 200), 0 -1px rgb(200, 200, 200); */
+
+  overflow-x: hidden;
 
   * {
     cursor: text;
