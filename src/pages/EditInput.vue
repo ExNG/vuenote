@@ -167,10 +167,10 @@ necessary to avoid scrollbar on the right */
   * {
     cursor: text;
     max-width: 100%;
+    white-space: normal !important;
   }
 
   div {
-    white-space: normal;
     width: 100%;
     min-height: 24px;
   }
