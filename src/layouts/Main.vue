@@ -371,6 +371,10 @@ export default {
         return
       }
 
+      // Reset events to not duplicate them
+      this.$off('content-updated')
+      this.$off('content-paste')
+
       this.activeTab = tabIndex
     },
 
