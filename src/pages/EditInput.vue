@@ -170,6 +170,7 @@ necessary to avoid scrollbar on the right */
   }
 
   div {
+    white-space: normal;
     width: 100%;
     min-height: 24px;
   }
