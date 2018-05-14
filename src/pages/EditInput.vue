@@ -173,5 +173,9 @@ necessary to avoid scrollbar on the right */
     width: 100%;
     min-height: 24px;
   }
+
+  img {
+    max-height: 20vh;
+  }
 }
 </style>
