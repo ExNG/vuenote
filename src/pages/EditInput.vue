@@ -39,10 +39,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.setText(true)
-  },
-
   methods: {
     setText (mounted = false) {
       // NOTE: Since contenteditable isnt in its final form it might be that
@@ -57,12 +53,12 @@ export default {
         if (mounted) {
           let i = 0.0
           for (let div of divs) {
-            div.setAttribute('class', 'animated fadeInUp')
+            div.setAttribute('class', 'animated fadeIn')
             div.style.cssText += `-webkit-animation-delay: ${i}s;`
 
             this.$el.querySelector('#editor').appendChild(div)
 
-            i += 0.05
+            i += 0.007
           }
         } else {
           for (let div of divs) {
@@ -135,6 +131,8 @@ export default {
   },
 
   created () {
+    this.setText(true)
+
     this.$parent.$on('content-updated', this.setText)
 
     // Listen for paste events
