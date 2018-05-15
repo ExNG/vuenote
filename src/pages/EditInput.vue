@@ -165,7 +165,7 @@ necessary to avoid scrollbar on the right */
   * {
     cursor: text;
     max-width: 100%;
-    white-space: normal !important;
+    white-space: pre-wrap;
   }
 
   div {
