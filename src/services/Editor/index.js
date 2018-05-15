@@ -145,6 +145,10 @@ export default {
     let li = document.createElement('li')
     li.innerText = line
 
+    // TODO: implement this right
+    li = document.createElement('div')
+    li.innerText = line
+
     // Append li to base div
     element.appendChild(li)
 
