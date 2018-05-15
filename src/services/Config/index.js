@@ -104,8 +104,7 @@ export default {
     if (fs.existsSync(path)) {
       return true
     } else {
-      fs.writeFileSync(path, JSON.stringify({}))
-      return true
+      return false
     }
   }
 }

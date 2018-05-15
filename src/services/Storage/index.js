@@ -191,7 +191,7 @@ export default {
     try {
       // add all items to data
       for (let name in this.structure) {
-        data[name] = this.structure[name]
+        data[name] = this.load(name)
       }
 
       // turn into JSOn and return it
