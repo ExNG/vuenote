@@ -14,51 +14,53 @@ export default {
 
     let divs = []
     for (let line of content) {
-      // If the line is empty its necessary to put a line feed
-      if (line === '') {
-        line = '\n'
-      }
-
-      // TODO: Optimize regex
-
-      if (/^# /.test(line)) { // #
-        divs.push(this.heading(line, 'h1'))
-        continue
-      } else if (/^## /.test(line)) { // ##
-        divs.push(this.heading(line, 'h2'))
-        continue
-      } else if (/^### /.test(line)) { // ###
-        divs.push(this.heading(line, 'h3'))
-        continue
-      } else if (/^#### /.test(line)) { // ####
-        divs.push(this.heading(line, 'h4'))
-        continue
-      } else if (/^##### /.test(line)) { // #####
-        divs.push(this.heading(line, 'h5'))
-        continue
-      } else if (/^###### /.test(line)) { // ######
-        divs.push(this.heading(line, 'h6'))
-        continue
-      } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
-        divs.push(this.img(line))
-        continue
-      } else if (/^\* \* \*/.test(line)) { // hr
-        divs.push(this.hr(line))
-        continue
-      } else if (/^[- ]{2,}/.test(line)) { // list
-        divs.push(this.list(line))
-        continue
-      }
-
-      // Nothing before matched sp just display the line as text
-      let element = document.createElement('div')
-
-      // Append text to div
-      element.appendChild(document.createTextNode(line))
-      divs.push(element)
+      divs.push(this.getElement(line))
     }
 
     return divs
+  },
+
+  /**
+   * Convert one line of markdown into HTML.
+   * Can only be used with oneliners, like headings.
+   *
+   * @param {String} line
+   * @return {Element} = div
+   */
+  getElement (line) {
+    // If the line is empty its necessary to put a line feed
+    if (line === '') {
+      line = '\n'
+    }
+
+    // TODO: Optimize regex
+
+    if (/^# /.test(line)) { // #
+      return this.heading(line, 'h1')
+    } else if (/^## /.test(line)) { // ##
+      return this.heading(line, 'h2')
+    } else if (/^### /.test(line)) { // ###
+      return this.heading(line, 'h3')
+    } else if (/^#### /.test(line)) { // ####
+      return this.heading(line, 'h4')
+    } else if (/^##### /.test(line)) { // #####
+      return this.heading(line, 'h5')
+    } else if (/^###### /.test(line)) { // ######
+      return this.heading(line, 'h6')
+    } else if (/!\[[^\]]+\]\([^\\]+\)/.test(line)) { // image
+      return this.img(line)
+    } else if (/^\* \* \*/.test(line)) { // hr
+      return this.hr(line)
+    } else if (/^[- ]{2,}/.test(line)) { // list
+      return this.list(line)
+    }
+
+    // Nothing before matched sp just display the line as text
+    let element = document.createElement('div')
+
+    // Append text to div
+    element.appendChild(document.createTextNode(line))
+    return element
   },
 
   /**
