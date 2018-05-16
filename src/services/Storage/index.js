@@ -16,7 +16,8 @@ export default {
       replace: false,
       replaceList: {
         '(=>)': '➡',
-        '(<=)': '⬅'
+        '(<=)': '⬅',
+        '(check)': '✔'
       },
       panes: {
         left: true,
@@ -84,6 +85,10 @@ export default {
     ].join('\n')
   }),
 
+  getStructur () {
+    return Essential.clone(this.structure)
+  },
+
   /**
    * Initiate the DB
    *
@@ -92,8 +97,8 @@ export default {
   init () {
     try {
       // set all items with their default value
-      for (let name in this.structure) {
-        let value = this.structure[name]
+      for (let name in this.getStructur()) {
+        let value = this.getStructur()[name]
 
         if (name === 'tabs') {
           value.push(this._welcomeTab)
@@ -125,7 +130,7 @@ export default {
     // check if item is already set
     if (!value) {
       // no return default value if set
-      let newValue = this.structure[name]
+      let newValue = this.getStructur()[name]
 
       // save item with default value
       this.save(name, newValue)
@@ -190,7 +195,7 @@ export default {
 
     try {
       // add all items to data
-      for (let name in this.structure) {
+      for (let name in this.getStructur()) {
         data[name] = this.load(name)
       }
 

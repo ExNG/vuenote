@@ -155,7 +155,7 @@ export default {
     },
 
     resetReplace () {
-      this.settings.replaceList = Storage.structure.settings.replaceList
+      this.settings.replaceList = Storage.getStructur().settings.replaceList
 
       this.save()
     }

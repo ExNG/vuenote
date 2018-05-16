@@ -21,7 +21,7 @@ export default function () {
     Storage.save('appData', appData)
   }
 
-  let structure = Storage.structure
+  let structure = Storage.getStructur()
 
   // loop over every item
   for (let itemName in structure) {
