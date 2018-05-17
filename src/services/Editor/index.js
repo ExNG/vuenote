@@ -1,5 +1,7 @@
 export default {
   _elementBackgroundStyle: 'background-color: rgba(0, 0, 0, 0.025);',
+  _boldRegex: /[ ]?\*\*[^*]+\*\*[ ]?/g,
+  _italicRegex: /[ ]?\*[^*]+\*[ ]?/g,
 
   /**
    * Parse editor content and create
@@ -18,6 +20,45 @@ export default {
     }
 
     return divs
+  },
+
+  /**
+   * Transform whole line to new element, for styleNode()
+   *
+   * @param {String} innerText
+   * @param {String} type
+   * @return {Element}
+   */
+  _newNode (innerText, type) {
+    let container = document.createElement('div')
+    let newNode = document.createElement(String(type))
+    newNode.innerText = innerText
+
+    container.appendChild(newNode)
+
+    return container
+  },
+
+  /**
+   * Detect if a line contains bold or italic
+   * parts and proced to turn it into html.
+   *
+   * @param {Element} node
+   * @return {Element}
+   */
+  styleNode (node) {
+    // Check for bold part
+    if (this._boldRegex.test(node.innerText)) {
+      return this._newNode(node.innerText, 'b')
+
+    // Check for italic part
+    } else if (this._italicRegex.test(node.innerText)) {
+      return this._newNode(node.innerText, 'i')
+
+    // Nothing found, juts text
+    } else {
+      return node
+    }
   },
 
   /**
@@ -60,6 +101,7 @@ export default {
 
     // Append text to div
     element.appendChild(document.createTextNode(line))
+    element = this.styleNode(element)
     return element
   },
 
