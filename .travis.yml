@@ -6,9 +6,9 @@ before_script:
 script:
   - npm run testBuild
   - ls -lsah dist/
+before/_deploy:
   - npm run build
   - ls -lsah dist/
-# before_deploy:
 deploy:
   provider: releases
   api_key: $gh_token
