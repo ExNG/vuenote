@@ -174,7 +174,7 @@ necessary to avoid scrollbar on the right */
   }
 
   img {
-    max-height: 20vh;
+    max-height: 50vh;
   }
 }
 </style>
