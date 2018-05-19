@@ -53,12 +53,7 @@ export default {
   set (name, value) {
     let file = path.join(this.paths.data, name)
 
-    if (this._exist(file)) {
-      fs.writeFileSync(file, value)
-      return true
-    } else {
-      return false
-    }
+    fs.writeFileSync(file, value)
   },
 
   /**
@@ -101,10 +96,11 @@ export default {
    * @return {Bool}
    */
   _exist (path) {
-    if (fs.existsSync(path)) {
-      return true
-    } else {
+    if (!fs.existsSync(path)) {
+      fs.writeFileSync(path, '')
       return false
     }
+
+    return true
   }
 }

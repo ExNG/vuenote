@@ -2,7 +2,9 @@
 
 > Vuenote is the simplest note app.
 
-[![Travis](https://img.shields.io/travis/ExNG/vuenote.svg)](https://travis-ci.org/ExNG/vuenote) [![GitHub tag](https://img.shields.io/github/tag/ExNG/vuenote.svg)](https://github.com/ExNG/vuenote) [![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenote/total.svg)](http://github.com/ExNG/vuenote)
+[![Travis](https://img.shields.io/travis/ExNG/vuenote.svg)](https://travis-ci.org/ExNG/vuenote)
+[![GitHub tag](https://img.shields.io/github/tag/ExNG/vuenote.svg)](https://github.com/ExNG/vuenote)
+[![Github All Releases](https://img.shields.io/github/downloads/ExNG/vuenote/total.svg)](http://github.com/ExNG/vuenote)
 
 ![vuenote Screenshot](docs/vuenote.png)
 
@@ -15,21 +17,13 @@
 ## Build
 
 ```bash
-# install dependies
-$ npm install
-
-# run quasar
-$ quasar build -t ios -m electron -T all
+npm run build
 ```
 
 ## Dev
 
 ```bash
-# install dependies
-$ npm install
-
-# run dev script
-$ ./dev.sh
+npm run dev
 ```
 
 ## License

@@ -13,11 +13,12 @@
     "url": "https://github.com/ExNG/vuenote.git"
   },
   "scripts": {
+    "build": "sh scripts/build.sh",
+    "buildDeb": "node scripts/build-debian.js",
+    "dev": "sh scripts/dev.sh",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
-    "buildDeb": "node scripts/build-debian.js",
-    "testBuild": "sh scripts/test-build.sh",
-    "build": "sh scripts/build.sh"
+    "testBuild": "sh scripts/test-build.sh"
   },
   "dependencies": {
     "animate.css": "^3.6.1",
@@ -47,10 +48,10 @@
     "eslint-plugin-promise": "3.4.0",
     "eslint-plugin-standard": "3.0.1",
     "eslint-plugin-vue": "4.0.0",
-    "ncp": "^2.0.0",
     "node-run-cmd": "^1.0.1",
     "node-sass": "^4.9.0",
     "quasar-cli": "^0.15.14",
+    "quasar-pak": "0.0.1",
     "sass-loader": "^7.0.1"
   },
   "engines": {
