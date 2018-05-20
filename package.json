@@ -17,7 +17,7 @@
     "buildDeb": "node scripts/build-debian.js",
     "dev": "sh scripts/dev.sh",
     "lint": "eslint --ext .js,.vue src",
-    "test": "echo \"No test specified\" && exit 0",
+    "test": "node scripts/test.js",
     "testBuild": "sh scripts/test-build.sh"
   },
   "dependencies": {
