@@ -4,6 +4,7 @@ node_js:
 before_script:
   - sudo apt-get update -qq
 script:
+  - npm run test
   - npm run testBuild
   - ls -lsah dist/
 before/_deploy:

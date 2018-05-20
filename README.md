@@ -17,13 +17,31 @@
 ## Build
 
 ```bash
-npm run build
+$ npm run build
 ```
 
 ## Dev
 
 ```bash
-npm run dev
+$ npm run dev
+```
+
+## Test
+
+Run tests by:
+
+```bash
+$ npm run test
+```
+
+Tests a written as AMD modules, they should return tests as an array
+
+```javascript
+module.exports = [
+  () => {
+    // ... test code here
+  }
+]
 ```
 
 ## License
