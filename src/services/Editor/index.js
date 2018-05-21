@@ -69,10 +69,8 @@ export default {
    * @return {Element} = div
    */
   getElement (line) {
-    // If the line is empty its necessary to put a line feed
-    if (line === '') {
-      line = '\n'
-    }
+    // Append newLine, removed from line split in EditInput
+    line += '\n'
 
     // TODO: Optimize regex
 
