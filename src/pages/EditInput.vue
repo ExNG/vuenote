@@ -40,9 +40,12 @@ export default {
   },
 
   methods: {
+    /**
+     * Set text in editor.
+     *
+     * @param {Bool} mounted = false
+     */
     setText (mounted = false) {
-      // NOTE: Since contenteditable isnt in its final form it might be that
-      //       after an electron update the following code might break.
       this.$nextTick(() => {
         // Reset content of the editor
         this.$el.querySelector('#editor').innerHTML = null
@@ -68,11 +71,21 @@ export default {
       })
     },
 
+    /**
+     * Inform parent about change.
+     *
+     * @param {Object} event
+     */
     update (event) {
       // Send the content of the contenteditable div as plain text without div elements
       this.$emit('update', event.target.innerText + '\n')
     },
 
+    /**
+     * Register keydown event and fire action if a match appears.
+     *
+     * @param {Object} event
+     */
     keydownRegistration (event) {
       let code = event.keyCode
 
@@ -80,7 +93,7 @@ export default {
 
       setTimeout(() => {
         this.activeKeys[String(code)] = false
-      }, 1000)
+      }, 10000)
 
       if (this.activeKeys['9']) { // Tab
         this.paste('    ')
@@ -89,12 +102,22 @@ export default {
       }
     },
 
+    /**
+     * Register a keyup event.
+     *
+     * @param {Object} event
+     */
     keyupRegistration (event) {
       let code = event.keyCode
 
       this.activeKeys[String(code)] = false
     },
 
+    /**
+     * Paste a string like its from clipboard.
+     *
+     * @param {String} html
+     */
     paste (html) {
       // console.log('window.getSelection', window.getSelection)
 
@@ -157,7 +180,7 @@ necessary to avoid scrollbar on the right */
   outline: none;
   font-size: 15px;
   color: black;
-  padding-bottom: 60vh;
+  padding-bottom: 45vh;
   /* text-shadow: -1px 0 rgb(200, 200, 200), 0 1px rgb(200, 200, 200), 1px 0 rgb(200, 200, 200), 0 -1px rgb(200, 200, 200); */
 
   overflow-x: hidden;
