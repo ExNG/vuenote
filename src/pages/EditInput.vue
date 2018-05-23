@@ -41,6 +41,15 @@ export default {
 
   methods: {
     /**
+     * Return editor div of this component.
+     *
+     * @return {Element}
+     */
+    getInput () {
+      return this.$el.querySelector('#editor')
+    },
+
+    /**
      * Set text in editor.
      *
      * @param {Bool} mounted = false
@@ -48,7 +57,7 @@ export default {
     setText (mounted = false) {
       this.$nextTick(() => {
         // Reset content of the editor
-        this.$el.querySelector('#editor').innerHTML = null
+        this.getInput().innerHTML = null
 
         let divs = Editor.getElements(this.content)
 
@@ -59,13 +68,13 @@ export default {
             div.setAttribute('class', 'animated fadeIn')
             div.style.cssText += `-webkit-animation-delay: ${i}s;`
 
-            this.$el.querySelector('#editor').appendChild(div)
+            this.getInput().appendChild(div)
 
             i += 0.007
           }
         } else {
           for (let div of divs) {
-            this.$el.querySelector('#editor').appendChild(div)
+            this.getInput().appendChild(div)
           }
         }
       })
@@ -149,7 +158,7 @@ export default {
         document.selection.createRange().pasteHTML(html)
       }
 
-      this.$emit('update', this.$el.querySelector('#editor').innerText + '\n')
+      this.$emit('update', this.getInput().innerText + '\n')
     }
   },
 
