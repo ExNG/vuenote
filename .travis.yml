@@ -7,7 +7,7 @@ script:
   - npm run test
   - npm run testBuild
   - ls -lsah dist/
-before/_deploy:
+# before/_deploy:
   - npm run build
   - ls -lsah dist/
 deploy:
