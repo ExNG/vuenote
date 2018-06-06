@@ -1,7 +1,7 @@
 {
   "name": "vuenote",
   "productName": "Vuenote",
-  "version": "0.0.27",
+  "version": "0.0.27.1",
   "private": true,
   "license": "MIT",
   "description": "Vuenote is the simplest note app.",
