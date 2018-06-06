@@ -51,7 +51,7 @@
     "node-run-cmd": "^1.0.1",
     "node-sass": "^4.9.0",
     "quasar-cli": "^0.15.14",
-    "quasar-pak": "0.0.1",
+    "quasar-pak": "0.0.2",
     "sass-loader": "^7.0.1"
   },
   "engines": {
