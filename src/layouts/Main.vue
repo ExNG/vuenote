@@ -52,12 +52,12 @@
                  style="margin-right: 10px;"
             >
               <button class="btn btn-default text-buttons"
-                      @click="paste('** Text **')"
+                      @click="paste('**Text**')"
               >
                 <b>B</b>
               </button>
               <button class="btn btn-default text-buttons"
-                      @click="paste('* Text *')"
+                      @click="paste('*Text*')"
               >
                 <i>I</i>
               </button>
