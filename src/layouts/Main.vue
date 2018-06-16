@@ -1,6 +1,7 @@
 <template>
   <div class="window"
        id="window"
+       :class="{ 'dark': settings.darkmode }"
   >
 
     <transition appear
@@ -591,6 +592,16 @@ export default {
 #window {
   .text-buttons {
     min-width: 40px;
+  }
+}
+
+#window.dark {
+  * {
+    filter: invert(100%) !important;
+  }
+
+  img {
+    filter: inherit !important;
   }
 }
 </style>
