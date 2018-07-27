@@ -2,4 +2,4 @@
 
 npm install
 npm run lint
-node_modules/quasar-cli/bin/quasar build --clean --mode electron --theme ios
+node_modules/quasar-cli/bin/quasar build --mode electron --theme ios --target linux
