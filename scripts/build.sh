@@ -4,7 +4,18 @@ sudo apt-get install wine zip fuse -y
 
 # node_modules/quasar-cli/bin/quasar build --mode electron --theme ios --target darwin
 node_modules/quasar-cli/bin/quasar build --mode electron --theme ios --target linux
+
+# NOTE: Saving build files from clean of quasar
+rm -rf /tmp/Vuenote-linux-x64
+mkdir /tmp/Vuenote-linux-x64
+cp -r dist/electron-ios/Vuenote-linux-x64/* /tmp/Vuenote-linux-x64
+
 node_modules/quasar-cli/bin/quasar build --mode electron --theme ios --target win32
+
+# NOTE: Copy files back
+mkdir dist/electron-ios/Vuenote-linux-x64
+cp -r /tmp/Vuenote-linux-x64/* dist/electron-ios/Vuenote-linux-x64
+rm -rf /tmp/Vuenote-linux-x64
 
 # cp src/statics/icon.png dist/electron-ios/Vuenote-darwin-x64/icon.png
 cp src/statics/icon.png dist/electron-ios/Vuenote-linux-x64/icon.png
