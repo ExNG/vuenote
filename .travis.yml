@@ -7,18 +7,15 @@ script:
   - npm run test
   - npm run testBuild
   - ls -lsah dist/
-before_deploy:
   - npm run build
   - ls -lsah dist/
+# before_deploy:
 deploy:
   provider: releases
   api_key: $gh_token
   file:
-    # - vuenote-darwin-x64.zip
     - dist/vuenote-linux-x64.zip
     - dist/vuenote-win32-x64.zip
-    - dist/vuenote_amd64.deb
-    - dist/Vuenote.AppImage
   skip_cleanup: true
   on:
     repo: ExNG/vuenote
