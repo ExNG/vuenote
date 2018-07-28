@@ -17,7 +17,6 @@
     "dev": "sh scripts/dev.sh",
     "i": "npm install && yarn",
     "lint": "eslint --ext .js,.vue src",
-    "test": "node scripts/test.js",
     "testBuild": "sh scripts/test-build.sh"
   },
   "dependencies": {

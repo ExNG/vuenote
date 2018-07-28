@@ -6,7 +6,6 @@ node_js:
 before_script:
   - sudo apt-get update -qq
 script:
-  - npm run test
   - npm run testBuild
   - ls -lsah dist/
 before_deploy:
@@ -17,7 +16,7 @@ deploy:
   api_key: $gh_token
   file:
     - dist/vuenote-linux-x64.zip
-    - dist/vuenote-win32-x64.zip
+    # - dist/vuenote-win32-x64.zip
   skip_cleanup: true
   on:
     repo: ExNG/vuenote
