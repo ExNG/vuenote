@@ -57,11 +57,13 @@
 
         <div style="max-height: 50vh; overflow-y: scroll">
           <table>
-            <tr v-for="(version, packageName) in dependencieList"
+              <tr
+                v-for="(version, packageName) in dependencieList"
                 :key="packageName"
-                @click="openURL('https://npmjs.com/package/' + packageName)"
-            >
-              <td class="cursor-pointer">{{ packageName }}</td>
+              >
+              <a :href="'https://npmjs.com/package/' + packageName">
+                <td class="cursor-pointer">{{ packageName }}</td>
+              </a>
             </tr>
           </table>
         </div>
@@ -73,8 +75,6 @@
 </template>
 
 <script>
-import { shell } from 'electron'
-
 export default {
   props: ['packageInfo'],
 
@@ -82,12 +82,6 @@ export default {
     return {
       activeTab: 'about',
       dependencieList: Object.assign(this.packageInfo.dependencies, this.packageInfo.devDependencies)
-    }
-  },
-
-  methods: {
-    openURL (url) {
-      shell.openExternal(url)
     }
   }
 }

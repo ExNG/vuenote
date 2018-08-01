@@ -1,4 +1,4 @@
-import Backup from '../Backup'
+// import Backup from '../Backup'
 import Storage from '../Storage'
 import Essential from '../Essential'
 
@@ -9,7 +9,7 @@ import Essential from '../Essential'
  */
 export default function () {
   // Backup before structure merge
-  Backup.create('')
+  // Backup.create('')
 
   let appData = Storage.load('appData')
 

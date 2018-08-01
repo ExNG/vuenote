@@ -1,4 +1,4 @@
-import { remote } from 'electron'
+// import { remote } from 'electron'
 
 import Config from '../Config'
 import Notification from '../Notification'
@@ -226,7 +226,8 @@ export default {
         this.save(name, value)
       }
 
-      remote.getCurrentWindow().reload()
+      // TODO: Switch this to browser reload
+      // remote.getCurrentWindow().reload()
       return true
     } catch (e) {
       console.log('Error importing JSON')

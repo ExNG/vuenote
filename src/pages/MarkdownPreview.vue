@@ -13,7 +13,6 @@
 <script>
 import Markdown from '../services/Markdown'
 import Slide from '../components/Slide'
-import { shell } from 'electron'
 
 export default {
   props: ['tab'],
@@ -34,20 +33,6 @@ export default {
       handler (data) {
         this.renderMarkdown(data.content)
       }
-    },
-
-    parsedContent () {
-      this.$nextTick(() => {
-        for (let element of document.body.querySelectorAll('a')) {
-          if (element.href && element.href !== null && element.href !== '') {
-            let href = element.href
-            element.removeAttribute('href')
-            element.onclick = () => {
-              shell.openExternal(href)
-            }
-          }
-        }
-      })
     }
   },
 

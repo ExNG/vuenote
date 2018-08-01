@@ -14,10 +14,9 @@
   },
   "scripts": {
     "build": "sh scripts/build.sh",
-    "dev": "sh scripts/dev.sh",
+    "dev": "quasar dev -m pwa",
     "i": "npm install && yarn",
-    "lint": "eslint --ext .js,.vue src",
-    "testBuild": "sh scripts/test-build.sh"
+    "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
     "animate.css": "^3.6.1",

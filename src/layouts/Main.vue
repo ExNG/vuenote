@@ -306,7 +306,7 @@
 </template>
 
 <script>
-import { remote } from 'electron'
+import { AppFullscreen } from 'quasar'
 
 import About from '../pages/About'
 import CloudList from '../pages/CloudList'
@@ -551,13 +551,16 @@ export default {
     })
 
     Mousetrap.bind('ctrl+f', (e) => {
-      let isFullscreen = remote.getCurrentWindow().isFullScreen()
-      remote.getCurrentWindow().setFullScreen(!isFullscreen)
+      if (AppFullscreen.isCapable) {
+        // request first time fullscreen
+        AppFullscreen.request()
+        AppFullscreen.toggle()
+      }
     })
 
     Mousetrap.bind('ctrl+n', (e) => { this.addTab({}) })
     Mousetrap.bind('ctrl+w', (e) => { this.archiveTab(Number(this.activeTab)) })
-    Mousetrap.bind('ctrl+q', (e) => { require('electron').remote.app.quit() })
+    Mousetrap.bind('ctrl+q', (e) => { window.close() })
     Mousetrap.bind('option+down', (e) => { this.showOverlay = !this.showOverlay })
     Mousetrap.bind('option+left', (e) => { this.togglePane('left') })
     Mousetrap.bind('option+right', (e) => { this.togglePane('right') })

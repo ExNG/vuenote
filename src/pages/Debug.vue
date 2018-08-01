@@ -5,13 +5,12 @@
         Clear cache (Deletes all settings, tabs and debug settings)
       </q-item>
       <q-item v-close-overlay @click.native="testNotification()">
-        Open test notification
+        Open test notifications
       </q-item>
-      <q-item v-close-overlay @click.native="openDevtools()">
-        Open dev tools
-      </q-item>
-      <q-item v-close-overlay @click.native="openIssues()">
-        Report issue (github.com/ExNG/vuenote/issues)
+      <q-item v-close-overlay>
+        <a href="https://github.com/ExNG/vuenote/issues">
+          Report issue (github.com/ExNG/vuenote/issues)
+        </a>
       </q-item>
       <q-item v-close-overlay>
         Cancel
@@ -21,7 +20,6 @@
 </template>
 
 <script>
-import { shell, remote } from 'electron'
 import Notification from '../services/Notification'
 import Storage from '../services/Storage'
 
@@ -47,14 +45,6 @@ export default {
       Notification({title: 'Test Notification', description: 'Here`s a test notification! Negative', type: 'negative'})
       Notification({title: 'Test Notification', description: 'Here`s a test notification! Warning', type: 'warning'})
       Notification({title: 'Test Notification', description: 'Here`s a test notification! info', type: 'info'})
-    },
-
-    openDevtools () {
-      remote.getCurrentWindow().toggleDevTools()
-    },
-
-    openIssues () {
-      shell.openExternal('https://github.com/ExNG/vuenote/issues')
     }
   }
 }
