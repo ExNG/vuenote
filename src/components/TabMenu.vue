@@ -1,5 +1,5 @@
 <template>
-  <div id="tabmenu-container" class="q-pr-sm q-py-md">
+  <div id="tabmenu-container" class="q-pr-sm q-py-md animated fadeInLeft">
     <div id="tabmenu" class="q-py-sm shadow-1">
 
       <!-- ROWS -->
