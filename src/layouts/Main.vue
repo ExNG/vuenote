@@ -486,22 +486,24 @@ export default {
     Mousetrap.bind('option', (e) => {
       this.showTooltip = true
 
-      setTimeout(() => {
+      if (this.tooltipTimeoout) clearTimeout(this.tooltipTimeoout)
+
+      this.tooltipTimeoout = setTimeout(() => {
         this.showTooltip = false
       }, 5000)
     }, 'keydown')
     Mousetrap.bind('option', (e) => { this.showTooltip = false }, 'keyup')
 
-    Mousetrap.bind('option+1', (e) => { this.setActiveTab(0) })
-    Mousetrap.bind('option+2', (e) => { this.setActiveTab(1) })
-    Mousetrap.bind('option+3', (e) => { this.setActiveTab(2) })
-    Mousetrap.bind('option+4', (e) => { this.setActiveTab(3) })
-    Mousetrap.bind('option+5', (e) => { this.setActiveTab(4) })
-    Mousetrap.bind('option+6', (e) => { this.setActiveTab(5) })
-    Mousetrap.bind('option+7', (e) => { this.setActiveTab(6) })
-    Mousetrap.bind('option+8', (e) => { this.setActiveTab(7) })
-    Mousetrap.bind('option+9', (e) => { this.setActiveTab(8) })
-    Mousetrap.bind('option+0', (e) => { this.setActiveTab(9) })
+    Mousetrap.bind('option+1', () => { this.setActiveTab(0) })
+    Mousetrap.bind('option+2', () => { this.setActiveTab(1) })
+    Mousetrap.bind('option+3', () => { this.setActiveTab(2) })
+    Mousetrap.bind('option+4', () => { this.setActiveTab(3) })
+    Mousetrap.bind('option+5', () => { this.setActiveTab(4) })
+    Mousetrap.bind('option+6', () => { this.setActiveTab(5) })
+    Mousetrap.bind('option+7', () => { this.setActiveTab(6) })
+    Mousetrap.bind('option+8', () => { this.setActiveTab(7) })
+    Mousetrap.bind('option+9', () => { this.setActiveTab(8) })
+    Mousetrap.bind('option+0', () => { this.setActiveTab(9) })
   }
 }
 </script>
@@ -521,7 +523,7 @@ export default {
 }
 
 .max {
-  max-height: calc(100vh - 52px);
+  max-height: calc(100vh - 44px);
   overflow-y: auto;
 }
 </style>
