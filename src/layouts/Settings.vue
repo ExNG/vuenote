@@ -113,6 +113,7 @@ export default {
 
     save () {
       Storage.save('settings', this.settings)
+      this.cancel()
     },
 
     resetReplace () {
