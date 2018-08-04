@@ -49,7 +49,7 @@ export default {
       '<body>',
       '<div class="window">',
       '<div class="window-content">',
-      '<div class="padded-more">',
+      '<div class="q-pa-md">',
       this.generateHtml(data),
       '</div>',
       '</div>',

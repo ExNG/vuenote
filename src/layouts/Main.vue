@@ -88,7 +88,7 @@
                   Shortcuts
 
                   <q-modal v-model="shortcutsModal">
-                    <div class="padded-more">
+                    <div class="q-pa-md">
                       <shortcuts></shortcuts>
                       <div style="text-align: right;">
                         <q-btn color="primary" @click="shortcutsModal = false">Close</q-btn>
@@ -101,7 +101,7 @@
                   About
 
                   <q-modal v-model="aboutModal">
-                    <div class="padded-more">
+                    <div class="q-pa-md">
                       <about :packageInfo="packageInfo"></about>
                       <div style="text-align: right;">
                         <q-btn color="primary" @click="aboutModal = false">Close</q-btn>
@@ -203,7 +203,7 @@
     </q-fab>
 
     <q-modal v-model="searchModal">
-      <div class="padded-more">
+      <div class="q-pa-md">
         <transition appear
                     leave-active-class="animated fadeOut"
                     enter-active-class="animated fadeIn"

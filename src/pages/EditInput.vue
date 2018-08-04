@@ -11,7 +11,7 @@
     ></div>
 
     <q-modal v-model="tableCreator">
-      <div class="padded-more">
+      <div class="q-pa-md">
         <table-creator v-on:tablecreate="paste($event)"
                        v-on:closemodal="tableCreator = false"
         >

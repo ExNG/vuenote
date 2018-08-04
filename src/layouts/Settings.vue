@@ -12,7 +12,7 @@
     </header>
 
     <div class="window-content animated fadeInUp">
-      <div class="padded-more" style="width: 100vw;">
+      <div class="q-pa-md" style="width: 100vw;">
         <h1>{{ packageInfo.productName }}</h1>
 
         <hr>
