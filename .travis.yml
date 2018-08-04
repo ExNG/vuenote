@@ -9,6 +9,7 @@ script:
   - npm run lint
   - npm run build
   - ls -lsah dist/
+  - du -h dist/vuenote.zip dist/pwa-mat/
 deploy:
   provider: releases
   api_key: $gh_token
