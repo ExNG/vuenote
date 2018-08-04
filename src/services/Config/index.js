@@ -16,7 +16,7 @@ export default {
    * @param {String} name
    */
   unset (name) {
-    localStorage.unsetItem(name)
+    localStorage.removeItem(name)
   },
 
   /**
