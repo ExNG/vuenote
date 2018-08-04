@@ -213,10 +213,5 @@ necessary to avoid scrollbar on the right */
   img {
     max-height: 50vh;
   }
-
-  // TODO: Find a way around css scoped to remove quasar heading margin
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-  }
 }
 </style>
