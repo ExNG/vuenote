@@ -1,67 +1,53 @@
 <template>
-  <div style="text-align: center;">
-    <input type="text"
-           placeholder="Search"
-           v-model="search"
-           id="searchbox"
-           class="form-control mousetrap"
-           tabindex="1000"
-    >
+  <div>
+    <q-input
+      id="searchbox"
+      class="mousetrap"
+      type="text"
+      float-label="Search"
+      tabindex="1000"
+      v-model="search"
+    />
 
     <br>
+
+    <div class="row" v-if="settings.tabs">
+      <div class="col-12" v-if="settings.tabs">
+        <b>Tabs</b>
+      </div>
+      <div
+        class="col-12 cursor-pointer"
+        v-for="(tab, index) in tabs"
+        :key="index"
+        v-if="settings.tabs && index < 10 && applySearch(tab)"
+        @click="setActiveTab(index)"
+        @keydown.enter="setActiveTab(index)"
+        :tabindex="1000 + index"
+      >
+        {{ tab.name }}
+      </div>
+    </div>
+
     <br>
 
-    <table>
-      <tbody id="search-tabs-container"
-             v-if="settings.tabs"
+    <div class="row" v-if="settings.archived">
+      <div class="col-12" v-if="settings.archived">
+        <b>Archive</b>
+      </div>
+      <div
+        class="col-12 cursor-pointer"
+        v-for="(tab, index) in archive"
+        :key="index"
+        v-if="settings.archived && index < 10 && applySearch(tab)"
+        @click="restoreArchivedTab(index)"
+        @keydown.enter="restoreArchivedTab(index)"
+        :tabindex="1100 + index"
       >
-        <!-- TABS -->
-        <tr>
-          <td class="border-below">
-            <small>
-              <span class="icon icon-doc-text-inv"></span>
-              Open Tabs
-            </small>
-          </td>
-        </tr>
-        <tr v-for="(tab, index) in tabs"
-            :key="index"
-            v-if="index < 10 && applySearch(tab)"
-        >
-          <td @click="setActiveTab(index)"
-              @keydown.enter="setActiveTab(index)"
-              :tabindex="1000 + index"
-          >
-            {{ tab.name }}
-          </td>
-        </tr>
-      </tbody>
+        {{ tab.name }}
+      </div>
+    </div>
 
-      <tbody id="search-tabs-container"
-             v-if="settings.archived"
-      >
-        <!-- ARCHIVED TABS -->
-        <tr>
-          <td class="border-below">
-            <small>
-              <span class="icon icon-archive"></span>
-              Archive
-            </small>
-          </td>
-        </tr>
-        <tr v-for="(tab, index) in archive"
-            :key="index"
-            v-if="index < 10 && applySearch(tab)"
-        >
-          <td @click="restoreArchivedTab(index)"
-              @keydown.enter="restoreArchivedTab(index)"
-              :tabindex="1100 + index"
-          >
-            {{ tab.name }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <br>
 
     <small>
       <span class="icon icon-help"></span>
@@ -189,17 +175,23 @@ export default {
   created () {
     this.getSearchSettings()
 
-    setTimeout(() => {
-      document.querySelector('#searchbox').focus()
-    }, 0)
+    this.$nextTick(() => {
+      let el = this.$el.querySelector('input#searchbox')
 
-    Mousetrap.bind('ctrl+shift+space', (e) => { this.fab = !this.fab })
+      el.classList.add('mousetrap') // Hack to add class to input to allow shortcut detection
+
+      setTimeout(() => {
+        el.focus()
+      }, 0)
+    })
+
+    Mousetrap.bind('ctrl+shift+space', () => { this.fab = !this.fab })
   }
 }
 </script>
 
 <style>
-#searchbox {
+input#searchbox {
   width: 50vw;
 }
 
