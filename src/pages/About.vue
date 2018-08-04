@@ -1,20 +1,20 @@
 <template>
   <div>
     <div style="width: 100%; text-align: center;">
-      <div class="btn-group">
-        <button class="btn btn-default"
-                @click="activeTab = 'about'"
-                :class="{ 'active': activeTab === 'about' }"
-        >
-          About
-        </button>
-        <button class="btn btn-default"
-                @click="activeTab = 'dependencies'"
-                :class="{ 'active': activeTab === 'dependencies' }"
-        >
-          Dependencies
-        </button>
-      </div>
+      <q-btn-group>
+        <q-btn
+          label="About"
+          :color="activeTab === 'about' ? 'primary' : 'white'"
+          :text-color="activeTab === 'about' ? 'white' : 'color'"
+          @click="activeTab = 'about'"
+        />
+        <q-btn
+          label="Dependencies"
+          :color="activeTab === 'dependencies' ? 'primary' : 'white'"
+          :text-color="activeTab === 'dependencies' ? 'white' : 'color'"
+          @click="activeTab = 'dependencies'"
+        />
+      </q-btn-group>
     </div>
 
     <hr>
@@ -28,27 +28,32 @@
 
         <br>
 
-        <table>
-          <tr>
-            <td><span class="icon icon-github"></span></td>
-            <td>Source:</td>
-            <td>
-              <a @click="openURL(packageInfo.homepage)">
-                {{ packageInfo.homepage }}
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td><span class="icon icon-attention"></span></td>
-            <td>License:</td>
-            <td>{{ packageInfo.license }}</td>
-          </tr>
-          <tr>
-            <td><span class="icon icon-book"></span></td>
-            <td>Author:</td>
-            <td>{{ packageInfo.author }}</td>
-          </tr>
-        </table>
+        <div class="row q-pa-sm">
+          <div class="col-12">
+            <b>Source</b>
+          </div>
+          <div class="col-12">
+            <a :href="packageInfo.homepage">{{ packageInfo.homepage }}</a>
+          </div>
+        </div>
+
+        <div class="row q-pa-sm">
+          <div class="col-12">
+            <b>License</b>
+          </div>
+          <div class="col-12 ">
+            {{ packageInfo.license }}
+          </div>
+        </div>
+
+        <div class="row q-pa-sm">
+          <div class="col-12">
+            <b>Author</b>
+          </div>
+          <div class="col-12">
+            {{ packageInfo.author }}
+          </div>
+        </div>
       </div>
       <div class="animated fadeIn" v-show="activeTab === 'dependencies'">
         <p>{{ packageInfo.productName }} only works because of these libraries</p>
@@ -56,16 +61,17 @@
         <br>
 
         <div style="max-height: 50vh; overflow-y: scroll">
-          <table>
-              <tr
-                v-for="(version, packageName) in dependencieList"
-                :key="packageName"
-              >
-              <a :href="'https://npmjs.com/package/' + packageName">
-                <td class="cursor-pointer">{{ packageName }}</td>
+          <div class="row">
+            <div
+              class="col-12 col-xs-12 col-md-6 col-xl-4"
+              v-for="(version, packageName) in dependencieList"
+              :key="packageName"
+            >
+              <a :href="`https://npmjs.com/package/${packageName}`">
+                {{ packageName }}
               </a>
-            </tr>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
