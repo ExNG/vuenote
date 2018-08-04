@@ -170,6 +170,38 @@
       <!-- END NONE -->
     </div>
 
+    <q-fab
+      color="primary"
+      text-color="white"
+      class="fixed animated fadeInUp"
+      style="right: 10px; bottom: 10px;"
+      icon="keyboard_arrow_left"
+      direction="left"
+    >
+      <q-fab-action
+        icon="assistant"
+        color="primary"
+        text-color="white"
+        @click="applyMarkdownStyle()"
+      >
+        <q-tooltip>
+          Prettify
+        </q-tooltip>
+      </q-fab-action>
+
+      <q-fab-action
+        icon="slideshow"
+        :color="tabs[activeTab].slide ? 'warning' : 'primary'"
+        text-color="white"
+        @click="toggleSlides()"
+        v-if="tabs[activeTab] && Object.keys(tabs[activeTab]).includes('slide')"
+      >
+        <q-tooltip>
+          Toggle Presentation
+        </q-tooltip>
+      </q-fab-action>
+    </q-fab>
+
     <q-modal v-model="searchModal">
       <div class="padded-more">
         <transition appear
