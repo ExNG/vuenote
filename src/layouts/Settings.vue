@@ -1,22 +1,13 @@
 <template>
   <div class="container">
     <div class="row q-pa-sm animated fadeInDown shadow-1">
-      <div class="col-6">
+      <div class="col-12">
         <q-btn
           no-caps rounded dense
-          icon="close"
-          label="Cancel"
-          color="negative"
-          @click="cancel()"
-        />
-      </div>
-      <div class="col-6 text-right">
-        <q-btn
-          no-caps rounded dense
-          icon="save"
-          label="Save"
+          icon="chevron_left"
+          label="Back"
           color="positive"
-          @click="save()"
+          @click="cancel()"
         />
       </div>
     </div>
@@ -113,17 +104,12 @@ export default {
 
     save () {
       Storage.save('settings', this.settings)
-      this.cancel()
     },
 
     resetReplace () {
       this.settings.replaceList = Storage.getStructur().settings.replaceList
-
-      this.save()
     }
-  },
-
-  created () {}
+  }
 }
 </script>
 
