@@ -2,7 +2,7 @@
   <div class="container">
 
     <transition appear enter-active-class="animated fadeInDown">
-      <div class="row navbar-buttons" v-if="showOverlay">
+      <div class="row navbar-buttons shadow-1" v-if="showOverlay">
         <div class="col-6 q-pa-sm">
           <q-btn
             rounded dense

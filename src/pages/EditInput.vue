@@ -1,5 +1,5 @@
 <template>
-  <div id="editor-root" class="shadow-4 q-pa-md">
+  <div id="editor-root" class="shadow-1 q-pa-md">
     <div contenteditable="true"
          class="editor mousetrap"
          id="editor"
@@ -189,7 +189,7 @@ necessary to avoid scrollbar on the right */
   outline: none;
   font-size: 15px;
   color: black;
-  padding-bottom: 45vh;
+  margin-bottom: 25vh;
   /* text-shadow: -1px 0 rgb(200, 200, 200), 0 1px rgb(200, 200, 200), 1px 0 rgb(200, 200, 200), 0 -1px rgb(200, 200, 200); */
 
   overflow-x: hidden;

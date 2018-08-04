@@ -1,6 +1,6 @@
 <template>
-  <div id="tabmenu-container" class="q-pa-xs">
-    <div class="q-py-sm round-borders shadow-1">
+  <div id="tabmenu-container" class="q-pr-sm q-py-md">
+    <div id="tabmenu" class="q-py-sm shadow-1">
 
       <!-- ROWS -->
       <div class="row">
@@ -15,9 +15,9 @@
           :key="`tab-${index}`"
           @click="$parent.setActiveTab(Number(index))"
         >
-          <span v-if="$parent.showTooltip && (Number(index) + 1 <= 10)">
+          <i v-if="$parent.showTooltip && (Number(index) + 1 <= 10)">
             {{ index + 1 }}
-          </span>
+          </i>
 
           {{ tab.name }}
 
@@ -68,6 +68,10 @@ export default {
 #tabmenu-container {
   width: 100%; // TODO: maybe remove this
 
+  #tabmenu {
+    border-top-right-radius: 7.5px;
+    border-bottom-right-radius: 7.5px;
+  }
   // Tab items
   .col-12 {
     width: 100%;
@@ -76,7 +80,7 @@ export default {
 
     &.header {
       font-style: italic;
-
+      // Divided, it neads header so it wont have hover effetcs
       &.hr {
         border-bottom: 1px solid lightgrey;
         margin-bottom: 8px;
