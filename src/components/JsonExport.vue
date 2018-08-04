@@ -2,13 +2,24 @@
   <div>
     <label>Export</label>
 
-    <div class="checkbox float-right"
-         style="margin: 0"
-    >
-      <label>
-        <input type="checkbox" v-model="all"> Include All
-      </label>
-    </div>
+    <q-btn
+      rounded dense
+      label="Export JSON"
+      color="primary"
+      class="float-right"
+      @click="getExport()"
+    />
+
+    <q-input
+      type="text"
+      placeholder="{}"
+      v-model="jsonExport"
+    />
+
+    <!-- <q-toggle
+      label="Include All"
+      v-model="all"
+    />
 
     <table>
       <thead>
@@ -44,14 +55,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
-
-    <input type="text" class="form-control" placeholder="{}" v-model="jsonExport">
-
-    <button class="btn btn-primary"
-            style="width: 100%;"
-            @click="getExport()"
-    >Generate Export JSON</button>
+    </table> -->
   </div>
 </template>
 

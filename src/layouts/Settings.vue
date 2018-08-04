@@ -1,65 +1,59 @@
 <template>
-  <div class="window">
-    <header class="toolbar toolbar-header animated fadeInDown">
-      <div class="toolbar-actions">
-        <button class="btn btn-primary"
-                @click="cancel()"
-        >
-          <span class="icon icon-left-open" style="color: white;"></span>
-          Back
-        </button>
+  <div class="container">
+    <div class="row q-pa-sm animated fadeInDown shadow-1">
+      <div class="col-6">
+        <q-btn
+          no-caps rounded dense
+          icon="close"
+          label="Cancel"
+          color="negative"
+          @click="cancel()"
+        />
       </div>
-    </header>
+      <div class="col-6 text-right">
+        <q-btn
+          no-caps rounded dense
+          icon="save"
+          label="Save"
+          color="positive"
+          @click="save()"
+        />
+      </div>
+    </div>
 
     <div class="window-content animated fadeInUp">
       <div class="q-pa-md" style="width: 100vw;">
         <h1>{{ packageInfo.productName }}</h1>
 
-        <hr>
-
-        <div>
-          <label>Darkmode</label>
-
-          <div class="pull-right">
-            <button class="btn btn-primary"
-                    v-show="!settings.darkmode"
-                    @click="settings.darkmode = true; save()"
-            >
-              Enable
-            </button>
-            <button class="btn btn-primary"
-                    v-show="settings.darkmode"
-                    @click="settings.darkmode = false; save()"
-            >
-              Disable
-            </button>
-          </div>
-        </div>
-
-        <hr>
+        <br>
 
         <!-- REPLACE -->
         <div>
           <label>Replace</label>
 
-          <div class="pull-right">
-            <button class="btn btn-default"
-                    @click="resetReplace()"
-            >
-              Reset
-            </button>
-            <button class="btn btn-negative"
-                    v-show="settings.replace"
-                    @click="settings.replace = false; save()"
-            >
-              Disable
-            </button>
-            <button class="btn btn-positive"
-                    v-show="!settings.replace"
-                    @click="settings.replace = true; save()"
-            >
-              Enable
-            </button>
+          <div class="float-right">
+            <q-btn-group rounded>
+              <q-btn
+                no-caps rounded dense
+                label="Reset"
+                color="secondary"
+                @click="resetReplace()"
+              />
+              <q-btn
+                no-caps rounded dense
+                label="Disable"
+                color="negative"
+                v-if="settings.replace"
+                @click="settings.replace = false; save()"
+              />
+              <q-btn
+                no-caps rounded dense
+                label="Enable"
+                color="primary"
+                v-if="!settings.replace"
+                @click="settings.replace = true; save()"
+              />
+            </q-btn-group>
           </div>
 
           <table>
@@ -68,8 +62,9 @@
               <th>Result</th>
             </thead>
             <tbody>
-              <tr v-for="(value, index) in settings.replaceList"
-                  :key="index"
+              <tr
+                v-for="(value, index) in settings.replaceList"
+                :key="index"
               >
                 <td>{{ index }}</td>
                 <td>{{ value }}</td>
@@ -78,12 +73,12 @@
           </table>
         </div>
 
-        <hr>
+        <br>
 
         <!-- IMPORT -->
         <json-import></json-import>
 
-        <hr>
+        <br>
 
         <!-- EXPORT -->
         <json-export></json-export>

@@ -2,12 +2,19 @@
   <div>
     <label>Import</label>
 
-    <input type="text" class="form-control" placeholder="{}" v-model="jsonImport">
+    <q-btn
+      rounded dense
+      label="Import JSON"
+      color="negative"
+      class="float-right"
+      @click="importJSON(jsonImport)"
+    />
 
-    <button class="btn btn-warning"
-            style="width: 100%;"
-            @click="importJSON(jsonImport)"
-    >Import JSON</button>
+    <q-input
+      type="text"
+      placeholder="{}"
+      v-model="jsonImport"
+    />
   </div>
 </template>
 
