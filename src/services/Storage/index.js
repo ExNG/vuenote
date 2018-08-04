@@ -226,8 +226,7 @@ export default {
         this.save(name, value)
       }
 
-      // TODO: Switch this to browser reload
-      // remote.getCurrentWindow().reload()
+      location.reload()
       return true
     } catch (e) {
       console.log('Error importing JSON')

@@ -11,4 +11,5 @@ export default {
 </script>
 
 <style>
+.aright { text-align: right; }
 </style>

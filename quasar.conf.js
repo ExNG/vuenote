@@ -3,7 +3,6 @@
 module.exports = function (ctx) {
   return {
     plugins: [
-      'antimatterkit',
       'animatecss'
     ],
     css: [
@@ -46,18 +45,23 @@ module.exports = function (ctx) {
     framework: {
       components: [
         'QContextMenu',
+        'QPopover',
+
         'QFab',
         'QFabAction',
+
         'QModal',
-        'QPopover',
+
         'QBtn',
+        'QBtnGroup',
         'QIcon',
+        'QTooltip',
+
         'QList',
         'QListHeader',
         'QItem',
         'QItemMain',
-        'QItemSide',
-        'QTooltip'
+        'QItemSide'
       ],
       directives: [
         'CloseOverlay',

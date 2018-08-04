@@ -1,289 +1,174 @@
 <template>
-  <div class="window"
-       id="window"
-       :class="{ 'dark': settings.darkmode }"
-  >
+  <div class="container">
 
-    <transition appear
-                enter-active-class="animated fadeInDown"
-    >
-      <header class="toolbar toolbar-header animated fadeInDown"
-              v-if="showOverlay"
-      >
-        <div class="toolbar-actions">
-          <button class="btn btn-primary"
-                  v-show="tabs.length === 0"
-                  @click="addTab({})"
-          >
-            <span class="icon icon-plus icon-text" style="color: white;"></span>
-            New Tab
-          </button>
+    <transition appear enter-active-class="animated fadeInDown">
+      <div class="row navbar-buttons" v-if="showOverlay">
+        <div class="col-6 q-pa-sm">
+          <q-btn
+            rounded dense
+            icon="add"
+            label="New Tab"
+            v-show="tabs.length === 0"
+            @click="addTab({})"
+          />
+          <q-btn
+            rounded dense
+            icon="add"
+            v-show="tabs.length > 0"
+            @click="addTab({})"
+          />
 
-          <button class="btn btn-default"
-                  v-show="tabs.length >= 1"
-                  @click="addTab({})"
-          >
-            <span class="icon icon-plus-circled"></span>
-          </button>
+          <q-btn
+            rounded dense
+            icon="save"
+            @click="save()"
+          />
 
-          <button class="btn btn-default"
-                  @click="save()"
-          >
-            <span class="icon icon-floppy icon-text"></span>
-            Save
-          </button>
+          <q-btn-group rounded dense>
+            <q-btn
+              rounded dense
+              icon="edit"
+              :color="panes.left ? 'primary' : null"
+              @click="togglePane('left')"
+            />
 
-          <div class="btn-group">
-            <button class="btn btn-default"
-                    @click="togglePane('left')"
-                    :class="{ 'active': panes.left }"
-            >
-              <span class="icon icon-pencil"></span>
-            </button>
-            <button class="btn btn-default"
-                    @click="togglePane('right')"
-                    :class="{ 'active': panes.right }"
-            >
-              <span class="icon icon-eye"></span>
-            </button>
-          </div>
-
-          <div class="pull-right">
-            <div class="btn-group"
-                 style="margin-right: 10px;"
-            >
-              <button class="btn btn-default text-buttons"
-                      @click="paste('**Text**')"
-              >
-                <b>B</b>
-              </button>
-              <button class="btn btn-default text-buttons"
-                      @click="paste('*Text*')"
-              >
-                <i>I</i>
-              </button>
-              <button class="btn btn-default text-buttons"
-              >
-                <span class="icon icon-down-open"></span>
-
-                <text-options :paste="paste"
-                ></text-options>
-              </button>
-            </div>
-
-            <button class="btn btn-default btn-dropdown">
-              <span class="icon icon-menu icon-text"></span>
-              <!-- Menu -->
-              <q-popover>
-                <q-list separator link>
-                  <q-item>
-                    Export
-                    <export v-if="tabs[activeTab] && tabs.length >= 1"
-                            :content="tabs[activeTab].content"
-                            :name="tabs[activeTab].name"
-                            :active-tab="activeTab"
-                            :preview-visible="panes.right"
-                    ></export>
-                  </q-item>
-
-                  <q-item v-close-overlay @click.native="$router.push('/settings')">
-                    Settings
-                  </q-item>
-
-                  <q-item>
-                    Debug
-                    <debug></debug>
-                  </q-item>
-
-                  <q-item v-close-overlay @click.native="shortcutsModal = true">
-                    Shortcuts
-
-                    <q-modal v-model="shortcutsModal">
-                      <div class="padded-more">
-                        <shortcuts></shortcuts>
-                        <div style="text-align: right;">
-                          <q-btn color="primary" @click="shortcutsModal = false">Close</q-btn>
-                        </div>
-                      </div>
-                    </q-modal>
-                  </q-item>
-
-                  <q-item v-close-overlay @click.native="aboutModal = true">
-                    About
-
-                    <q-modal v-model="aboutModal">
-                      <div class="padded-more">
-                        <about :packageInfo="packageInfo"></about>
-                        <div style="text-align: right;">
-                          <q-btn color="primary" @click="aboutModal = false">Close</q-btn>
-                        </div>
-                      </div>
-                    </q-modal>
-                  </q-item>
-                </q-list>
-              </q-popover>
-            </button>
-          </div>
-
-        </div>
-      </header>
-    </transition>
-
-    <div class="window-content">
-      <div class="pane-group" style="overflow: hidden;">
-
-        <div class="pane-sm sidebar animated fadeInLeft">
-          <nav class="nav-group">
-            <h5 class="nav-group-title">
-              <span class="icon icon-doc-text-inv"></span>
-              Tabs
-            </h5>
-            <transition-group appear
-                              enter-active-class="animated fadeInLeft"
-                              leave-active-class="animated fadeOutLeft"
-            >
-              <span class="nav-group-item cursor-pointer"
-                    :class="{ 'active': activeTab === Number(index) }"
-                    v-for="(tab, index) in tabs"
-                    :key="`tab-${index}`"
-                    @click="setActiveTab(Number(index))"
-              >
-                <span class="icon icon-doc-text"></span>
-
-                <small class="pull-left"
-                       style="width: 10px; margin-right: 2.5px;"
-                >
-                  <span v-if="showTooltip && (Number(index) + 1 <= 10)">
-                    {{ index + 1 }}
-                  </span>
-                </small>
-
-                {{ tab.name }}
-
-                <tab-context @rename="renameTab(Number(index))"
-                             @archive="archiveTab(Number(index))"
-                             @close="removeTab(Number(index))"
-                ></tab-context>
-              </span>
-            </transition-group>
-
-            <h5 class="nav-group-title">
-              <span class="icon icon-archive"></span>
-              Archive
-            </h5>
-            <transition-group appear
-                              enter-active-class="animated fadeInLeft"
-                              leave-active-class="animated fadeOutLeft"
-            >
-              <span class="nav-group-item cursor-pointer"
-                    v-for="(note, index) in archived"
-                    :key="`archive-${index}`"
-                    @click="restoreArchivedTab(Number(index))"
-              >
-                <span class="icon icon-doc-text"></span>
-                {{ note.name }}
-              </span>
-            </transition-group>
-            <transition appear
-                        enter-active-class="animated fadeInLeft"
-                        leave-active-class="animated fadeOutLeft"
-            >
-              <span class="nav-group-item" v-show="archived.length === 0">
-                <span class="icon icon-info-circled"></span>
-                No archived notes
-              </span>
-            </transition>
-
-            <h5 class="nav-group-title">
-              <span class="icon icon-cloud"></span>
-              Cloud
-            </h5>
-            <cloud-list @addTab="addTab($event); save()"
-                        :cloud="cloud"
-                        :packageInfo="packageInfo"
-            ></cloud-list>
-          </nav>
+            <q-btn
+              rounded dense
+              icon="visibility"
+              :color="panes.right ? 'primary' : null"
+              @click="togglePane('right')"
+            />
+          </q-btn-group>
         </div>
 
-        <transition appear
-                    enter-active-class="animated fadeIn"
-        >
-          <div class="pane padded-more"
-               v-if="panes.left"
-          >
-            <div v-for="(tab, index) in tabs"
-                 :key="index"
-            >
-              <edit-input :content="tab.content"
-                          :index="Number(index)"
-                          @update="setTabContent(index, $event)"
-                          v-if="tabs[activeTab] && activeTab === Number(index)"
-                          class="edit-input"
-              ></edit-input>
-            </div>
-          </div>
-        </transition>
+        <div class="col-6 q-pa-sm aright">
+          <q-btn-group rounded dense>
+            <q-btn
+              rounded dense
+              icon="format_bold"
+              @click="paste('**Text**')"
+            />
 
-        <transition appear
-                    enter-active-class="animated fadeInUp"
-        >
-          <div class="pane padded-more"
-               v-if="panes.right"
-          >
-            <div v-for="(tab, index) in tabs"
-                 :key="index"
-            >
-              <markdown-preview :tab="tab"
-                                :id="'preview-' + index"
-                                v-if="tabs[activeTab] && activeTab === Number(index)"
-              ></markdown-preview>
-            </div>
+            <q-btn
+              rounded dense
+              icon="format_italic"
+              @click="paste('*Text*')"
+            />
 
-          </div>
-        </transition>
+            <q-btn rounded dense>
+              <q-icon name="expand_more"/>
+              <text-options :paste="paste"></text-options>
+            </q-btn>
+          </q-btn-group>
 
-        <transition appear
-                    enter-active-class="animated fadeIn"
-        >
-          <div class="pane padded-more"
-               v-if="!panes.left && !panes.right"
-          >
-            <div class="absolute-center" style="text-align: center;">
-              <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
-            </div>
-          </div>
-        </transition>
+          <q-btn rounded dense>
+            <q-icon name="menu"/>
+            <q-popover>
+              <q-list separator link>
+                <q-item>
+                  Export
+                  <export v-if="tabs[activeTab] && tabs.length >= 1"
+                          :content="tabs[activeTab].content"
+                          :name="tabs[activeTab].name"
+                          :active-tab="activeTab"
+                          :preview-visible="panes.right"
+                  ></export>
+                </q-item>
 
+                <q-item v-close-overlay @click.native="$router.push('/settings')">
+                  Settings
+                </q-item>
+
+                <q-item>
+                  Debug
+                  <debug></debug>
+                </q-item>
+
+                <q-item v-close-overlay @click.native="shortcutsModal = true">
+                  Shortcuts
+
+                  <q-modal v-model="shortcutsModal">
+                    <div class="padded-more">
+                      <shortcuts></shortcuts>
+                      <div style="text-align: right;">
+                        <q-btn color="primary" @click="shortcutsModal = false">Close</q-btn>
+                      </div>
+                    </div>
+                  </q-modal>
+                </q-item>
+
+                <q-item v-close-overlay @click.native="aboutModal = true">
+                  About
+
+                  <q-modal v-model="aboutModal">
+                    <div class="padded-more">
+                      <about :packageInfo="packageInfo"></about>
+                      <div style="text-align: right;">
+                        <q-btn color="primary" @click="aboutModal = false">Close</q-btn>
+                      </div>
+                    </div>
+                  </q-modal>
+                </q-item>
+              </q-list>
+            </q-popover>
+          </q-btn>
+        </div>
       </div>
-    </div>
+    </transition>
 
-    <transition appear
-                enter-active-class="animated fadeInUp"
-    >
-      <footer class="toolbar toolbar-footer animated fadeInUp"
-              v-if="showOverlay"
+    <div class="row">
+      <div class="col-3 max">
+        <tab-menu></tab-menu>
+      </div>
+
+      <!-- EDITOR -->
+      <transition appear
+                  enter-active-class="animated fadeIn"
       >
-        <div class="toolbar-actions">
-          <div class="pull-right">
-            <button class="btn btn-default"
-                    v-if="tabs[activeTab] && Object.keys(tabs[activeTab]).includes('slide')"
-                    @click="toggleSlides()"
-                    :class="{ 'btn-primary': tabs[activeTab].slide }"
-            >
-              <span class="icon icon-doc-landscape"
-                    :class="{ 'text-white': tabs[activeTab].slide }"
-              ></span>
-            </button>
-
-            <button class="btn btn-default"
-                    @click="applyMarkdownStyle()"
-            >
-              <span class="icon icon-feather"></span>
-            </button>
+        <div class="col max q-pa-md" v-if="panes.left">
+          <div v-for="(tab, index) in tabs"
+               :key="index"
+          >
+            <edit-input :content="tab.content"
+                        :index="Number(index)"
+                        @update="setTabContent(index, $event)"
+                        v-if="tabs[activeTab] && activeTab === Number(index)"
+                        class="edit-input"
+            ></edit-input>
           </div>
         </div>
-      </footer>
-    </transition>
+      </transition>
+      <!-- END EDITOR -->
+
+      <!-- PREVIEW -->
+      <transition appear
+                  enter-active-class="animated fadeIn"
+      >
+        <div class="col max q-pa-md" v-if="panes.right">
+          <div v-for="(tab, index) in tabs"
+               :key="index"
+          >
+            <markdown-preview :tab="tab"
+                              :id="'preview-' + index"
+                              v-if="tabs[activeTab] && activeTab === Number(index)"
+            ></markdown-preview>
+          </div>
+        </div>
+      </transition>
+      <!-- END PREVIEW -->
+
+      <!-- NONE -->
+      <transition appear
+                  enter-active-class="animated fadeIn"
+      >
+        <div class="col max" v-if="!panes.left && !panes.right">
+          <div class="absolute-center" style="text-align: center;">
+            <h4 style="color: lightgrey">Literally nothing to see here :(</h4>
+          </div>
+        </div>
+      </transition>
+      <!-- END NONE -->
+    </div>
 
     <q-modal v-model="searchModal">
       <div class="padded-more">
@@ -309,7 +194,6 @@
 import { AppFullscreen } from 'quasar'
 
 import About from '../pages/About'
-import CloudList from '../pages/CloudList'
 import Debug from '../pages/Debug'
 import EditInput from '../pages/EditInput'
 import Essential from '../services/Essential'
@@ -323,20 +207,19 @@ import Search from '../pages/Search'
 import Shortcuts from '../pages/Shortcuts'
 import StartupHandler from '../services/StartupHandler'
 import Storage from '../services/Storage'
-import TabContext from '../components/TabContext'
+import TabMenu from '../components/TabMenu'
 import TextOptions from '../components/TextOptions'
 
 export default {
   components: {
     About,
-    CloudList,
     Debug,
     EditInput,
     Export,
     MarkdownPreview,
     Search,
     Shortcuts,
-    TabContext,
+    TabMenu,
     TextOptions
   },
 
@@ -591,20 +474,22 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#window {
-  .text-buttons {
-    min-width: 40px;
+<style lang="scss" scoped>
+.navbar-buttons {
+  button {
+    margin-right: 7.5px;
+  }
+
+  .q-btn-group {
+    margin-right: 7.5px;
+    button {
+      margin-right: unset;
+    }
   }
 }
 
-#window.dark {
-  * {
-    filter: invert(100%) !important;
-  }
-
-  img {
-    filter: inherit !important;
-  }
+.max {
+  max-height: calc(100vh - 52px);
+  overflow-y: auto;
 }
 </style>

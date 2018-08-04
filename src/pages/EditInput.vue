@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="editor-root" class="shadow-4 q-pa-md">
     <div contenteditable="true"
          class="editor mousetrap"
          id="editor"
@@ -179,10 +179,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 /* TODO: Only apply padding at bottom if text reaches point where its
 necessary to avoid scrollbar on the right */
-.editor {
+#editor-root {
   white-space: pre;
   word-wrap: break-word;
   font-family: monospace;
@@ -193,6 +193,11 @@ necessary to avoid scrollbar on the right */
   /* text-shadow: -1px 0 rgb(200, 200, 200), 0 1px rgb(200, 200, 200), 1px 0 rgb(200, 200, 200), 0 -1px rgb(200, 200, 200); */
 
   overflow-x: hidden;
+
+  &:focus, &:active {
+    border: none;
+    outline: none;
+  }
 
   * {
     cursor: text;
@@ -207,6 +212,11 @@ necessary to avoid scrollbar on the right */
 
   img {
     max-height: 50vh;
+  }
+
+  // TODO: Find a way around css scoped to remove quasar heading margin
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
   }
 }
 </style>
