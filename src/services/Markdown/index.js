@@ -1,5 +1,4 @@
 import MarkdownIt from 'markdown-it'
-import markdownItCheckbox from 'markdown-it-checkbox'
 import remark from 'remark'
 
 // Basic markdown configuration
@@ -14,11 +13,6 @@ var md = new MarkdownIt({
   quotes: '“”‘’',
   highlight: function (/* str, lang */) { return '' }
 })
-  .use(markdownItCheckbox, {
-    divWrap: true,
-    divClass: 'checkbox',
-    idPrefix: 'markdownpreview-checkbox-'
-  })
 
 export default {
   /**
@@ -41,21 +35,19 @@ export default {
    * @return {String}
    */
   generateHtmlPage (data, name) {
-    return ['<html>',
+    return [
+      '<html>',
       '<head>',
       '<title>' + String(name) + '</title>',
-      '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ExNG/antimatter/73e5bbc4/dist/antimatter.css">',
+      '<link rel="stylesheet" type="text/css" href="https://unpkg.com/quasar-framework@latest/dist/umd/quasar.mat.min.css">',
       '</head>',
       '<body>',
-      '<div class="window">',
-      '<div class="window-content">',
       '<div class="q-pa-md">',
       this.generateHtml(data),
       '</div>',
-      '</div>',
-      '</div>',
       '</body>',
-      '</html>'].join('\n')
+      '</html>'
+    ].join('\n')
   },
 
   /**
@@ -68,7 +60,7 @@ export default {
   applyStyle (data) {
     remark()
       .data('settings', {commonmark: true, emphasis: '*', strong: '*'})
-      .process(data, function (err, file) {
+      .process(data, (err, file) => {
         if (err) throw err
         data = file.contents
       })

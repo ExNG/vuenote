@@ -71,7 +71,6 @@
                           :content="tabs[activeTab].content"
                           :name="tabs[activeTab].name"
                           :active-tab="activeTab"
-                          :preview-visible="panes.right"
                   ></export>
                 </q-item>
 
@@ -230,7 +229,6 @@ import Debug from '../pages/Debug'
 import EditInput from '../pages/EditInput'
 import Essential from '../services/Essential'
 import Export from '../pages/Export'
-import ExportDialog from '../services/Export'
 import Markdown from '../services/Markdown'
 import MarkdownPreview from '../pages/MarkdownPreview'
 import Mousetrap from 'mousetrap'
@@ -364,10 +362,6 @@ export default {
       settings.panes = this.panes
 
       Storage.save('settings', settings)
-    },
-
-    exportDoc () {
-      ExportDialog.exportDialog(this.tabs[this.activeTab].content, this.tabs[this.activeTab].name, this.activeTab)
     },
 
     save () {

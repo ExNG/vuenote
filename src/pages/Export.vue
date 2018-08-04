@@ -11,16 +11,6 @@
       >
         Html
       </q-item>
-      <q-item v-close-overlay
-              @click.native="exportToPicture()"
-              :disabled="!previewVisible"
-      >
-        Picture
-
-        <q-tooltip :disable="previewVisible">
-          Open the preview
-        </q-tooltip>
-      </q-item>
       <q-item v-close-overlay>
         Cancel
       </q-item>
@@ -30,11 +20,10 @@
 
 <script>
 import FileSaver from 'file-saver'
-import Html2Canvas from 'html2canvas'
 import Markdown from '../services/Markdown'
 
 export default {
-  props: ['content', 'name', 'activeTab', 'previewVisible'],
+  props: ['content', 'name', 'activeTab'],
 
   data () {
     return {}
@@ -44,7 +33,7 @@ export default {
     exportToTxt () {
       FileSaver.saveAs(
         new Blob(
-          [this.content],
+          [ this.content ],
           {
             type: 'text/plain;charset=utf-8'
           }
@@ -56,26 +45,13 @@ export default {
     exportToHtml () {
       FileSaver.saveAs(
         new Blob(
-          [Markdown.generateHtmlPage(this.content, this.name)],
+          [ Markdown.generateHtmlPage(this.content, this.name) ],
           {
             type: 'text/plain;charset=utf-8'
           }
         ),
         this.name + '.html'
       )
-    },
-
-    exportToPicture () {
-      Html2Canvas(document.querySelector('#preview-' + this.activeTab))
-        .then(canvas => {
-          document.body.appendChild(canvas)
-          canvas.toBlob(canvas => {
-            FileSaver.saveAs(
-              canvas,
-              this.name + '.jpg'
-            )
-          }, 'image/jpeg', 1)
-        })
     }
   }
 }

@@ -1,4 +1,3 @@
-// import Backup from '../Backup'
 import Storage from '../Storage'
 import Essential from '../Essential'
 
@@ -8,9 +7,6 @@ import Essential from '../Essential'
  * present before they're called.
  */
 export default function () {
-  // Backup before structure merge
-  // Backup.create('')
-
   let appData = Storage.load('appData')
 
   if (!appData || !appData.version) {
@@ -57,7 +53,4 @@ export default function () {
       console.log(e)
     }
   }
-
-  // Backup after structure merge
-  // Backup.create('_AfterMerge')
 }

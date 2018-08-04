@@ -1,5 +1,9 @@
 <template>
-  <q-popover>
+  <!-- TODO: Fix this, strings are pasted on buttons rather than document -->
+  <q-popover
+    @show="focusEditor()"
+    @hide="focusEditor()"
+  >
     <q-list separator link>
       <q-item v-close-overlay
               @click.native="paste(val)"
@@ -45,6 +49,14 @@ export default {
       image: '![Text](https://github.com/ExNG/vuenote/blob/master/src/statics/icon.png?raw=true)',
 
       quote: '> '
+    }
+  },
+
+  methods: {
+    focusEditor () {
+      let el = document.querySelector('div#editor')
+
+      el.focus()
     }
   }
 }
