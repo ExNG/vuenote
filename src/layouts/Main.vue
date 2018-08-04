@@ -275,8 +275,7 @@ export default {
       settings: {},
 
       tabs: [],
-      archived: [],
-      cloud: {}
+      archived: []
     }
   },
 
@@ -448,8 +447,6 @@ export default {
 
     this.settings = Storage.load('settings')
     this.panes = this.settings.panes
-
-    this.cloud = Storage.load('cloud')
 
     Mousetrap.bind('ctrl+s', (e) => {
       this.save()

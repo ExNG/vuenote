@@ -82,45 +82,18 @@
 
         <!-- EXPORT -->
         <json-export></json-export>
-
-        <hr>
-
-        <!-- GITHUB GIST -->
-        <github-gist></github-gist>
       </div>
     </div>
-
-    <footer class="toolbar toolbar-footer animated fadeInUp">
-      <div class="toolbar-actions">
-        <button class="btn btn-negative"
-                @click="cancel()"
-        >
-          <span class="icon icon-cancel" style="color: white;"></span>
-          Cancel
-        </button>
-
-        <div class="pull-right">
-          <button class="btn btn-positive"
-                  @click="save()"
-          >
-            <span class="icon icon-floppy" style="color: white;"></span>
-            Save
-          </button>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 
 <script>
-import GithubGist from '../components/GithubGist'
 import JsonExport from '../components/JsonExport'
 import JsonImport from '../components/JsonImport'
 import Storage from '../services/Storage'
 
 export default {
   components: {
-    GithubGist,
     JsonExport,
     JsonImport
   },

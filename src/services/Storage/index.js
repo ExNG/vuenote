@@ -26,11 +26,7 @@ export default {
       search: {
         tabs: true,
         archived: true
-      },
-      darkmode: false
-    },
-    cloud: {
-      githubGists: []
+      }
     },
     tabs: [],
     archived: [],

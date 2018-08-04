@@ -41,8 +41,6 @@
         >
           {{ note.name }}
         </div>
-
-        <!-- TODO: Implement cloud-list here -->
       </div>
       <!-- END ROWS -->
 
