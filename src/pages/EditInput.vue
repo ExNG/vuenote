@@ -179,7 +179,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 /* TODO: Only apply padding at bottom if text reaches point where its
 necessary to avoid scrollbar on the right */
 #editor-root {
