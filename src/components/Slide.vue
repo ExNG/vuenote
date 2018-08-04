@@ -1,23 +1,22 @@
 <template>
   <div>
     <div class="text-center">
-      <div class="btn-group">
-        <button class="btn btn-default"
-                @click="switchSlide(-1)"
-        >
-          <span class="icon icon-left"></span>
-        </button>
-
-        <button class="btn btn-default" disabled>
-          {{ activeSlide + 1 }} / {{ parsedSlides.length }}
-        </button>
-
-        <button class="btn btn-default"
-                @click="switchSlide(1)"
-        >
-          <span class="icon icon-right"></span>
-        </button>
-      </div>
+      <q-btn-group>
+        <q-btn
+          :disabled="activeSlide === 0"
+          icon="chevron_left"
+          @click="switchSlide(-1)"
+        />
+        <q-btn
+          disabled
+          :label="`${activeSlide + 1} / ${parsedSlides.length}`"
+        />
+        <q-btn
+          :disabled="activeSlide === parsedSlides.length - 1"
+          icon="chevron_right"
+          @click="switchSlide(1)"
+        />
+      </q-btn-group>
     </div>
 
     <div v-for="(slide, index) in parsedSlides"
@@ -63,12 +62,12 @@ export default {
       let result = this.activeSlide + operator
 
       if (result < 0) {
-        return
+        this.activeSlide = 0
       } else if (result >= this.parsedSlides.length) {
-        return
+        this.activeSlide = this.parsedSlides.length - 1
+      } else {
+        this.activeSlide = result
       }
-
-      this.activeSlide = result
     }
   },
 
