@@ -1,14 +1,16 @@
 <template>
   <div>
     <div style="width: 100%; text-align: center;">
-      <q-btn-group>
+      <q-btn-group rounded>
         <q-btn
+          rounded
           label="About"
           :color="activeTab === 'about' ? 'primary' : 'white'"
           :text-color="activeTab === 'about' ? 'white' : 'color'"
           @click="activeTab = 'about'"
         />
         <q-btn
+          rounded
           label="Dependencies"
           :color="activeTab === 'dependencies' ? 'primary' : 'white'"
           :text-color="activeTab === 'dependencies' ? 'white' : 'color'"
