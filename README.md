@@ -1,3 +1,11 @@
+# Project has been moved to Gitlab
+
+**New repository:** <https://gitlab.com/exng/vuenote>
+
+**New page:** <https://exng.gitlab.io/vuenote/>
+
+* * *
+
 # Vuenote
 
 > Vuenote is the simplest note app.
